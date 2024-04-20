@@ -2,7 +2,7 @@ import {Project, ProjectsList } from "./project.js";
 
 const projectName = document.querySelector("#project-name");
 const form = document.querySelector("#add-project-form");
-const div = document.querySelector("#result-div");
+const tableBody = document.querySelector("#result-tb")
 
 let projectslist = new ProjectsList();
 
@@ -12,8 +12,8 @@ form.addEventListener("submit", (event) => {
 
   let project = new Project(projectName.value);
   projectslist.projects.push(project);
-  div.innerHTML = "";
+  tableBody.innerHTML = ""
   for(let pros = 0;pros<= projectslist.projects.length; pros++){
-    div.innerHTML += "<p>" + projectslist.projects[pros].name + "</p>";
+    tableBody.innerHTML += "<tr> <td>" + projectslist.projects[pros].name + "</td> </tr>";
   }
 });
