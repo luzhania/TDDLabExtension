@@ -1,8 +1,11 @@
-class Project {
+export class Project {
   name= "";
   constructor(name) {
     this.name = name;
   }
 }
 
-export default Project;
+export class ProjectsList{
+  projects = [];
+}
+
