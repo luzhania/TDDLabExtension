@@ -1,22 +1,31 @@
 <html>
-  <body>
-    <h1>Projects</h1>
-    <form id="add-project-form">
-      <label for="project-name">Name:</label>
-      <input type="text" id="project-name" />
-      <input type="submit" value="Add" id="add-project-button" />
-    </form>
-    <table>
-      <thead>
-        <tr>
-          <th>Nombre Proyecto</th>
-        </tr>
-      </thead>
-      <tbody id ='result-tb'>
 
-      </tbody>
-    </table>
+<head>
+  <title>Projects</title>
+  <script type="module" src="./src/presenter.js"></script>
+</head>
 
-    <script type="module" src="./src/presenter.js"></script>
-  </body>
+<body>
+  <h1>Projects</h1>
+  <form id="add-project-form">
+    <label for="project-name">Name:</label>
+    <input type="text" id="project-name" />
+    <input type="submit" value="Add" id="add-project-button" />
+  </form>
+  <table border="1" ;>
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Nombre Proyecto</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody id='result-tb'>
+
+    </tbody>
+  </table>
+
+  
+</body>
+
 </html>
