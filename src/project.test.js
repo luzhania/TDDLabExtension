@@ -17,3 +17,16 @@ describe("Add projects", () => {
     expect(projectslist.projects).toEqual([{"name": "Saludador"}, {"name": "Totalizador"}]);
   });
 });
+
+describe("Delete one project", () => {
+  let project1 = new Project("Saludador");
+  let project2 = new Project("Totalizador");
+  let projectslist = new ProjectsList();
+  projectslist.projects.push(project1);
+  projectslist.projects.push(project2);
+  projectslist.projects.pop(0);
+  it("delete the last project 'Saludador'", () => {
+    expect(projectslist.projects).toEqual([{"name": "Saludador"}]);
+  });
+  
+});
