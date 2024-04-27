@@ -8,12 +8,22 @@ let projectslist = new ProjectsList();
 
 form.addEventListener("submit", (event) => {
   event.preventDefault();
-
-
   let project = new Project(projectName.value);
   projectslist.projects.push(project);
-  tableBody.innerHTML = ""
-  for(let pros = 0;pros<= projectslist.projects.length; pros++){
-    tableBody.innerHTML += "<tr> <td>" + projectslist.projects[pros].name + "</td> </tr>";
-  }
+  
+  renderTable();
 });
+
+function renderTable() {
+  tableBody.innerHTML = "";
+  projectslist.projects.forEach((project, index) => {
+    const row = document.createElement("tr");
+    row.innerHTML = `
+      <td>${index}</td>
+      <td>${project.name}</td>
+    `;
+    const cell = document.createElement("td");
+    row.appendChild(cell);
+    tableBody.appendChild(row);
+  });
+}
