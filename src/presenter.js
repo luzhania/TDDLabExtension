@@ -1,40 +1,39 @@
-import {Project, ProjectsList } from "./project.js";
+import { Project, ProjectsList } from "./project.js";
 
-const projectName = document.querySelector("#project-name");
+const projectNameInput = document.querySelector("#project-name");
 const form = document.querySelector("#add-project-form");
-const tableBody = document.querySelector("#result-tb")
+const tableBody = document.querySelector("#result-tb");
 
-let projectslist = new ProjectsList();
+const projectsList = new ProjectsList();
 
 form.addEventListener("submit", (event) => {
   event.preventDefault();
-  let project = new Project(projectName.value);
-  projectslist.projects.push(project);
-  
+  const projectName = projectNameInput.value.trim();
+  projectsList.addProject(projectName);
   renderTable();
 });
 
 function renderTable() {
   tableBody.innerHTML = "";
-  projectslist.projects.forEach((project, index) => {
+
+  projectsList.projects.forEach((project, index) => {
     const deleteButton = document.createElement("button");
     deleteButton.textContent = "Delete";
-    deleteButton.addEventListener("click", () => deleteProject(index));
+    deleteButton.addEventListener("click", () => {
+      projectsList.deleteProject(index);
+      renderTable();
+    });
 
     const row = document.createElement("tr");
     row.innerHTML = `
-      <td>${index}</td>
+      <td>${index + 1}</td>
       <td>${project.name}</td>
     `;
+
     const cell = document.createElement("td");
     cell.appendChild(deleteButton);
     row.appendChild(cell);
 
     tableBody.appendChild(row);
   });
-}
-
-function deleteProject(index) {
-  projectslist.projects.splice(index, 1);
-  renderTable();
 }
