@@ -39,13 +39,13 @@ export class Commit {
   commitDescription = "";
   modifiedLines = 0;
   addedTests = 0;
-  percentageOfCoverage = 0;
+  percentageOfCoverage = null;
 
   constructor(commitDescription, modifiedLines, addedTests, percentageOfCoverage) {
     this.commitDescription = commitDescription;
     this.modifiedLines = modifiedLines;
     this.addedTests = addedTests;
-    this.percentageOfCoverage = percentageOfCoverage;
+    this.percentageOfCoverage = new PercentageOfCoverageMetric(percentageOfCoverage);
   }
 
   getCommitDescription() {
@@ -63,4 +63,17 @@ export class Commit {
   getPercentageOfCoverage() {
     return this.percentageOfCoverage;
   }
+}
+
+export class PercentageOfCoverageMetric{
+  value = 0;
+
+  constructor(value){
+    this.value = value;
+  }
+
+  getValue(){
+    return this.value;
+  }
+
 }

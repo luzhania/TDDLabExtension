@@ -88,7 +88,7 @@ function renderCommitsTable(projectIndex) {
       <td>${commit.getCommitDescription()}</td>
       <td>${commit.getModifiedLines()}</td>
       <td>${commit.getAddedTests()}</td>
-      <td>${commit.getPercentageOfCoverage()}</td>
+      <td>${commit.getPercentageOfCoverage().getValue()}</td>
     `;
     tableCommitsBody.appendChild(row);
   });

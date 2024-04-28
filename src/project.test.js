@@ -80,6 +80,6 @@ describe("Add percentage of coverage per commit", () => {
     expect(commit.getCommitDescription()).toEqual("Added the greet method");
     expect(commit.getModifiedLines()).toEqual(10);
     expect(commit.getAddedTests()).toEqual(2);
-    expect(commit.getPercentageOfCoverage()).toEqual(100);
+    expect(commit.getPercentageOfCoverage().getValue()).toEqual(100);
   });
 });
