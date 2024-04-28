@@ -3,6 +3,10 @@ export class Project {
   constructor(name) {
     this.name = name;
   }
+
+  getProjectName() {
+    return this.name;
+  }
 }
 
 export class ProjectsList {
