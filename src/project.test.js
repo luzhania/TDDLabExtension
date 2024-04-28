@@ -58,3 +58,15 @@ describe("Add modified lines per commit", () => {
     expect(commit.getModifiedLines()).toEqual(10);
   });
 });
+
+describe("Add added tests per commit", () => {
+  let project = new Project("Saludador");
+  project.addCommit("Added the greet method", 10, 2);
+
+  it("should save 1 commit with description 'Added the greet method', 10 modified lines, and 2 added tests", () => {
+    const commit = project.commitList[0]; 
+    expect(commit.getCommitDescription()).toEqual("Added the greet method");
+    expect(commit.getModifiedLines()).toEqual(10);
+    expect(commit.getAddedTests()).toEqual(2);
+  });
+});

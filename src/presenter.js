@@ -8,6 +8,7 @@ const commitMessageInput = document.querySelector("#commit-message");
 const addCommitForm = document.querySelector("#add-commit-form");
 const tableCommitsBody = document.querySelector("#result-tb-commit");
 const modifiedLinesInput = document.querySelector("#modified-lines");
+const addedTestsInput = document.querySelector("#added-tests");
 
 const projectsList = new ProjectsList();
 
@@ -24,7 +25,8 @@ addCommitForm.addEventListener("submit", (event) => {
   const projectIndex = commitProjectSelect.value;
   const commitMessage = commitMessageInput.value.trim();
   const commitModifiedLines = modifiedLinesInput.value;
-  projectsList.projects[projectIndex].addCommit(commitMessage, commitModifiedLines);
+  const commitAddedTests = addedTestsInput.value;
+  projectsList.projects[projectIndex].addCommit(commitMessage, commitModifiedLines, commitAddedTests);
   renderCommitsTable(projectIndex);
 });
 
@@ -83,6 +85,7 @@ function renderCommitsTable(projectIndex) {
       <td>${index + 1}</td>
       <td>${commit.getCommitDescription()}</td>
       <td>${commit.getModifiedLines()}</td>
+      <td>${commit.getAddedTests()}</td>
     `;
     tableCommitsBody.appendChild(row);
   });
