@@ -1,42 +1,95 @@
-import {Project, ProjectsList } from "./project.js";
+import { Project, ProjectsList, Commit } from "./project.js";
 
-const projectName = document.querySelector("#project-name");
-const form = document.querySelector("#add-project-form");
-const tableBody = document.querySelector("#result-tb")
+const projectNameInput = document.querySelector("#project-name");
+const addProjectForm = document.querySelector("#add-project-form");
+const tableProjectsBody = document.querySelector("#result-tb");
+const commitProjectSelect = document.querySelector("#commit-project");
+const commitMessageInput = document.querySelector("#commit-message");
+const addCommitForm = document.querySelector("#add-commit-form");
+const tableCommitsBody = document.querySelector("#result-tb-commit");
+const modifiedLinesInput = document.querySelector("#modified-lines");
+const addedTestsInput = document.querySelector("#added-tests");
+const percentageOfCoverageInput = document.querySelector("#percentage-coverage");
 
-let projectslist = new ProjectsList();
+const projectsList = new ProjectsList();
 
-document.addEventListener("DOMContentLoaded", function() {
-  function deleteProject(index) {
-    projectslist.projects.splice(index, 1);
-    renderTable();
-  }
+addProjectForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const projectName = projectNameInput.value.trim();
+  projectsList.addProject(projectName);
+  renderProjectsTable();
+  updateCommitProjectSelect();
+});
 
-  form.addEventListener("submit", (event) => {
-    event.preventDefault();
+addCommitForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const projectIndex = commitProjectSelect.value;
+  const commitMessage = commitMessageInput.value.trim();
+  const commitModifiedLines = modifiedLinesInput.value;
+  const commitAddedTests = addedTestsInput.value;
+  const commitPercentageOfCoverage = percentageOfCoverageInput.value;
+  projectsList.projects[projectIndex].addCommit(commitMessage, commitModifiedLines, commitAddedTests, commitPercentageOfCoverage);
+  renderCommitsTable(projectIndex);
+});
 
-    let project = new Project(projectName.value);
-    projectslist.projects.push(project);
-    renderTable();
+commitProjectSelect.addEventListener("change", () => {
+  const projectIndex = commitProjectSelect.value;
+  renderCommitsTable(projectIndex);
+});
+
+function renderProjectsTable() {
+  tableProjectsBody.innerHTML = "";
+
+  projectsList.projects.forEach((project, index) => {
+    const deleteButton = document.createElement("button");
+    deleteButton.textContent = "Delete";
+    deleteButton.addEventListener("click", () => {
+      projectsList.deleteProject(index);
+      renderProjectsTable();
+      updateCommitProjectSelect();
+    });
+
+    const row = document.createElement("tr");
+    row.innerHTML = `
+      <td>${index + 1}</td>
+      <td>${project.name}</td>
+      <td><button class="delete-project-btn">Delete</button></td>
+    `;
+    row.querySelector(".delete-project-btn").addEventListener("click", () => {
+      projectsList.deleteProject(index);
+      renderProjectsTable();
+      updateCommitProjectSelect();
+    });
+
+    tableProjectsBody.appendChild(row);
   });
 
-  function renderTable() {
-    tableBody.innerHTML = "";
-    projectslist.projects.forEach((project, index) => {
-      const deleteButton = document.createElement("button");
-      deleteButton.textContent = "Delete";
-      deleteButton.addEventListener("click", () => deleteProject(index));
+  updateCommitProjectSelect();
+}
 
-      const row = document.createElement("tr");
-      row.innerHTML = `
-        <td>${index}</td>
-        <td>${project.name}</td>
-      `;
-      const cell = document.createElement("td");
-      cell.appendChild(deleteButton);
-      row.appendChild(cell);
+function updateCommitProjectSelect() {
+  commitProjectSelect.innerHTML = "";
+  projectsList.getProjectList().forEach((project, index) => {
+    const option = document.createElement("option");
+    option.value = index;
+    option.textContent = project.name;
+    commitProjectSelect.appendChild(option);
+  });
+}
 
-      tableBody.appendChild(row);
-    });
-  }
-});
+function renderCommitsTable(projectIndex) {
+  tableCommitsBody.innerHTML = "";
+  const project = projectsList.projects[projectIndex];
+
+  project.commitList.forEach((commit, index) => {
+    const row = document.createElement("tr");
+    row.innerHTML = `
+      <td>${index + 1}</td>
+      <td>${commit.getCommitDescription()}</td>
+      <td>${commit.getModifiedLines()}</td>
+      <td>${commit.getAddedTests()}</td>
+      <td>${commit.getPercentageOfCoverage()}</td>
+    `;
+    tableCommitsBody.appendChild(row);
+  });
+}

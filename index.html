@@ -1,31 +1,55 @@
 <html>
-
-<head>
-  <title>Projects</title>
-  <script type="module" src="./src/presenter.js"></script>
-</head>
-
-<body>
-  <h1>Projects</h1>
-  <form id="add-project-form">
-    <label for="project-name">Name:</label>
-    <input type="text" id="project-name" />
-    <input type="submit" value="Add" id="add-project-button" />
-  </form>
-  <table border="1" ;>
-    <thead>
-      <tr>
-        <th>Id</th>
-        <th>Nombre Proyecto</th>
-        <th>Delete</th>
-      </tr>
-    </thead>
-    <tbody id='result-tb'>
+  <body>
+    <h1>Projects</h1>
+    <form id="add-project-form">
+      <label for="project-name">Name:</label>
+      <input type="text" id="project-name" />
+      <input type="submit" value="Add" id="add-project-button" />
+    </form>
+    <table border="1">
+      <thead>
+        <tr>
+          <th>Index</th>
+          <th>Nombre Proyecto</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody id ='result-tb'>
 
     </tbody>
   </table>
 
-  
-</body>
+    <h2>Commits</h2>
+    <form id="add-commit-form">
+      <label for="commit-project">Project:</label>
+      <select id="commit-project">
+      </select>
+      <label for="commit-message">Message:</label>
+      <input type="text" id="commit-message" />
+      <label for="modified-lines">Modified lines</label>
+      <input type="text" id="modified-lines">
+      <label for="added-tests">Added tests</label>
+      <input type="text" id="added-tests">
+      <label for="percentaje-coverage">Percentage of coverage</label>
+      <input type="text" id="percentage-coverage">
+      
+      <input type="submit" value="Add" id="add-commit-button" />
+    </form>
 
+    <table border="1">
+      <thead>
+        <tr>
+          <th>Index</th>
+          <th>Commit description</th>
+          <th>Modified lines</th>
+          <th>Added tests</th>
+          <th>Percentage of coverage</th>
+        </tr>
+      </thead>
+      <tbody id ='result-tb-commit'>
+
+      </tbody>
+
+    <script type="module" src="./src/presenter.js"></script>
+  </body>
 </html>
