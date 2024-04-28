@@ -10,8 +10,8 @@ export class Project {
     return this.name;
   }
 
-  addCommit(commitDescription, modifiedLines, addedTests) {
-    const commit = new Commit(commitDescription, modifiedLines, addedTests);
+  addCommit(commitDescription, modifiedLines, addedTests, percentageOfCoverage) {
+    const commit = new Commit(commitDescription, modifiedLines, addedTests, percentageOfCoverage);
     this.commitList.push(commit);
   }
 }
@@ -39,11 +39,13 @@ export class Commit {
   commitDescription = "";
   modifiedLines = 0;
   addedTests = 0;
+  percentageOfCoverage = 0;
 
-  constructor(commitDescription, modifiedLines, addedTests) {
+  constructor(commitDescription, modifiedLines, addedTests, percentageOfCoverage) {
     this.commitDescription = commitDescription;
     this.modifiedLines = modifiedLines;
     this.addedTests = addedTests;
+    this.percentageOfCoverage = percentageOfCoverage;
   }
 
   getCommitDescription() {
@@ -56,5 +58,9 @@ export class Commit {
 
   getAddedTests() {
     return this.addedTests;
+  }
+
+  getPercentageOfCoverage() {
+    return this.percentageOfCoverage;
   }
 }

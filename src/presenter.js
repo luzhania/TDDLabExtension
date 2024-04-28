@@ -9,6 +9,7 @@ const addCommitForm = document.querySelector("#add-commit-form");
 const tableCommitsBody = document.querySelector("#result-tb-commit");
 const modifiedLinesInput = document.querySelector("#modified-lines");
 const addedTestsInput = document.querySelector("#added-tests");
+const percentageOfCoverageInput = document.querySelector("#percentage-coverage");
 
 const projectsList = new ProjectsList();
 
@@ -26,7 +27,8 @@ addCommitForm.addEventListener("submit", (event) => {
   const commitMessage = commitMessageInput.value.trim();
   const commitModifiedLines = modifiedLinesInput.value;
   const commitAddedTests = addedTestsInput.value;
-  projectsList.projects[projectIndex].addCommit(commitMessage, commitModifiedLines, commitAddedTests);
+  const commitPercentageOfCoverage = percentageOfCoverageInput.value;
+  projectsList.projects[projectIndex].addCommit(commitMessage, commitModifiedLines, commitAddedTests, commitPercentageOfCoverage);
   renderCommitsTable(projectIndex);
 });
 
@@ -86,6 +88,7 @@ function renderCommitsTable(projectIndex) {
       <td>${commit.getCommitDescription()}</td>
       <td>${commit.getModifiedLines()}</td>
       <td>${commit.getAddedTests()}</td>
+      <td>${commit.getPercentageOfCoverage()}</td>
     `;
     tableCommitsBody.appendChild(row);
   });

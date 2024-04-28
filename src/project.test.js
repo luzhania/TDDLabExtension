@@ -70,3 +70,16 @@ describe("Add added tests per commit", () => {
     expect(commit.getAddedTests()).toEqual(2);
   });
 });
+
+describe("Add percentage of coverage per commit", () => {
+  let project = new Project("Saludador");
+  project.addCommit("Added the greet method", 10, 2, 100);
+
+  it("should save 1 commit with description 'Added the greet method', 10 modified lines, and 2 added tests, 100 percentage of coverage", () => {
+    const commit = project.commitList[0];
+    expect(commit.getCommitDescription()).toEqual("Added the greet method");
+    expect(commit.getModifiedLines()).toEqual(10);
+    expect(commit.getAddedTests()).toEqual(2);
+    expect(commit.getPercentageOfCoverage()).toEqual(100);
+  });
+});
