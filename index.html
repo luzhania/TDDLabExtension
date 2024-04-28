@@ -26,6 +26,8 @@
       </select>
       <label for="commit-message">Message:</label>
       <input type="text" id="commit-message" />
+      <label for="modified-lines">Modified lines</label>
+      <input type="text" id="modified-lines">
       
       <input type="submit" value="Add" id="add-commit-button" />
     </form>
@@ -35,6 +37,7 @@
         <tr>
           <th>Index</th>
           <th>Commit description</th>
+          <th>Modified lines</th>
         </tr>
       </thead>
       <tbody id ='result-tb-commit'>

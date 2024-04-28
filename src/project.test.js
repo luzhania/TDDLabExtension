@@ -47,3 +47,14 @@ describe("Add commit", () => {
     expect(project.commitList[0].getCommitDescription()).toEqual("Added the greet method");
   });
 });
+
+describe("Add modified lines per commit", () => {
+  let project = new Project("Saludador");
+  project.addCommit("Added the greet method", 10);
+
+  it("should save 1 commit with description 'Added the greet method' and 10 modified lines", () => {
+    const commit = project.commitList[0]; 
+    expect(commit.getCommitDescription()).toEqual("Added the greet method");
+    expect(commit.getModifiedLines()).toEqual(10);
+  });
+});
