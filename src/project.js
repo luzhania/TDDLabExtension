@@ -67,13 +67,23 @@ export class Commit {
 
 export class PercentageOfCoverageMetric{
   value = 0;
+  points = 0;
 
   constructor(value){
     this.value = value;
+    this.assignPoints();
   }
 
   getValue(){
     return this.value;
+  }
+  
+  getPoints(){
+    return this.points;
+  }
+
+  assignPoints(){
+    this.points = 10;
   }
 
 }

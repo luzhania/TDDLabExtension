@@ -1,5 +1,7 @@
 <html>
-  <body>
+
+<body>
+  <section>
     <h1>Projects</h1>
     <form id="add-project-form">
       <label for="project-name">Name:</label>
@@ -14,11 +16,12 @@
           <th>Delete</th>
         </tr>
       </thead>
-      <tbody id ='result-tb'>
+      <tbody id='result-tb'>
 
-    </tbody>
-  </table>
-
+      </tbody>
+    </table>
+  </section>
+  <section>
     <h2>Commits</h2>
     <form id="add-commit-form">
       <label for="commit-project">Project:</label>
@@ -27,12 +30,12 @@
       <label for="commit-message">Message:</label>
       <input type="text" id="commit-message" />
       <label for="modified-lines">Modified lines</label>
-      <input type="text" id="modified-lines">
+      <input type="number" id="modified-lines">
       <label for="added-tests">Added tests</label>
-      <input type="text" id="added-tests">
+      <input type="number" id="added-tests">
       <label for="percentaje-coverage">Percentage of coverage</label>
-      <input type="text" id="percentage-coverage">
-      
+      <input type="number" id="percentage-coverage">
+
       <input type="submit" value="Add" id="add-commit-button" />
     </form>
 
@@ -46,10 +49,28 @@
           <th>Percentage of coverage</th>
         </tr>
       </thead>
-      <tbody id ='result-tb-commit'>
+      <tbody id='result-tb-commit'>
 
       </tbody>
+    </table>
+  </section>
+  <section>
+    <h2>Feedback</h2>
+    <table border="1">
+      <thead>
+        <tr>
+          <th>Index</th>
+          <th>Commit description</th>
+          <th>Points per Percentage of coverage</th>
+        </tr>
+      </thead>
+      <tbody id='feedback-project-tb'>
 
-    <script type="module" src="./src/presenter.js"></script>
-  </body>
+      </tbody>
+    </table>
+  </section>
+
+  <script type="module" src="./src/presenter.js"></script>
+</body>
+
 </html>

@@ -11,6 +11,8 @@ const modifiedLinesInput = document.querySelector("#modified-lines");
 const addedTestsInput = document.querySelector("#added-tests");
 const percentageOfCoverageInput = document.querySelector("#percentage-coverage");
 
+const tableFeedbackProject = document.querySelector("#feedback-project-tb");
+
 const projectsList = new ProjectsList();
 
 addProjectForm.addEventListener("submit", (event) => {
@@ -30,11 +32,13 @@ addCommitForm.addEventListener("submit", (event) => {
   const commitPercentageOfCoverage = percentageOfCoverageInput.value;
   projectsList.projects[projectIndex].addCommit(commitMessage, commitModifiedLines, commitAddedTests, commitPercentageOfCoverage);
   renderCommitsTable(projectIndex);
+  renderFeedbackTable(projectIndex);
 });
 
 commitProjectSelect.addEventListener("change", () => {
   const projectIndex = commitProjectSelect.value;
   renderCommitsTable(projectIndex);
+  renderFeedbackTable(projectIndex);
 });
 
 function renderProjectsTable() {
@@ -91,5 +95,19 @@ function renderCommitsTable(projectIndex) {
       <td>${commit.getPercentageOfCoverage().getValue()}</td>
     `;
     tableCommitsBody.appendChild(row);
+  });
+}
+
+function renderFeedbackTable(projectIndex) {
+  tableFeedbackProject.innerHTML = "";
+  const project = projectsList.projects[projectIndex];
+  project.commitList.forEach((commit, index) => {
+    const row = document.createElement("tr");
+    row.innerHTML = `
+      <td>${index + 1}</td>
+      <td>${commit.getCommitDescription()}</td>
+      <td>${commit.getPercentageOfCoverage().getPoints()}</td>
+    `;
+    tableFeedbackProject.appendChild(row);
   });
 }
