@@ -39,3 +39,11 @@ describe("Delete any project", () => {
     expect(projectNames).toEqual(["Totalizador", "Calculador"]);
   });
 });
+
+describe("Add commit", () => {
+  let project = new Project("Saludador");
+  project.addCommit("Added the greet method");
+  it("should save a commit with the description 'Added the greet method'", () => {
+    expect(project.commitList[0].getCommitDescription()).toEqual("Added the greet method");
+  });
+});

@@ -1,11 +1,18 @@
 export class Project {
   name= "";
+  commitList = [];
+  
   constructor(name) {
     this.name = name;
   }
 
   getProjectName() {
     return this.name;
+  }
+
+  addCommit(commitDescription) {
+    const commit = new Commit(commitDescription);
+    this.commitList.push(commit);
   }
 }
 
@@ -28,3 +35,14 @@ export class ProjectsList {
   }
 }
 
+export class Commit {
+  commitDescription = "";
+
+  constructor(commitDescription) {
+    this.commitDescription = commitDescription;
+  }
+
+  getCommitDescription() {
+    return this.commitDescription;
+  }
+}

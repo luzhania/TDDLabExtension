@@ -6,7 +6,7 @@
       <input type="text" id="project-name" />
       <input type="submit" value="Add" id="add-project-button" />
     </form>
-    <table>
+    <table border="1">
       <thead>
         <tr>
           <th>Index</th>
@@ -18,6 +18,28 @@
 
       </tbody>
     </table>
+
+    <h2>Commits</h2>
+    <form id="add-commit-form">
+      <label for="commit-project">Project:</label>
+      <select id="commit-project">
+      </select>
+      <label for="commit-message">Message:</label>
+      <input type="text" id="commit-message" />
+      
+      <input type="submit" value="Add" id="add-commit-button" />
+    </form>
+
+    <table border="1">
+      <thead>
+        <tr>
+          <th>Index</th>
+          <th>Commit description</th>
+        </tr>
+      </thead>
+      <tbody id ='result-tb-commit'>
+
+      </tbody>
 
     <script type="module" src="./src/presenter.js"></script>
   </body>
