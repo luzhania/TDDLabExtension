@@ -1,7 +1,7 @@
 export class Project {
-  name= "";
+  name = "";
   commitList = [];
-  
+
   constructor(name) {
     this.name = name;
   }
@@ -65,32 +65,38 @@ export class Commit {
   }
 }
 
-export class PercentageOfCoverageMetric{
+export class PercentageOfCoverageMetric {
   value = 0;
   points = 0;
+  feedbackMessage = "";
 
-  constructor(value){
+  constructor(value) {
     this.value = value;
     this.assignPoints();
+    this.assignFeedbackMessage();
   }
 
-  getValue(){
+  getValue() {
     return this.value;
   }
-  
-  getPoints(){
+
+  getFeedbackMessage() {
+    return this.feedbackMessage;
+  }
+
+  getPoints() {
     return this.points;
   }
 
-  isRelativelyGood(){
+  isRelativelyGood() {
     return this.value >= 60 && this.value < 90;
   }
 
-  isCorrect(){
+  isCorrect() {
     return this.value >= 90;
   }
 
-  assignPoints(){
+  assignPoints() {
     switch (true) {
       case this.isCorrect():
         this.points = 100;
@@ -102,5 +108,8 @@ export class PercentageOfCoverageMetric{
         this.points = 10;
         break;
     }
+  }
+  assignFeedbackMessage() {
+    this.feedbackMessage = `❌ Cobertura de código: ¡Solo el ${this.value}% del código está cubierto por pruebas! Es fundamental mejorar drásticamente la cobertura de pruebas para garantizar la calidad y fiabilidad del código. Dedica más tiempo a escribir pruebas exhaustivas antes de escribir el código de producción. ¡Vamos, puedes lograr una cobertura mucho más alta en el siguiente commit!`
   }
 }

@@ -104,3 +104,12 @@ describe("Assign points for percentage of coverage per commit", () => {
     expect(commit.getPercentageOfCoverage().getPoints()).toEqual(100);
   });
 });
+
+describe("Return feedback messages for percentage of coverage per commit", () => {
+  it("should return encouraging feedback for the attempt", () => {
+    let project = new Project("Saludador");
+    project.addCommit("Added the greet method", 10, 2, 20);
+    const commit = project.commitList[0];
+    expect(commit.getPercentageOfCoverage().getFeedbackMessage()).toEqual("❌ Cobertura de código: ¡Solo el 20% del código está cubierto por pruebas! Es fundamental mejorar drásticamente la cobertura de pruebas para garantizar la calidad y fiabilidad del código. Dedica más tiempo a escribir pruebas exhaustivas antes de escribir el código de producción. ¡Vamos, puedes lograr una cobertura mucho más alta en el siguiente commit!");
+  });
+});
