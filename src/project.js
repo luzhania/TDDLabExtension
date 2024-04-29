@@ -82,8 +82,16 @@ export class PercentageOfCoverageMetric{
     return this.points;
   }
 
-  assignPoints(){
-    this.points = 10;
+  isRelativelyGood(){
+    return this.value >= 60;
   }
 
+  assignPoints(){
+    if(this.isRelativelyGood()){
+      this.points = 70;
+    }
+    else{
+      this.points = 10;
+    }
+  }
 }

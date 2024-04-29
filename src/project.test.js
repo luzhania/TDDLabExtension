@@ -91,4 +91,10 @@ describe("Assign points for percentage of coverage per commit", () => {
     const commit = project.commitList[0];
     expect(commit.getPercentageOfCoverage().getPoints()).toEqual(10);
   });
+  it("should assign 70 points if the percentage of coverage is major or equal to 60", () => {
+    let project = new Project("Saludador");
+    project.addCommit("Added the greet method", 10, 2, 75);
+    const commit = project.commitList[0];
+    expect(commit.getPercentageOfCoverage().getPoints()).toEqual(70);
+  });
 });
