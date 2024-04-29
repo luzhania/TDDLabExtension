@@ -83,15 +83,24 @@ export class PercentageOfCoverageMetric{
   }
 
   isRelativelyGood(){
-    return this.value >= 60;
+    return this.value >= 60 && this.value < 90;
+  }
+
+  isCorrect(){
+    return this.value >= 90;
   }
 
   assignPoints(){
-    if(this.isRelativelyGood()){
-      this.points = 70;
-    }
-    else{
-      this.points = 10;
+    switch (true) {
+      case this.isCorrect():
+        this.points = 100;
+        break;
+      case this.isRelativelyGood():
+        this.points = 70;
+        break;
+      default:
+        this.points = 10;
+        break;
     }
   }
 }
