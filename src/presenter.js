@@ -90,7 +90,7 @@ function renderCommitsTable(projectIndex) {
     row.innerHTML = `
       <td>${index + 1}</td>
       <td>${commit.getCommitDescription()}</td>
-      <td>${commit.getModifiedLines()}</td>
+      <td>${commit.getModifiedLines().getValue()}</td>
       <td>${commit.getAddedTests()}</td>
       <td>${commit.getPercentageOfCoverage().getValue()}</td>
     `;
@@ -107,6 +107,7 @@ function renderFeedbackTable(projectIndex) {
       <td>${index + 1}</td>
       <td>${commit.getCommitDescription()}</td>
       <td>${commit.getPercentageOfCoverage().getPoints()}</td>
+      <td>${commit.getModifiedLines().getPoints()}</td>
       <td>${commit.getPercentageOfCoverage().getFeedbackMessage()}</td>
     `;
     tableFeedbackProject.appendChild(row);
