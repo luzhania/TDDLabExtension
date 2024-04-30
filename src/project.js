@@ -128,10 +128,12 @@ export class PercentageOfCoverageMetric {
 export class ModifiedLinesMetric {
   value = 0;
   points = 0;
+  feedbackMessage = "";
 
   constructor(value) {
     this.value = value;
     this.assignPoints();
+    this.assignFeedbackMessage();
   }
 
   getValue() {
@@ -140,6 +142,10 @@ export class ModifiedLinesMetric {
 
   getPoints() {
     return this.points;
+  }
+
+  getFeedbackMessage() {
+    return this.feedbackMessage;
   }
 
   isIncorrect() {
@@ -167,6 +173,16 @@ export class ModifiedLinesMetric {
         break;
       default:
         this.points = 10;
+        break;
+    }
+  }
+  assignFeedbackMessage() {
+    switch (true) {
+      case this.isIncorrect():
+        this.feedbackMessage = `❌ Líneas de código modificadas: ${this.value}. Debes hacer los cambios necesarios para el ciclo TDD en tu código antes de hacer un commit. No te desanimes. ¡Aplica lo aprendido en la siguiente!`
+        break;
+      default:
+        this.feedbackMessage = `xd`
         break;
     }
   }

@@ -152,3 +152,12 @@ describe("Assign points for modified lines per commit", () => {
     expect(commit.getModifiedLines().getPoints()).toEqual(10);
   });  
 });
+
+describe("Return feedback messages for modified lines per commit", () => {
+  it("should return encouraging feedback for the attempt when there was 0 lines modified", () => {
+    let project = new Project("Saludador");
+    project.addCommit("Added the greet method", 0, 2, 20);
+    const commit = project.commitList[0];
+    expect(commit.getModifiedLines().getFeedbackMessage()).toEqual("❌ Líneas de código modificadas: 0. Debes hacer los cambios necesarios para el ciclo TDD en tu código antes de hacer un commit. No te desanimes. ¡Aplica lo aprendido en la siguiente!");
+  });
+});
