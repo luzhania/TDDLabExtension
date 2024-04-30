@@ -184,6 +184,9 @@ export class ModifiedLinesMetric {
       case this.isCorrect():
         this.feedbackMessage = `✔ Líneas de código modificadas: ${this.value}. El código sufrió pocos cambios. ¡Buen trabajo! ¡Sigue así!`
         break;
+      case this.isRelativelyGood():
+        this.feedbackMessage = `🤔 Líneas de código modificadas: ${this.value}. Muchas líneas de código modificadas para ser un ciclo TDD, debes reducir los cambios que realizas al código en cada ciclo ¡Lo harás mejor en el siguiente commit!`
+        break;
       default:
         this.feedbackMessage = `xd`
         break;
