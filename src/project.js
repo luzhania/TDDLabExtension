@@ -188,7 +188,7 @@ export class ModifiedLinesMetric {
         this.feedbackMessage = `🤔 Líneas de código modificadas: ${this.value}. Muchas líneas de código modificadas para ser un ciclo TDD, debes reducir los cambios que realizas al código en cada ciclo ¡Lo harás mejor en el siguiente commit!`
         break;
       default:
-        this.feedbackMessage = `xd`
+        this.feedbackMessage = `❌ Líneas de código modificadas: ${this.value}. Demasiadas líneas de código añadidas. Debes hacer solo los cambios necesarios en cada ciclo de TDD. ¡Vamos, puedes hacerlo mejor y tendrás más puntos!`
         break;
     }
   }
