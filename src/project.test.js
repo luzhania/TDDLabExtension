@@ -160,4 +160,10 @@ describe("Return feedback messages for modified lines per commit", () => {
     const commit = project.commitList[0];
     expect(commit.getModifiedLines().getFeedbackMessage()).toEqual("❌ Líneas de código modificadas: 0. Debes hacer los cambios necesarios para el ciclo TDD en tu código antes de hacer un commit. No te desanimes. ¡Aplica lo aprendido en la siguiente!");
   });
+  it("should return encouraging feedback if the modified lines were grater than 0 and lower or equal to 35", () => {
+    let project = new Project("Saludador");
+    project.addCommit("Added the greet method", 15, 2, 20);
+    const commit = project.commitList[0];
+    expect(commit.getModifiedLines().getFeedbackMessage()).toEqual("✔ Líneas de código modificadas: 15. El código sufrió pocos cambios. ¡Buen trabajo! ¡Sigue así!");
+  });
 });
