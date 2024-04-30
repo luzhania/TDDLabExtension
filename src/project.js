@@ -146,13 +146,20 @@ export class ModifiedLinesMetric {
     return this.value == 0;
   }
 
+  isBad() {
+    return this.value > 50;
+  }
+
   assignPoints() {
     switch (true) {
       case this.isIncorrect():
         this.points = 0;
         break;
-      default:
+      case this.isBad():
         this.points = 10;
+        break;
+      default:
+        this.points = 70;
         break;
     }
   }
