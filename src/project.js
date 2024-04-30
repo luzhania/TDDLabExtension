@@ -146,8 +146,8 @@ export class ModifiedLinesMetric {
     return this.value == 0;
   }
 
-  isBad() {
-    return this.value > 50;
+  isRelativelyGood() {
+    return this.value > 0 && this.value <= 50;
   }
 
   assignPoints() {
@@ -155,11 +155,11 @@ export class ModifiedLinesMetric {
       case this.isIncorrect():
         this.points = 0;
         break;
-      case this.isBad():
-        this.points = 10;
+      case this.isRelativelyGood():
+        this.points = 70;
         break;
       default:
-        this.points = 70;
+        this.points = 10;
         break;
     }
   }
