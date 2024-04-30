@@ -43,7 +43,8 @@ export class Commit {
 
   constructor(commitDescription, modifiedLines, addedTests, percentageOfCoverage) {
     this.commitDescription = commitDescription;
-    this.modifiedLines = modifiedLines;
+    let linesValue = new ModifiedLinesMetric(modifiedLines);
+    this.modifiedLines = linesValue;
     this.addedTests = addedTests;
     this.percentageOfCoverage = new PercentageOfCoverageMetric(percentageOfCoverage);
   }
@@ -119,6 +120,39 @@ export class PercentageOfCoverageMetric {
         break;
       default:
         this.feedbackMessage = `❌ Cobertura de código: ¡Solo el ${this.value}% del código está cubierto por pruebas! Es fundamental mejorar drásticamente la cobertura de pruebas para garantizar la calidad y fiabilidad del código. Dedica más tiempo a escribir pruebas exhaustivas antes de escribir el código de producción. ¡Vamos, puedes lograr una cobertura mucho más alta en el siguiente commit!`
+        break;
+    }
+  }
+}
+
+export class ModifiedLinesMetric {
+  value = 0;
+  points = 0;
+
+  constructor(value) {
+    this.value = value;
+    this.assignPoints();
+  }
+
+  getValue() {
+    return this.value;
+  }
+
+  getPoints() {
+    return this.points;
+  }
+
+  isIncorrect() {
+    return this.value == 0;
+  }
+
+  assignPoints() {
+    switch (true) {
+      case this.isIncorrect():
+        this.points = 0;
+        break;
+      default:
+        this.points = 10;
         break;
     }
   }
