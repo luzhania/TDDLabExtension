@@ -4,11 +4,11 @@ const projectNameInput = document.querySelector("#project-name");
 const addProjectForm = document.querySelector("#add-project-form");
 const tableProjectsBody = document.querySelector("#result-tb");
 const commitProjectSelect = document.querySelector("#commit-project");
-const commitMessageInput = document.querySelector("#commit-message");
+const commitMessageInput = document.querySelector("#commit-message"); //test criteria
 const addCommitForm = document.querySelector("#add-commit-form");
 const tableCommitsBody = document.querySelector("#result-tb-commit");
 const modifiedLinesInput = document.querySelector("#modified-lines");
-const addedTestsInput = document.querySelector("#added-tests");
+const addedTestsInput = document.querySelector("#added-tests"); //test criteria
 const percentageOfCoverageInput = document.querySelector("#percentage-coverage");
 
 const tableFeedbackProject = document.querySelector("#feedback-project-tb");
@@ -108,8 +108,12 @@ function renderFeedbackTable(projectIndex) {
       <td>${commit.getCommitDescription()}</td>
       <td>${commit.getPercentageOfCoverage().getPoints()}</td>
       <td>${commit.getModifiedLines().getPoints()}</td>
+      <td>Nothing for now</td>
       <td>${commit.getPercentageOfCoverage().getFeedbackMessage() + "<br><br>" + commit.getModifiedLines().getFeedbackMessage()}</td>
     `;
+    /*<td>${commit.getTestAdded().getPoints()}</td>
+    <td>${commit.getTestAdded().getFeedbackMessage()}</td>
+    */
     tableFeedbackProject.appendChild(row);
   });
 }

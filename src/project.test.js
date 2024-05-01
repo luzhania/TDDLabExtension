@@ -178,4 +178,8 @@ describe("Return feedback messages for modified lines per commit", () => {
     const commit = project.commitList[0];
     expect(commit.getModifiedLines().getFeedbackMessage()).toEqual("❌ Líneas de código modificadas: 55. Demasiadas líneas de código añadidas. Debes hacer solo los cambios necesarios en cada ciclo de TDD. ¡Vamos, puedes hacerlo mejor y tendrás más puntos!");
   });
+
+  describe("Assign points for added tests", () => {
+    
+  });
 });
