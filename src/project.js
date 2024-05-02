@@ -236,12 +236,18 @@ export class AddedTestMetric {
     return this.feedbackMessage;
   }
   assignFeedbackMessage(){
-    if(this.areTestAddedInRefactoring()) return "❌Recuerda, no se añaden pruebas cuando el código solo es modificado para 'refactoring'⚠️";
-    if(this.noTestAddedInNoRefactoring()) return "❌Para escribir código con TDD no olvides hacer primero las pruebas!!!😨";
-    if(this.testAddedInNoRefactoring()) return "☑️Excelente! No olvides que las pruebas son el alma del TDD 😎";
-    if(this.areMuchTestsInNoRefactoring()) return "🤦‍♂️No hace falta añadir tantas pruebas en un solo ciclo de TDD";
-    return "☑️Buen trabajo, no se añaden pruebas cuando el código solo es modificado para 'refactoring' 👍";
-    
+    switch(true){
+      case this.areTestAddedInRefactoring():
+        return "❌Recuerda, no se añaden pruebas cuando el código solo es modificado para 'refactoring'⚠️";
+      case this.noTestAddedInNoRefactoring():
+        return "❌Para escribir código con TDD no olvides hacer primero las pruebas!!!😨";
+      case this.testAddedInNoRefactoring():
+        return "☑️Excelente! No olvides que las pruebas son el alma del TDD 😎";
+      case this.areMuchTestsInNoRefactoring(): 
+        return "🤦‍♂️No hace falta añadir tantas pruebas en un solo ciclo de TDD";
+      default:
+        return "☑️Buen trabajo, no se añaden pruebas cuando el código solo es modificado para 'refactoring' 👍";
+    }
   }
   areTestAddedInRefactoring(){
     return this.isRefactCommit() && this.value > 0;
