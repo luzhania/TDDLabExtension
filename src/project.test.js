@@ -249,5 +249,11 @@ describe("Return feedback messages for modified lines per commit", () => {
       const commit = project.commitList[0];
       expect(commit.getAddedTests().getFeedbackMessage()).toEqual("❌Para escribir código con TDD no olvides hacer primero las pruebas!!!😨");
     });
+    it("should return encouraging feedback when is not a refactoring commit and there is 1 tests added", () => {
+      let project = new Project("Saludador");
+      project.addCommit("function to destroy 'HelloWorld' added", 0, 1, 20);
+      const commit = project.commitList[0];
+      expect(commit.getAddedTests().getFeedbackMessage()).toEqual("☑️Excelente! No olvides que las pruebas son el alma del TDD 😎");
+    });
   });
 });

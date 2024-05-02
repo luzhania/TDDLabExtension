@@ -238,12 +238,17 @@ export class AddedTestMetric {
   assignFeedbackMessage(){
     if(this.areTestAddedInRefactoring()) return "❌Recuerda, no se añaden pruebas cuando el código solo es modificado para 'refactoring'⚠️";
     if(this.noTestAddedinNoRefactoring()) return "❌Para escribir código con TDD no olvides hacer primero las pruebas!!!😨";
+    if(this.testAddedinNoRefactoring())return "☑️Excelente! No olvides que las pruebas son el alma del TDD 😎"
     return "☑️Buen trabajo, no se añaden pruebas cuando el código solo es modificado para 'refactoring' 👍";
+    
   }
   areTestAddedInRefactoring(){
     return this.isRefactCommit() && this.value > 0;
   }
   noTestAddedinNoRefactoring(){
     return !this.isRefactCommit() && this.value == 0;
+  }
+  testAddedinNoRefactoring(){
+    return !this.isRefactCommit() && this.value == 1;
   }
 }
