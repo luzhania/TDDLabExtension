@@ -207,9 +207,11 @@ export class AddedTestMetric {
     return this.points;
   }
   assignPoints(){
-    if(this.isIncorrect()) return 0;
-    if(!this.isRefactCommit() && this.value > 1) return 10;
-    return 100;
+    switch(true){
+      case this.isIncorrect(): return 0;
+      case this.areMuchTests(): return 10;
+      default: return 100;
+    }
   }
   isRefactCommit(){
     const refactor = 'refact:';
@@ -220,6 +222,9 @@ export class AddedTestMetric {
     return this.message.trim().split(' ')[index];
   }
   isIncorrect(){
-    return this.isRefactCommit() && this.value == 1 || !this.isRefactCommit() && this.value == 0
+    return this.isRefactCommit() && this.value == 1 || !this.isRefactCommit() && this.value == 0;
+  }
+  areMuchTests(){
+    return !this.isRefactCommit() && this.value > 1;
   }
 }
