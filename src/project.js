@@ -227,7 +227,7 @@ export class AddedTestMetric {
     return this.message.trim().split(' ')[index];
   }
   isIncorrect(){
-    return this.isRefactCommit() && this.value > 0 || !this.isRefactCommit() && this.value == 0;
+    return this.areTestAddedInRefactoring() || !this.isRefactCommit() && this.value == 0;
   }
   areMuchTests(){
     return !this.isRefactCommit() && this.value > 1;
@@ -236,7 +236,10 @@ export class AddedTestMetric {
     return this.feedbackMessage;
   }
   assignFeedbackMessage(){
-    if(this.isRefactCommit() && this.value > 0) return "❌Recuerda, no se añaden pruebas cuando el código solo es modificado para 'refactoring'⚠️";
+    if(this.areTestAddedInRefactoring()) return "❌Recuerda, no se añaden pruebas cuando el código solo es modificado para 'refactoring'⚠️";
     return "☑️Buen trabajo, no se añaden pruebas cuando el código solo es modificado para 'refactoring' 👍";
+  }
+  areTestAddedInRefactoring(){
+    return this.isRefactCommit() && this.value > 0;
   }
 }
