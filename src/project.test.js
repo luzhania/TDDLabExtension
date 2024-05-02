@@ -67,7 +67,7 @@ describe("Add added tests per commit", () => {
     const commit = project.commitList[0];
     expect(commit.getCommitDescription()).toEqual("Added the greet method");
     expect(commit.getModifiedLines().getValue()).toEqual(10);
-    expect(commit.getAddedTests().value).toEqual(2);
+    expect(commit.getAddedTests().getValue()).toEqual(2);
   });
 });
 
@@ -224,6 +224,12 @@ describe("Return feedback messages for modified lines per commit", () => {
       project.addCommit("refact: adding functions for best coder reading", 0, 0, 20);
       const commit = project.commitList[0];
       expect(commit.getAddedTests().getFeedbackMessage()).toEqual("☑️Buen trabajo, no se añaden pruebas cuando el código solo es modificado para 'refactoring' 👍");
+    });
+    it("should return encouraging feedback when is a refactoring commit and the number of addedTests is 1", () => {
+      let project = new Project("Saludador");
+      project.addCommit("refact: adding functions for best coder reading", 0, 1, 20);
+      const commit = project.commitList[0];
+      expect(commit.getAddedTests().getFeedbackMessage()).toEqual("❌Recuerda, no se añaden pruebas cuando el código solo es modificado para 'refactoring'⚠️");
     });
   });
 });
