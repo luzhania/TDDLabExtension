@@ -295,3 +295,13 @@ describe("Calculate the overall total of points", () => {
     expect(projectslist.getTotalPoints()).toEqual(900);
   });
 });
+
+describe("Buscar proyectos de la lista de proyectos", () => {
+  it("deberia retornar una lista vacia de proyectos si le envio una cadena vacia para buscar", () => {
+    let projectslist = new ProjectsList();
+    projectslist.addProject("Saludador");
+    projectslist.addProject("Totalizador");
+    projectslist.addProject("Calculador");
+    expect(projectslist.searchProject('')).toEqual({"projects": []});
+  });
+});

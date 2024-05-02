@@ -41,6 +41,10 @@ export class ProjectsList {
   getTotalPoints() {
     return this.projects.reduce((acc, project) => acc + project.getTotalPointsPerProject(), 0);
   }
+
+  searchProject(projectNameSearched) {
+    return new ProjectsList();
+  }
 }
 
 export class Commit {

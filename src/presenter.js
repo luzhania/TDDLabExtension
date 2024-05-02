@@ -12,6 +12,9 @@ const addedTestsInput = document.querySelector("#added-tests"); //test criteria
 const percentageOfCoverageInput = document.querySelector("#percentage-coverage");
 const overallScore = document.querySelector("#overAll-score");
 
+const searchProjectForm = document.querySelector("#search-project-form");
+const projectNameInputSearched = document.querySelector("#project-name-searched");
+
 const tableFeedbackProject = document.querySelector("#feedback-project-tb");
 
 const projectsList = new ProjectsList();
@@ -20,10 +23,19 @@ addProjectForm.addEventListener("submit", (event) => {
   event.preventDefault();
   const projectName = projectNameInput.value.trim();
   projectsList.addProject(projectName);
-  renderProjectsTable();
+  renderProjectsTable(projectsList);
   updateCommitProjectSelect();
 });
 
+searchProjectForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const searchedProjectName = projectNameInputSearched.value.trim();
+  console.log(searchedProjectName);
+  const projectListSearched = projectsList.searchProject(searchedProjectName);
+  if (projectListSearched) {
+    renderProjectsTable(projectListSearched);
+  }
+});
 addCommitForm.addEventListener("submit", (event) => {
   event.preventDefault();
   const projectIndex = commitProjectSelect.value;
@@ -34,7 +46,7 @@ addCommitForm.addEventListener("submit", (event) => {
   projectsList.projects[projectIndex].addCommit(commitMessage, commitModifiedLines, commitAddedTests, commitPercentageOfCoverage);
   renderCommitsTable(projectIndex);
   renderFeedbackTable(projectIndex);
-  renderProjectsTable();
+  renderProjectsTable(projectsList);
   updadateOverallScore();
 });
 
@@ -44,7 +56,7 @@ commitProjectSelect.addEventListener("change", () => {
   renderFeedbackTable(projectIndex);
 });
 
-function renderProjectsTable() {
+function renderProjectsTable(projectsList) {
   tableProjectsBody.innerHTML = "";
 
   projectsList.projects.forEach((project, index) => {
@@ -52,7 +64,7 @@ function renderProjectsTable() {
     deleteButton.textContent = "Delete";
     deleteButton.addEventListener("click", () => {
       projectsList.deleteProject(index);
-      renderProjectsTable();
+      renderProjectsTable(projectsList);
       updateCommitProjectSelect();
     });
 
@@ -65,7 +77,7 @@ function renderProjectsTable() {
     `;
     row.querySelector(".delete-project-btn").addEventListener("click", () => {
       projectsList.deleteProject(index);
-      renderProjectsTable();
+      renderProjectsTable(projectsList);
       updateCommitProjectSelect();
     });
 
