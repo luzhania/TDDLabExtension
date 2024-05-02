@@ -302,7 +302,7 @@ describe("Buscar proyectos de la lista de proyectos", () => {
     projectslist.addProject("Saludador");
     projectslist.addProject("Totalizador");
     projectslist.addProject("Calculador");
-    expect(projectslist.searchProject('')).toEqual([]);
+    expect(projectslist.searchProject('')).toEqual({"projects": []});
   });
 });
 
@@ -312,6 +312,6 @@ describe("Buscar proyectos de la lista de proyectos", () => {
     projectslist.addProject("Saludador");
     projectslist.addProject("Totalizador");
     projectslist.addProject("Calculador");
-    expect(projectslist.searchProject('Saludador')).toEqual([{"commitList": [], "name": "Saludador"}]);
+    expect(projectslist.searchProject('Saludador')).toEqual({"projects": [{"commitList": [], "name": "Saludador"}]});
   });
 });

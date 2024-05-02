@@ -43,7 +43,12 @@ export class ProjectsList {
   }
 
   searchProject(projectNameSearched) {
-    let projectListSearched = this.projects.filter(project => project.name === projectNameSearched);
+    let projectListSearched = new ProjectsList();
+    for (let project of this.projects) {
+      if(project.name === projectNameSearched){
+        projectListSearched.addProject(project.name);
+      }
+    }
     return projectListSearched;
   }
 }

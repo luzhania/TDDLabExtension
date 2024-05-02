@@ -30,7 +30,6 @@ addProjectForm.addEventListener("submit", (event) => {
 searchProjectForm.addEventListener("submit", (event) => {
   event.preventDefault();
   const searchedProjectName = projectNameInputSearched.value.trim();
-  console.log(searchedProjectName);
   const projectListSearched = projectsList.searchProject(searchedProjectName);
   if (projectListSearched) {
     renderProjectsTable(projectListSearched);
