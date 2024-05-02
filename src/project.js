@@ -199,4 +199,7 @@ export class AddedTestMetric {
   constructor(value) {
     this.value = value;
   }
+  getPoints(){
+    return 100;
+  }
 }

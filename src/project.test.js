@@ -180,6 +180,11 @@ describe("Return feedback messages for modified lines per commit", () => {
   });
 
   describe("Assign points for added tests", () => {
-    
+    it("should assign 100 points for the attempt", () => { //next if the modified lines are equal to 0 when message of commit is 'refact: [rest of message]'
+      let project = new Project("Saludador");
+      project.addCommit("refact: changing names of variables", 0, 0, 20);
+      const commit = project.commitList[0];
+      expect(commit.getAddedTests().getPoints()).toEqual(100);
+    });
   });
 });
