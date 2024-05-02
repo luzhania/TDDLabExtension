@@ -237,6 +237,7 @@ export class AddedTestMetric {
   }
   assignFeedbackMessage(){
     if(this.areTestAddedInRefactoring()) return "❌Recuerda, no se añaden pruebas cuando el código solo es modificado para 'refactoring'⚠️";
+    if(!this.isRefactCommit() && this.value == 0) return "❌Para escribir código con TDD no olvides hacer primero las pruebas!!!😨";
     return "☑️Buen trabajo, no se añaden pruebas cuando el código solo es modificado para 'refactoring' 👍";
   }
   areTestAddedInRefactoring(){
