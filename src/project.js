@@ -214,7 +214,7 @@ export class AddedTestMetric {
   assignPoints(){
     switch(true){
       case this.isIncorrect(): return 0;
-      case this.areMuchTests(): return 10;
+      case this.areMuchTestsInNoRefactoring(): return 10;
       default: return 100;
     }
   }
@@ -227,9 +227,9 @@ export class AddedTestMetric {
     return this.message.trim().split(' ')[index];
   }
   isIncorrect(){
-    return this.areTestAddedInRefactoring() || this.noTestAddedinNoRefactoring();
+    return this.areTestAddedInRefactoring() || this.noTestAddedInNoRefactoring();
   }
-  areMuchTests(){
+  areMuchTestsInNoRefactoring(){
     return !this.isRefactCommit() && this.value > 1;
   }
   getFeedbackMessage(){
@@ -237,18 +237,19 @@ export class AddedTestMetric {
   }
   assignFeedbackMessage(){
     if(this.areTestAddedInRefactoring()) return "❌Recuerda, no se añaden pruebas cuando el código solo es modificado para 'refactoring'⚠️";
-    if(this.noTestAddedinNoRefactoring()) return "❌Para escribir código con TDD no olvides hacer primero las pruebas!!!😨";
-    if(this.testAddedinNoRefactoring())return "☑️Excelente! No olvides que las pruebas son el alma del TDD 😎"
+    if(this.noTestAddedInNoRefactoring()) return "❌Para escribir código con TDD no olvides hacer primero las pruebas!!!😨";
+    if(this.testAddedInNoRefactoring()) return "☑️Excelente! No olvides que las pruebas son el alma del TDD 😎";
+    if(this.areMuchTestsInNoRefactoring()) return "🤦‍♂️No hace falta añadir tantas pruebas en un solo ciclo de TDD";
     return "☑️Buen trabajo, no se añaden pruebas cuando el código solo es modificado para 'refactoring' 👍";
     
   }
   areTestAddedInRefactoring(){
     return this.isRefactCommit() && this.value > 0;
   }
-  noTestAddedinNoRefactoring(){
+  noTestAddedInNoRefactoring(){
     return !this.isRefactCommit() && this.value == 0;
   }
-  testAddedinNoRefactoring(){
+  testAddedInNoRefactoring(){
     return !this.isRefactCommit() && this.value == 1;
   }
 }
