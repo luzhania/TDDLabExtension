@@ -47,6 +47,7 @@ export class ProjectsList {
       if(projectElement.name == projectName)
       return projectElement;      
     }
+    return 'Project not found';
   }
 }
 

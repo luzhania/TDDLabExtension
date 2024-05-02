@@ -310,5 +310,12 @@ describe("Calculate the overall total of points", () => {
       projectslist.addProject("Calculador");
       expect(projectslist.searchProjectByName("Calculador")).toEqual({"commitList": [], "name": "Calculador"});
     });
+    it("should return 'Project not found' if the project searched by name doesn't exist", () => {
+      let projectslist = new ProjectsList();
+      projectslist.addProject("Saludador");
+      projectslist.addProject("Totalizador");
+      projectslist.addProject("Calculador");
+      expect(projectslist.searchProjectByName("Merodeador")).toEqual('Project not found');
+    });
   });
 });
