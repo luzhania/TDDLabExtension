@@ -11,15 +11,28 @@ const modifiedLinesInput = document.querySelector("#modified-lines");
 const addedTestsInput = document.querySelector("#added-tests"); //test criteria
 const percentageOfCoverageInput = document.querySelector("#percentage-coverage");
 const overallScore = document.querySelector("#overAll-score");
+const searchProjectForm = document.querySelector("#search-project-form");
+const projectNameSearched = document.querySelector("project-searched-name")
 
 const tableFeedbackProject = document.querySelector("#feedback-project-tb");
 
 const projectsList = new ProjectsList();
+let projectsSearchedList = projectsList;
 
 addProjectForm.addEventListener("submit", (event) => {
   event.preventDefault();
   const projectName = projectNameInput.value.trim();
   projectsList.addProject(projectName);
+  projectsSearchedList = projectsList;
+  renderProjectsTable();
+  updateCommitProjectSelect();
+});
+
+searchProjectForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const projectName = projectNameInput.value.trim();
+  projectsSearchedList = [];
+  projectsSearchedList.push(projectsList.searchProjectByName(projectName));
   renderProjectsTable();
   updateCommitProjectSelect();
 });
@@ -47,7 +60,7 @@ commitProjectSelect.addEventListener("change", () => {
 function renderProjectsTable() {
   tableProjectsBody.innerHTML = "";
 
-  projectsList.projects.forEach((project, index) => {
+  projectsSearchedList.projects.forEach((project, index) => {
     const deleteButton = document.createElement("button");
     deleteButton.textContent = "Delete";
     deleteButton.addEventListener("click", () => {
