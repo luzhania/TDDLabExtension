@@ -34,6 +34,9 @@ searchProjectForm.addEventListener("submit", (event) => {
   if (projectListSearched) {
     renderProjectsTable(projectListSearched);
   }
+  if(projectListSearched.projects.length === 0){
+    alert('No se encontró el proyecto ' + searchedProjectName)
+  }
 });
 addCommitForm.addEventListener("submit", (event) => {
   event.preventDefault();
