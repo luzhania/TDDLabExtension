@@ -197,12 +197,25 @@ export class ModifiedLinesMetric {
 export class AddedTestMetric {
   value = 0
   message = ''
+  points = 0
   constructor(value, message) {
     this.value = value;
     this.message = message;
+    this.points = this.assignPoints()
   }
   getPoints(){
-    if(this.message.trim().split(' ')[0] === 'refact:' && this.value === 1) return 0;
+    return this.points;
+  }
+  assignPoints(){
+    if(this.isRefactCommit() && this.value == 1) return 0;
     return 100;
+  }
+  isRefactCommit(){
+    const refactor = 'refact:';
+    return this.getFirstWordCommit() == refactor ? true : false;
+  }
+  getFirstWordCommit(){
+    const index = 0;
+    return this.message.trim().split(' ')[index];
   }
 }
