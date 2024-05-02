@@ -45,7 +45,7 @@ export class Commit {
     this.commitDescription = commitDescription;
     let linesValue = new ModifiedLinesMetric(modifiedLines);
     this.modifiedLines = linesValue;
-    this.addedTests = new AddedTestMetric(addedTests)
+    this.addedTests = new AddedTestMetric(addedTests, commitDescription)
     this.percentageOfCoverage = new PercentageOfCoverageMetric(percentageOfCoverage);
   }
 
@@ -196,10 +196,13 @@ export class ModifiedLinesMetric {
 
 export class AddedTestMetric {
   value = 0
-  constructor(value) {
+  message = ''
+  constructor(value, message) {
     this.value = value;
+    this.message = message;
   }
   getPoints(){
+    if(this.message.trim().split(' ')[0] === 'refact:' && this.value === 1) return 0;
     return 100;
   }
 }
