@@ -198,5 +198,11 @@ describe("Return feedback messages for modified lines per commit", () => {
       const commit = project.commitList[0];
       expect(commit.getAddedTests().getPoints()).toEqual(0);
     });
+    it("should assign 0 points for the attempt if the added tests are equal to 0 when commit isn't for refactoring", () => {
+      let project = new Project("Saludador");
+      project.addCommit("new function destroyHelloWorld implemented", 0, 0, 20);
+      const commit = project.commitList[0];
+      expect(commit.getAddedTests().getPoints()).toEqual(0);
+    });
   });
 });

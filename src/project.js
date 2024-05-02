@@ -208,6 +208,7 @@ export class AddedTestMetric {
   }
   assignPoints(){
     if(this.isRefactCommit() && this.value == 1) return 0;
+    if(!this.isRefactCommit() && this.value == 0) return 0;
     return 100;
   }
   isRefactCommit(){
