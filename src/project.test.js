@@ -272,3 +272,13 @@ describe("Calculate total points earned per commit", () => {
     expect(commit.getTotalPoints()).toEqual(300);
   });
 });
+
+describe("Calculate total points earned per project", () => {
+  it("should return 900 points for the attempt", () => {
+    let project = new Project("Saludador");
+    project.addCommit("Added the greet method", 10, 1, 100);
+    project.addCommit("Added the greet method", 200, 2, 30);
+    project.addCommit("Added the greet method", 20, 1, 100);
+    expect(project.getTotalPointsPerProject()).toEqual(630);
+  });
+});

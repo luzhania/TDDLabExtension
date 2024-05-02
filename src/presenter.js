@@ -33,6 +33,7 @@ addCommitForm.addEventListener("submit", (event) => {
   projectsList.projects[projectIndex].addCommit(commitMessage, commitModifiedLines, commitAddedTests, commitPercentageOfCoverage);
   renderCommitsTable(projectIndex);
   renderFeedbackTable(projectIndex);
+  renderProjectsTable();
 });
 
 commitProjectSelect.addEventListener("change", () => {
@@ -57,6 +58,7 @@ function renderProjectsTable() {
     row.innerHTML = `
       <td>${index + 1}</td>
       <td>${project.name}</td>
+      <td>${project.getTotalPointsPerProject()}</td>
       <td><button class="delete-project-btn">Delete</button></td>
     `;
     row.querySelector(".delete-project-btn").addEventListener("click", () => {
