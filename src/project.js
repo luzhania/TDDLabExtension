@@ -208,6 +208,9 @@ export class AddedTestMetric {
   getPoints(){
     return this.points;
   }
+  getValue(){
+    return this.value;
+  }
   assignPoints(){
     switch(true){
       case this.isIncorrect(): return 0;
