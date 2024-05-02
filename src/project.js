@@ -43,7 +43,8 @@ export class ProjectsList {
   }
 
   searchProject(projectNameSearched) {
-    return new ProjectsList();
+    let projectListSearched = this.projects.filter(project => project.name === projectNameSearched);
+    return projectListSearched;
   }
 }
 
