@@ -236,7 +236,7 @@ export class AddedTestMetric {
     return this.feedbackMessage;
   }
   assignFeedbackMessage(){
-    if(this.isRefactCommit() && this.value == 1) return "❌Recuerda, no se añaden pruebas cuando el código solo es modificado para 'refactoring'⚠️";
+    if(this.isRefactCommit() && this.value > 0) return "❌Recuerda, no se añaden pruebas cuando el código solo es modificado para 'refactoring'⚠️";
     return "☑️Buen trabajo, no se añaden pruebas cuando el código solo es modificado para 'refactoring' 👍";
   }
 }
