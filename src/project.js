@@ -1,3 +1,18 @@
+export class Search{
+  name = "";
+  status = "";
+  constructor(namese){
+    this.name = namese;
+    this.searchnames(this.name);
+  }
+  searchnames(name){
+    if(name == "Saludador")
+      this.status = "Encontrado";
+  }
+  getStatus(){
+    return this.status;
+  }
+}
 export class Project {
   name = "";
   commitList = [];

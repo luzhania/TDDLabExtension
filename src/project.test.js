@@ -1,4 +1,4 @@
-import { Project, ProjectsList } from "./project.js";
+import { Project, ProjectsList, Search } from "./project.js";
 
 describe("Add project", () => {
   let project = new Project("Saludador");
@@ -177,5 +177,16 @@ describe("Return feedback messages for modified lines per commit", () => {
     project.addCommit("Added the greet method", 55, 2, 20);
     const commit = project.commitList[0];
     expect(commit.getModifiedLines().getFeedbackMessage()).toEqual("❌ Líneas de código modificadas: 55. Demasiadas líneas de código añadidas. Debes hacer solo los cambios necesarios en cada ciclo de TDD. ¡Vamos, puedes hacerlo mejor y tendrás más puntos!");
+  });
+});
+
+describe("Search projects by name", () => {
+  it("should recieve a name of the project and return 'Encontrado' if the project exists", () => {
+    let project = new Project("Saludador");
+    project.addCommit("Added the greet method", 10, 2, 20);
+    const commit = project.commitList[0];
+    let projectname = "Saludador";
+    let search = new Search(projectname);
+    expect(search.getStatus()).toEqual("Encontrado");
   });
 });
