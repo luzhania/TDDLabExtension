@@ -42,8 +42,11 @@ export class ProjectsList {
     return this.projects.reduce((acc, project) => acc + project.getTotalPointsPerProject(), 0);
   }
 
-  searchProjectByName(){
-    return this.projects[0];
+  searchProjectByName(projectName){
+    for (const projectElement of this.projects) {
+      if(projectElement.name == projectName)
+      return projectElement;      
+    }
   }
 }
 
