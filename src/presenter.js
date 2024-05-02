@@ -109,10 +109,10 @@ function renderFeedbackTable(projectIndex) {
       <td>${commit.getPercentageOfCoverage().getPoints()}</td>
       <td>${commit.getModifiedLines().getPoints()}</td>
       <td>${commit.getAddedTests().getPoints()}</td>
-      <td>${commit.getPercentageOfCoverage().getFeedbackMessage() + "<br><br>" + commit.getModifiedLines().getFeedbackMessage()}</td>
+      <td>${commit.getPercentageOfCoverage().getFeedbackMessage()}<br><br>${commit.getModifiedLines().getFeedbackMessage()}<br><br>${commit.getAddedTests().getFeedbackMessage()}</td>
     `;
     /*
-    <td>${commit.getAddedTests().getFeedbackMessage()}</td>
+    <td></td>
     */
     tableFeedbackProject.appendChild(row);
   });

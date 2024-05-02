@@ -217,4 +217,13 @@ describe("Return feedback messages for modified lines per commit", () => {
       expect(commit.getAddedTests().getPoints()).toEqual(10);
     });
   });
+
+  describe("Return feedback messages for modified lines per commit", () => {
+    it("should return encouraging feedback when is a refactoring commit and the number of addedTests is equal to 0", () => {
+      let project = new Project("Saludador");
+      project.addCommit("refact: adding functions for best coder reading", 0, 0, 20);
+      const commit = project.commitList[0];
+      expect(commit.getAddedTests().getFeedbackMessage()).toEqual("☑️Buen trabajo, no se añaden pruebas cuando el código solo es modificado para 'refactoring' 👍");
+    });
+  });
 });

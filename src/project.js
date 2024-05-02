@@ -198,10 +198,12 @@ export class AddedTestMetric {
   value = 0
   message = ''
   points = 0
+  feedbackMessage = ''
   constructor(value, message) {
     this.value = value;
     this.message = message;
     this.points = this.assignPoints()
+    this.feedbackMessage = "☑️Buen trabajo, no se añaden pruebas cuando el código solo es modificado para 'refactoring' 👍"
   }
   getPoints(){
     return this.points;
@@ -226,5 +228,8 @@ export class AddedTestMetric {
   }
   areMuchTests(){
     return !this.isRefactCommit() && this.value > 1;
+  }
+  getFeedbackMessage(){
+    return this.feedbackMessage;
   }
 }
