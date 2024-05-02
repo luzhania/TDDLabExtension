@@ -207,8 +207,7 @@ export class AddedTestMetric {
     return this.points;
   }
   assignPoints(){
-    if(this.isRefactCommit() && this.value == 1) return 0;
-    if(!this.isRefactCommit() && this.value == 0) return 0;
+    if(this.isIncorrect()) return 0;
     return 100;
   }
   isRefactCommit(){
@@ -218,5 +217,8 @@ export class AddedTestMetric {
   getFirstWordCommit(){
     const index = 0;
     return this.message.trim().split(' ')[index];
+  }
+  isIncorrect(){
+    return this.isRefactCommit() && this.value == 1 || !this.isRefactCommit() && this.value == 0
   }
 }
