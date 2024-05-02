@@ -294,4 +294,14 @@ describe("Calculate the overall total of points", () => {
     projectslist.projects[2].addCommit("Added substracting method", 10, 1, 100);
     expect(projectslist.getTotalPoints()).toEqual(900);
   });
+
+  describe("Search Project by name", () => {
+    it("should return the first project", () => {
+      let projectslist = new ProjectsList();
+      projectslist.addProject("Saludador");
+      projectslist.addProject("Totalizador");
+      projectslist.addProject("Calculador");
+      expect(projectslist.searchProjectByName("Saludador")).toEqual({"commitList": [], "name": "Saludador"});
+    });
+  });
 });
