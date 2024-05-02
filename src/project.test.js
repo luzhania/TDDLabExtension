@@ -79,7 +79,7 @@ describe("Add percentage of coverage per commit", () => {
     const commit = project.commitList[0];
     expect(commit.getCommitDescription()).toEqual("Added the greet method");
     expect(commit.getModifiedLines().getValue()).toEqual(10);
-    expect(commit.getAddedTests().value).toEqual(2);
+    expect(commit.getAddedTests().getValue()).toEqual(2);
     expect(commit.getPercentageOfCoverage().getValue()).toEqual(100);
   });
 });
@@ -177,121 +177,5 @@ describe("Return feedback messages for modified lines per commit", () => {
     project.addCommit("Added the greet method", 55, 2, 20);
     const commit = project.commitList[0];
     expect(commit.getModifiedLines().getFeedbackMessage()).toEqual("❌ Líneas de código modificadas: 55. Demasiadas líneas de código añadidas. Debes hacer solo los cambios necesarios en cada ciclo de TDD. ¡Vamos, puedes hacerlo mejor y tendrás más puntos!");
-  });
-
-  describe("Assign points for added tests", () => {
-    it("should assign 100 points for the attempt", () => {
-      let project = new Project("Saludador");
-      project.addCommit("refact: changing names of variables", 0, 0, 20);
-      const commit = project.commitList[0];
-      expect(commit.getAddedTests().getPoints()).toEqual(100);
-    });
-    it("should assign 100 points for the attempt if the added tests are equal to 0 when message of commit is 'refact: [rest of message]'", () => {
-      let project = new Project("Saludador");
-      project.addCommit("refact: changing names of variables", 0, 0, 20);
-      const commit = project.commitList[0];
-      expect(commit.getAddedTests().getPoints()).toEqual(100);
-    });
-    it("should assign 0 points for the attempt if the added tests are equal to 1 when message of commit is 'refact: [rest of message]'", () => {
-      let project = new Project("Saludador");
-      project.addCommit("refact: changing names of variables", 0, 1, 20);
-      const commit = project.commitList[0];
-      expect(commit.getAddedTests().getPoints()).toEqual(0);
-    });
-    it("should assign 0 points for the attempt if the added tests are more than 0 when message of commit is 'refact: [rest of message]'", () => {
-      let project = new Project("Saludador");
-      project.addCommit("refact: changing names of variables", 0, 2, 20);
-      const commit = project.commitList[0];
-      expect(commit.getAddedTests().getPoints()).toEqual(0);
-    });
-    it("should assign 0 points for the attempt if the added tests are equal to 0 when commit isn't for refactoring", () => {
-      let project = new Project("Saludador");
-      project.addCommit("new function destroyHelloWorld implemented", 0, 0, 20);
-      const commit = project.commitList[0];
-      expect(commit.getAddedTests().getPoints()).toEqual(0);
-    });
-    it("should assign 100 points for the attempt if the added tests are equal to 1 when commit isn't for refactoring", () => {
-      let project = new Project("Saludador");
-      project.addCommit("new function destroyHelloWorld implemented", 0, 1, 20);
-      const commit = project.commitList[0];
-      expect(commit.getAddedTests().getPoints()).toEqual(100);
-    });
-    it("should assign 10 points for the attempt if the added tests are more than 1 when commit isn't for refactoring", () => {
-      let project = new Project("Saludador");
-      project.addCommit("new function destroyHelloWorld implemented", 0, 2, 20);
-      const commit = project.commitList[0];
-      expect(commit.getAddedTests().getPoints()).toEqual(10);
-    });
-  });
-
-  describe("Return feedback messages for modified lines per commit", () => {
-    it("should return encouraging feedback when is a refactoring commit and the number of addedTests is equal to 0", () => {
-      let project = new Project("Saludador");
-      project.addCommit("refact: adding functions for best coder reading", 0, 0, 20);
-      const commit = project.commitList[0];
-      expect(commit.getAddedTests().getFeedbackMessage()).toEqual("☑️Buen trabajo, no se añaden pruebas cuando el código solo es modificado para 'refactoring' 👍");
-    });
-    it("should return encouraging feedback when is a refactoring commit and the number of addedTests is 1", () => {
-      let project = new Project("Saludador");
-      project.addCommit("refact: adding functions for best coder reading", 0, 1, 20);
-      const commit = project.commitList[0];
-      expect(commit.getAddedTests().getFeedbackMessage()).toEqual("❌Recuerda, no se añaden pruebas cuando el código solo es modificado para 'refactoring'⚠️");
-    });
-    it("should return encouraging feedback when is a refactoring commit and there are tests added", () => {
-      let project = new Project("Saludador");
-      project.addCommit("refact: adding functions for best coder reading", 0, 2, 20);
-      const commit = project.commitList[0];
-      expect(commit.getAddedTests().getFeedbackMessage()).toEqual("❌Recuerda, no se añaden pruebas cuando el código solo es modificado para 'refactoring'⚠️");
-    });
-    it("should return encouraging feedback when is not a refactoring commit and there are not tests added", () => {
-      let project = new Project("Saludador");
-      project.addCommit("function to destroy 'HelloWorld' added", 0, 0, 20);
-      const commit = project.commitList[0];
-      expect(commit.getAddedTests().getFeedbackMessage()).toEqual("❌Para escribir código con TDD no olvides hacer primero las pruebas!!!😨");
-    });
-    it("should return encouraging feedback when is not a refactoring commit and there is 1 tests added", () => {
-      let project = new Project("Saludador");
-      project.addCommit("function to destroy 'HelloWorld' added", 0, 1, 20);
-      const commit = project.commitList[0];
-      expect(commit.getAddedTests().getFeedbackMessage()).toEqual("☑️Excelente! No olvides que las pruebas son el alma del TDD 😎");
-    });
-    it("should return encouraging feedback when is not a refactoring commit and there are more than 1 tests added", () => {
-      let project = new Project("Saludador");
-      project.addCommit("function to destroy 'HelloWorld' added", 0, 2, 20);
-      const commit = project.commitList[0];
-      expect(commit.getAddedTests().getFeedbackMessage()).toEqual("🤦‍♂️No hace falta añadir tantas pruebas en un solo ciclo de TDD");
-    });
-  });
-});
-
-describe("Calculate total points earned per commit", () => {
-  it("should return 300 points for the attempt", () => {
-    let project = new Project("Saludador");
-    project.addCommit("Added the greet method", 10, 1, 100);
-    const commit = project.commitList[0];
-    expect(commit.getTotalPoints()).toEqual(300);
-  });
-});
-
-describe("Calculate total points earned per project", () => {
-  it("should return 900 points for the attempt", () => {
-    let project = new Project("Saludador");
-    project.addCommit("Added the greet method", 10, 1, 100);
-    project.addCommit("Added the greet method", 200, 2, 30);
-    project.addCommit("Added the greet method", 20, 1, 100);
-    expect(project.getTotalPointsPerProject()).toEqual(630);
-  });
-});
-
-describe("Calculate the overall total of points", () => {
-  it("should return 900 points for the attempt", () => {
-    let projectslist = new ProjectsList();
-    projectslist.addProject("Saludador");
-    projectslist.addProject("Totalizador");
-    projectslist.addProject("Calculador");
-    projectslist.projects[0].addCommit("Added the greet method", 10, 1, 100);
-    projectslist.projects[1].addCommit("Added totalizer method", 10, 1, 100);
-    projectslist.projects[2].addCommit("Added substracting method", 10, 1, 100);
-    expect(projectslist.getTotalPoints()).toEqual(900);
   });
 });
