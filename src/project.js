@@ -45,7 +45,7 @@ export class Commit {
     this.commitDescription = commitDescription;
     let linesValue = new ModifiedLinesMetric(modifiedLines);
     this.modifiedLines = linesValue;
-    this.addedTests = addedTests;
+    this.addedTests = new AddedTestMetric(addedTests)
     this.percentageOfCoverage = new PercentageOfCoverageMetric(percentageOfCoverage);
   }
 
@@ -191,5 +191,12 @@ export class ModifiedLinesMetric {
         this.feedbackMessage = `❌ Líneas de código modificadas: ${this.value}. Demasiadas líneas de código añadidas. Debes hacer solo los cambios necesarios en cada ciclo de TDD. ¡Vamos, puedes hacerlo mejor y tendrás más puntos!`
         break;
     }
+  }
+}
+
+export class AddedTestMetric {
+  value = 0
+  constructor(value) {
+    this.value = value;
   }
 }

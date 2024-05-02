@@ -67,7 +67,7 @@ describe("Add added tests per commit", () => {
     const commit = project.commitList[0];
     expect(commit.getCommitDescription()).toEqual("Added the greet method");
     expect(commit.getModifiedLines().getValue()).toEqual(10);
-    expect(commit.getAddedTests()).toEqual(2);
+    expect(commit.getAddedTests().value).toEqual(2);
   });
 });
 
@@ -79,7 +79,7 @@ describe("Add percentage of coverage per commit", () => {
     const commit = project.commitList[0];
     expect(commit.getCommitDescription()).toEqual("Added the greet method");
     expect(commit.getModifiedLines().getValue()).toEqual(10);
-    expect(commit.getAddedTests()).toEqual(2);
+    expect(commit.getAddedTests().value).toEqual(2);
     expect(commit.getPercentageOfCoverage().getValue()).toEqual(100);
   });
 });
