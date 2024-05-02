@@ -186,11 +186,11 @@ describe("Return feedback messages for modified lines per commit", () => {
       const commit = project.commitList[0];
       expect(commit.getAddedTests().getPoints()).toEqual(100);
     });
-    // it("should assign 100 points for the attempt if the modified lines are equal to 0 when message of commit is 'refact: [rest of message]'", () => {
-    //   let project = new Project("Saludador");
-    //   project.addCommit("refact: changing names of variables", 0, 0, 20);
-    //   const commit = project.commitList[0];
-    //   expect(commit.getAddedTests().getPoints()).toEqual(100);
-    // });
+    it("should assign 100 points for the attempt if the added tests are equal to 0 when message of commit is 'refact: [rest of message]'", () => {
+      let project = new Project("Saludador");
+      project.addCommit("refact: changing names of variables", 0, 0, 20);
+      const commit = project.commitList[0];
+      expect(commit.getAddedTests().getPoints()).toEqual(100);
+    });
   });
 });
