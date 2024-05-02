@@ -227,7 +227,7 @@ export class AddedTestMetric {
     return this.message.trim().split(' ')[index];
   }
   isIncorrect(){
-    return this.isRefactCommit() && this.value == 1 || !this.isRefactCommit() && this.value == 0;
+    return this.isRefactCommit() && this.value > 0 || !this.isRefactCommit() && this.value == 0;
   }
   areMuchTests(){
     return !this.isRefactCommit() && this.value > 1;
