@@ -282,3 +282,16 @@ describe("Calculate total points earned per project", () => {
     expect(project.getTotalPointsPerProject()).toEqual(630);
   });
 });
+
+describe("Calculate the overall total of points", () => {
+  it("should return 900 points for the attempt", () => {
+    let projectslist = new ProjectsList();
+    projectslist.addProject("Saludador");
+    projectslist.addProject("Totalizador");
+    projectslist.addProject("Calculador");
+    projectslist.projects[0].addCommit("Added the greet method", 10, 1, 100);
+    projectslist.projects[1].addCommit("Added totalizer method", 10, 1, 100);
+    projectslist.projects[2].addCommit("Added substracting method", 10, 1, 100);
+    expect(projectslist.getTotalPoints()).toEqual(900);
+  });
+});

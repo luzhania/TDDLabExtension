@@ -37,6 +37,10 @@ export class ProjectsList {
   deleteProject(index) {
     this.projects.splice(index, 1);
   }
+
+  getTotalPoints() {
+    return this.projects.reduce((acc, project) => acc + project.getTotalPointsPerProject(), 0);
+  }
 }
 
 export class Commit {

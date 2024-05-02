@@ -10,6 +10,7 @@ const tableCommitsBody = document.querySelector("#result-tb-commit");
 const modifiedLinesInput = document.querySelector("#modified-lines");
 const addedTestsInput = document.querySelector("#added-tests"); //test criteria
 const percentageOfCoverageInput = document.querySelector("#percentage-coverage");
+const overallScore = document.querySelector("#overAll-score");
 
 const tableFeedbackProject = document.querySelector("#feedback-project-tb");
 
@@ -34,6 +35,7 @@ addCommitForm.addEventListener("submit", (event) => {
   renderCommitsTable(projectIndex);
   renderFeedbackTable(projectIndex);
   renderProjectsTable();
+  updadateOverallScore();
 });
 
 commitProjectSelect.addEventListener("change", () => {
@@ -81,6 +83,10 @@ function updateCommitProjectSelect() {
     option.textContent = project.name;
     commitProjectSelect.appendChild(option);
   });
+}
+
+function updadateOverallScore() {
+  overallScore.innerHTML = "OverAll Score: " + projectsList.getTotalPoints();
 }
 
 function renderCommitsTable(projectIndex) {
