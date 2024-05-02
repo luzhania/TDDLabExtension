@@ -64,6 +64,10 @@ export class Commit {
   getPercentageOfCoverage() {
     return this.percentageOfCoverage;
   }
+
+  getTotalPoints() {
+    return this.modifiedLines.getPoints() + this.addedTests.getPoints() + this.percentageOfCoverage.getPoints();
+  }
 }
 
 export class PercentageOfCoverageMetric {

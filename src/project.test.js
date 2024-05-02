@@ -263,3 +263,12 @@ describe("Return feedback messages for modified lines per commit", () => {
     });
   });
 });
+
+describe("Calculate total points earned per commit", () => {
+  it("should return 300 points for the attempt", () => {
+    let project = new Project("Saludador");
+    project.addCommit("Added the greet method", 10, 1, 100);
+    const commit = project.commitList[0];
+    expect(commit.getTotalPoints()).toEqual(300);
+  });
+});

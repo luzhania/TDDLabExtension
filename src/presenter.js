@@ -93,6 +93,7 @@ function renderCommitsTable(projectIndex) {
       <td>${commit.getModifiedLines().getValue()}</td>
       <td>${commit.getAddedTests().getValue()}</td>
       <td>${commit.getPercentageOfCoverage().getValue()}</td>
+      <td>${commit.getTotalPoints()}</td>
     `;
     tableCommitsBody.appendChild(row);
   });
