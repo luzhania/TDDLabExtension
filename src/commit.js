@@ -1,4 +1,5 @@
-import { ModifiedLinesMetric, AddedTestMetric, PercentageOfCoverageMetric } from "./project.js";
+import { ModifiedLinesMetric, AddedTestMetric } from "./project.js";
+import { PercentageOfCoverageMetric } from "./percentageOfCoverageMetric.js";
 
 export class Commit {
     commitDescription = "";
