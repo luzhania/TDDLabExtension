@@ -1,4 +1,4 @@
-import { Project, ProjectsList, Commit } from "./project.js";
+import { ProjectsList } from "./projectList";
 
 const projectNameInput = document.querySelector("#project-name");
 const addProjectForm = document.querySelector("#add-project-form");
