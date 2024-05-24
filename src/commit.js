@@ -1,4 +1,4 @@
-import { AddedTestMetric } from "./project.js";
+import { AddedTestMetric } from "./addedTestMetric.js";
 import { PercentageOfCoverageMetric } from "./percentageOfCoverageMetric.js";
 import { ModifiedLinesMetric } from "./modifiedLinesMetric.js";
 
