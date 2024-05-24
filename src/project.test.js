@@ -1,4 +1,5 @@
-import { Project, ProjectsList } from "./project.js";
+import { Project } from "./project.js";
+import { ProjectsList } from "./projectList.js";
 
 describe("Add project", () => {
   let project = new Project("Saludador");
