@@ -132,6 +132,21 @@ describe("Add code complexity per commit", () => {
     expect(commit.getCommitTimeString()).toEqual("10:30");
     expect(commit.getCodeComplexity()).toEqual("low");
   });
+
+  it("should save 1 commit with description 'Added the greet method', 10 modified lines, 2 added tests, 100 percentage of coverage, date '2021-09-01', time '10:30', and code complexity 'Low'", () => {
+    let project = new Project("Saludador");
+    project.addCommit("Added the greet method", 10, 2, 100, 1, 1, 2000, 10, 30, "moderate");
+    const commit = project.commitList[0];
+
+    expect(commit.getCommitDescription()).toEqual("Added the greet method");
+    expect(commit.getModifiedLines().getValue()).toEqual(10);
+    expect(commit.getAddedTests().value).toEqual(2);
+    expect(commit.getPercentageOfCoverage().getValue()).toEqual(100);
+    expect(commit.getCommitDate()).toEqual(new Date(2000, 0, 1, 10, 30));
+    expect(commit.getCommitStringDate()).toEqual("1/1/2000");
+    expect(commit.getCommitTimeString()).toEqual("10:30");
+    expect(commit.getCodeComplexity()).toEqual("moderate");
+  });
 });
 
 describe("Assign points for percentage of coverage per commit", () => {
@@ -206,7 +221,7 @@ describe("Assign points for modified lines per commit", () => {
     project.addCommit("Added the greet method", 60, 2, 20);
     const commit = project.commitList[0];
     expect(commit.getModifiedLines().getPoints()).toEqual(10);
-  });  
+  });
 });
 
 describe("Return feedback messages for modified lines per commit", () => {
