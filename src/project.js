@@ -38,6 +38,6 @@ export class Project {
   }
 
   getPercentageOfCoverageAverage() {
-    return this.commitList[0].getPercentageOfCoverage().getValue();
+    return this.commitList.reduce((acc, commit) => acc + parseInt(commit.getPercentageOfCoverage().getValue()), 0) / this.commitList.length;
   }
 }
