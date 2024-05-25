@@ -20,7 +20,7 @@ export class ProjectCoverageFeedbackAssigner {
             case this.evaluationCriteria.isRegular(percentageOfCoverage):
                 this.feedbackMessage = "Regular";
                 break;
-            case percentageOfCoverage >= 80 && percentageOfCoverage <= 90:
+            case this.evaluationCriteria.isGood(percentageOfCoverage):
                 this.feedbackMessage = "Good";
                 break;
             case percentageOfCoverage >= 91 && percentageOfCoverage <= 100:
@@ -44,7 +44,7 @@ export class ProjectCoverageFeedbackAssigner {
             case this.evaluationCriteria.isRegular(percentageOfCoverage):
                 this.points = 12;
                 break;
-            case percentageOfCoverage >= 80 && percentageOfCoverage <= 90:
+            case this.evaluationCriteria.isGood(percentageOfCoverage):
                 this.points = 16;
                 break;
             case percentageOfCoverage >= 91 && percentageOfCoverage <= 100:
