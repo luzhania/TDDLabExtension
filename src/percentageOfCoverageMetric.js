@@ -46,7 +46,7 @@ export class TestCoverageCommitMetric {
     }
     assignFeedbackMessage() {
       switch (true) {
-        case this.value > 90:
+        case this.evaluationCriteria.isExcellent(this.value):
           this.feedbackMessage = `👏 Cobertura de código: ¡${this.value}% del código está cubierto por las pruebas! Continúa aplicando este enfoque riguroso para escribir pruebas antes de escribir el código de producción`
           break;
         case this.evaluationCriteria.isGood(this.value):

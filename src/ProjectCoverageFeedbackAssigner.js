@@ -23,7 +23,7 @@ export class ProjectCoverageFeedbackAssigner {
             case this.evaluationCriteria.isGood(percentageOfCoverage):
                 this.feedbackMessage = "Good";
                 break;
-            case percentageOfCoverage >= 91 && percentageOfCoverage <= 100:
+            case this.evaluationCriteria.isExcellent(percentageOfCoverage):
                 this.feedbackMessage = "Excellent";
                 break;
         }
@@ -47,7 +47,7 @@ export class ProjectCoverageFeedbackAssigner {
             case this.evaluationCriteria.isGood(percentageOfCoverage):
                 this.points = 16;
                 break;
-            case percentageOfCoverage >= 91 && percentageOfCoverage <= 100:
+            case this.evaluationCriteria.isExcellent(percentageOfCoverage):
                 this.points = 20;
                 break;
         }
