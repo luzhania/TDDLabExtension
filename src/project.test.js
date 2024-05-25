@@ -450,3 +450,11 @@ describe("Feedback messages for percentage of coverage per project", () => {
     expect(project.getTestCoverage().getFeedbackMessage()).toEqual("Excellent");
   });
 });
+describe("Points for test coverage per project", () => {
+  it("should return 0 points if there's no commits in the project", () => {
+    let projectslist = new ProjectsList();
+    projectslist.addProject("Saludador");
+    const project = projectslist.projects[0];
+    expect(project.getTestCoverage().getPoints()).toEqual(0);
+  });
+});

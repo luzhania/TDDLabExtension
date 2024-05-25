@@ -1,8 +1,10 @@
 export class ProjectCoverageFeedbackAssigner {
     feedbackMessage = "";
+    points = 0;
 
     constructor(percentageOfCoverage) {
         this.assignFeedbackMessage(percentageOfCoverage);
+        this.assignPoints(percentageOfCoverage);
     }
 
     assignFeedbackMessage(percentageOfCoverage) {
@@ -27,5 +29,13 @@ export class ProjectCoverageFeedbackAssigner {
 
     getFeedbackMessage() {
         return this.feedbackMessage;
+    }
+
+    assignPoints(percentageOfCoverage) {
+        this.points = 0;
+    }
+
+    getPoints() {
+        return this.points;
     }
 }
