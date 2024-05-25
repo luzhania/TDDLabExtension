@@ -145,17 +145,23 @@ describe("Return feedback messages for percentage of coverage per commit", () =>
     const commit = project.commitList[0];
     expect(commit.getPercentageOfCoverage().getFeedbackMessage()).toEqual("❌ Cobertura de código: ¡Solo el 20% del código está cubierto por pruebas! Es fundamental mejorar drásticamente la cobertura de pruebas para garantizar la calidad y fiabilidad del código. Dedica más tiempo a escribir pruebas exhaustivas antes de escribir el código de producción. ¡Vamos, puedes lograr una cobertura mucho más alta en el siguiente commit!");
   });
-  it("should return encouraging feedback for a relatively good percentage of coverage", () => {
+  it("should return encouraging feedback for a regular percentage of coverage", () => {
     let project = new Project("Saludador");
-    project.addCommit("Added the greet method", 10, 2, 65);
+    project.addCommit("Added the greet method", 10, 2, 75);
     const commit = project.commitList[0];
-    expect(commit.getPercentageOfCoverage().getFeedbackMessage()).toEqual("🤔 Cobertura de código: 65% del código está cubierto por pruebas. Aunque la cobertura de pruebas es relativamente buena, aún hay espacio para mejorar. Recuerda que al aplicar TDD es importante obtener un porcentaje de cobertura más alto. Escribe más pruebas para cubrir todas las funcionalidades y casos de uso de tu código. ¡Ánimo! ¡Tendrás una mayor cobertura en el siguiente commit!");
+    expect(commit.getPercentageOfCoverage().getFeedbackMessage()).toEqual("🤔 Cobertura de código: 75% del código está cubierto por pruebas. Aunque la cobertura de pruebas es relativamente buena, aún hay espacio para mejorar. Recuerda que al aplicar TDD es importante obtener un porcentaje de cobertura más alto. Escribe más pruebas para cubrir todas las funcionalidades y casos de uso de tu código. Con un poco más de esfuerzo, podrás alcanzar una cobertura más alta.");
   });
   it("should return encouraging feedback for a good percentage of coverage", () => {
     let project = new Project("Saludador");
-    project.addCommit("Added the greet method", 10, 2, 94);
+    project.addCommit("Added the greet method", 10, 2, 85);
     const commit = project.commitList[0];
-    expect(commit.getPercentageOfCoverage().getFeedbackMessage()).toEqual("✔ Cobertura de código: ¡94% del código está cubierto por las pruebas! Continúa aplicando este enfoque riguroso para escribir pruebas antes de escribir el código de producción.");
+    expect(commit.getPercentageOfCoverage().getFeedbackMessage()).toEqual("✔ Cobertura de código: ¡85% del código está cubierto por las pruebas! Continúa manteniendo este nivel de rigurosidad y busca oportunidades para mejorar aún más. ¡Sigue así y alcanzarás una cobertura aún mayor!");
+  });
+  it("should return encouraging feedback for a excellent percentage of coverage", () => {
+    let project = new Project("Saludador");
+    project.addCommit("Added the greet method", 10, 2, 98);
+    const commit = project.commitList[0];
+    expect(commit.getPercentageOfCoverage().getFeedbackMessage()).toEqual("👏 Cobertura de código: ¡98% del código está cubierto por las pruebas! Continúa aplicando este enfoque riguroso para escribir pruebas antes de escribir el código de producción");
   });
 });
 
