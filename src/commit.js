@@ -9,13 +9,13 @@ export class Commit {
     percentageOfCoverage = null;
     commitDate = null;
   
-    constructor(commitDescription, modifiedLines, addedTests, percentageOfCoverage, commitDay, commitMonth, commitYear, hours, minutes) {
+    constructor(commitDescription, modifiedLines, addedTests, percentageOfCoverage, date) {
       this.commitDescription = commitDescription;
       let linesValue = new ModifiedLinesMetric(modifiedLines);
       this.modifiedLines = linesValue;
       this.addedTests = new AddedTestMetric(addedTests, commitDescription)
       this.percentageOfCoverage = new PercentageOfCoverageMetric(percentageOfCoverage);
-      this.commitDate = new Date(commitYear, commitMonth - 1, commitDay, hours, minutes);
+      this.commitDate = date;
     }
   
     getCommitDescription() {

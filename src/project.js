@@ -20,7 +20,8 @@ export class Project {
   }
 
   addCommit(commitDescription, modifiedLines, addedTests, percentageOfCoverage, commitDay, commitMonth, commitYear, hours = 0, minutes = 0) {
-    const commit = new Commit(commitDescription, modifiedLines, addedTests, percentageOfCoverage, commitDay, commitMonth, commitYear, hours, minutes);
+    let date = new Date(commitYear, commitMonth - 1, commitDay, hours, minutes);
+    const commit = new Commit(commitDescription, modifiedLines, addedTests, percentageOfCoverage, date);
     this.commitList.push(commit);
   }
 
