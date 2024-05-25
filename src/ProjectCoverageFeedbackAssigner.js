@@ -8,8 +8,9 @@ export class ProjectCoverageFeedbackAssigner {
     assignFeedbackMessage(percentageOfCoverage) {
         if (percentageOfCoverage === null) {
             this.feedbackMessage = "This project has no commits yet.";
+            return;
         }
-        else{
+        if(percentageOfCoverage < 70) {
             this.feedbackMessage = "Deficient";
         }
     }
