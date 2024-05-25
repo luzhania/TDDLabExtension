@@ -312,3 +312,57 @@ describe("Calculate the overall total of points", () => {
     expect(projectslist.getTotalPoints()).toEqual(900);
   });
 });
+
+describe("Feedback messages for percentage of coverage per project", () => {
+  it("should return an a default string if there's no commits in the project", () => {
+    let project = new Project("Saludador");
+    expect(project.getTestCoverage().getFeedbackMessage()).toEqual("This project has no commits yet.");
+  });
+  it("should return any feedback if there's one commit in the project", () => {
+    let projectslist = new ProjectsList();
+    projectslist.addProject("Saludador");
+    projectslist.projects[0].addCommit("Added the greet method", 10, 1, 50);
+    const project = projectslist.projects[0];
+    expect(project.getTestCoverage().getFeedbackMessage()).toEqual("Deficient");
+  });
+  it("should return any feedback if there is many commits in the project", () => {
+    let projectslist = new ProjectsList();
+    projectslist.addProject("Saludador");
+    const project = projectslist.projects[0];
+    project.addCommit("Added the greet method", 10, 1, 50);
+    project.addCommit("Added the greet method 2", 10, 1, 60);
+    expect(project.getTestCoverage().getFeedbackMessage()).toEqual("Deficient");
+  });
+  it("should return 'Bad' feedback if the average test coverage of all commits in the project is minor to 70", () => {
+    let projectslist = new ProjectsList();
+    projectslist.addProject("Saludador");
+    const project = projectslist.projects[0];
+    project.addCommit("Added the greet method", 10, 1, 20);
+    project.addCommit("Added the greet method 2", 10, 1, 40);
+    expect(project.getTestCoverage().getFeedbackMessage()).toEqual("Deficient");
+  });
+  it("should return 'Regular' feedback if the average test coverage of all commits in the project is major or equal to 70 and minor or equal to 79", () => {
+    let projectslist = new ProjectsList();
+    projectslist.addProject("Saludador");
+    const project = projectslist.projects[0];
+    project.addCommit("Added the greet method", 10, 1, 70);
+    project.addCommit("Added the greet method 2", 10, 1, 70);
+    expect(project.getTestCoverage().getFeedbackMessage()).toEqual("Regular");
+  });
+  it("should return 'Good' feedback if the average test coverage of all commits in the project is major or equal to 80 and minor or equal to 90", () => {
+    let projectslist = new ProjectsList();
+    projectslist.addProject("Saludador");
+    const project = projectslist.projects[0];
+    project.addCommit("Added the greet method", 10, 1, 90);
+    project.addCommit("Added the greet method 2", 10, 1, 90);
+    expect(project.getTestCoverage().getFeedbackMessage()).toEqual("Good");
+  });
+  it("should return 'Excellent' feedback if the average test coverage of all commits in the project is major or equal to 80 and minor or equal to 90", () => {
+    let projectslist = new ProjectsList();
+    projectslist.addProject("Saludador");
+    const project = projectslist.projects[0];
+    project.addCommit("Added the greet method", 10, 1, 95);
+    project.addCommit("Added the greet method 2", 10, 1, 100);
+    expect(project.getTestCoverage().getFeedbackMessage()).toEqual("Excellent");
+  });
+});
