@@ -1,5 +1,6 @@
 import { Project } from "./project.js";
 import { ProjectsList } from "./projectList.js";
+import { Commit } from "./commit.js";
 
 describe("Add project", () => {
   let project = new Project("Saludador");
@@ -82,6 +83,21 @@ describe("Add percentage of coverage per commit", () => {
     expect(commit.getModifiedLines().getValue()).toEqual(10);
     expect(commit.getAddedTests().value).toEqual(2);
     expect(commit.getPercentageOfCoverage().getValue()).toEqual(100);
+  });
+});
+
+describe("Add commit date", () => {
+  it("should save 1 commit with description 'Added the greet method', 10 modified lines, 2 added tests, 100 percentage of coverage, and date '2021-09-01'", () => {
+    let project = new Project("Saludador");
+    project.addCommit("Added the greet method", 10, 2, 100, 1, 1, 2000);
+    const commit = project.commitList[0];
+
+    expect(commit.getCommitDescription()).toEqual("Added the greet method");
+    expect(commit.getModifiedLines().getValue()).toEqual(10);
+    expect(commit.getAddedTests().value).toEqual(2);
+    expect(commit.getPercentageOfCoverage().getValue()).toEqual(100);
+    expect(commit.getCommitDate()).toEqual(new Date(2000, 0, 1));
+    expect(commit.getCommitStringDate()).toEqual("1/1/2000");
   });
 });
 
