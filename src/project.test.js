@@ -141,6 +141,12 @@ describe("Return feedback messages for percentage of coverage per commit", () =>
     const commit = project.commitList[0];
     expect(commit.getPercentageOfCoverage().getFeedbackMessage()).toEqual("✔ Cobertura de código: ¡85% del código está cubierto por las pruebas! Continúa manteniendo este nivel de rigurosidad y busca oportunidades para mejorar aún más. ¡Sigue así y alcanzarás una cobertura aún mayor!");
   });
+  it("should return encouraging feedback for a excellent percentage of coverage", () => {
+    let project = new Project("Saludador");
+    project.addCommit("Added the greet method", 10, 2, 98);
+    const commit = project.commitList[0];
+    expect(commit.getPercentageOfCoverage().getFeedbackMessage()).toEqual("👏 Cobertura de código: ¡98% del código está cubierto por las pruebas! Continúa aplicando este enfoque riguroso para escribir pruebas antes de escribir el código de producción");
+  });
 });
 
 describe("Assign points for modified lines per commit", () => {

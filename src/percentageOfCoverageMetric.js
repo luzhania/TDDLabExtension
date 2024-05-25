@@ -44,8 +44,8 @@ export class TestCoverageCommitMetric {
     }
     assignFeedbackMessage() {
       switch (true) {
-        case this.isCorrect():
-          this.feedbackMessage = `✔ Cobertura de código: ¡${this.value}% del código está cubierto por las pruebas! Continúa aplicando este enfoque riguroso para escribir pruebas antes de escribir el código de producción.`
+        case this.value > 90:
+          this.feedbackMessage = `👏 Cobertura de código: ¡${this.value}% del código está cubierto por las pruebas! Continúa aplicando este enfoque riguroso para escribir pruebas antes de escribir el código de producción`
           break;
         case this.value >= 80 && this.value <= 90:
           this.feedbackMessage = `✔ Cobertura de código: ¡${this.value}% del código está cubierto por las pruebas! Continúa manteniendo este nivel de rigurosidad y busca oportunidades para mejorar aún más. ¡Sigue así y alcanzarás una cobertura aún mayor!`
