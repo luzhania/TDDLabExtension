@@ -8,11 +8,15 @@ export class Project {
 
   constructor(name) {
     this.name = name;
-    this.testCoverageFeedback = new ProjectCoverageFeedbackAssigner();
+    this.testCoverage = new ProjectCoverageFeedbackAssigner(null);
   }
 
   getProjectName() {
     return this.name;
+  }
+
+  isEmptyProject() {
+    return this.commitList.length === 0;
   }
 
   addCommit(commitDescription, modifiedLines, addedTests, percentageOfCoverage) {
@@ -25,6 +29,15 @@ export class Project {
   }
 
   getTestCoverage() {
-    return this.testCoverageFeedback;
+    if (!this.isEmptyProject()) {
+      return new ProjectCoverageFeedbackAssigner(this.getPercentageOfCoverageAverage());
+    }
+    else {
+      return this.testCoverage;
+    }
+  }
+
+  getPercentageOfCoverageAverage() {
+    return this.commitList[0].getPercentageOfCoverage().getValue();
   }
 }

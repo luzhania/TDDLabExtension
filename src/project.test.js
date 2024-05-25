@@ -302,4 +302,11 @@ describe("Feedback messages for percentage of coverage per project", () => {
     let project = new Project("Saludador");
     expect(project.getTestCoverage().getFeedbackMessage()).toEqual("This project has no commits yet.");
   });
+  it("should return any feedback if there's one commit in the project", () => {
+    let projectslist = new ProjectsList();
+    projectslist.addProject("Saludador");
+    projectslist.projects[0].addCommit("Added the greet method", 10, 1, 50);
+    const project = projectslist.projects[0];
+    expect(project.getTestCoverage().getFeedbackMessage()).toEqual("Deficient");
+  });
 });
