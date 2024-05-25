@@ -19,6 +19,9 @@ export class ProjectCoverageFeedbackAssigner {
             case percentageOfCoverage >= 80 && percentageOfCoverage <= 90:
                 this.feedbackMessage = "Good";
                 break;
+            case percentageOfCoverage >= 91 && percentageOfCoverage <= 100:
+                this.feedbackMessage = "Excellent";
+                break;
         }
     }
 
