@@ -32,7 +32,12 @@ export class ProjectCoverageFeedbackAssigner {
     }
 
     assignPoints(percentageOfCoverage) {
-        this.points = 0;
+        if (percentageOfCoverage === null) {
+            this.points = 0;
+        }
+        else {
+            this.points = 8;
+        }
     }
 
     getPoints() {

@@ -457,4 +457,11 @@ describe("Points for test coverage per project", () => {
     const project = projectslist.projects[0];
     expect(project.getTestCoverage().getPoints()).toEqual(0);
   });
+  it("should return points if there is one commit in the project", () => {
+    let projectslist = new ProjectsList();
+    projectslist.addProject("Saludador");
+    const project = projectslist.projects[0];
+    project.addCommit("Added the greet method", 10, 1, 60);
+    expect(project.getTestCoverage().getPoints()).toEqual(8);
+  });
 });
