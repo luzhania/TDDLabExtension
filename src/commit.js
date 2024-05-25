@@ -1,5 +1,5 @@
 import { AddedTestMetric } from "./addedTestMetric.js";
-import { PercentageOfCoverageMetric } from "./percentageOfCoverageMetric.js";
+import { TestCoverageCommitMetric } from "./percentageOfCoverageMetric.js";
 import { ModifiedLinesMetric } from "./modifiedLinesMetric.js";
 
 export class Commit {
@@ -14,7 +14,7 @@ export class Commit {
       let linesValue = new ModifiedLinesMetric(modifiedLines);
       this.modifiedLines = linesValue;
       this.addedTests = new AddedTestMetric(addedTests, commitDescription)
-      this.percentageOfCoverage = new PercentageOfCoverageMetric(percentageOfCoverage);
+      this.percentageOfCoverage = new TestCoverageCommitMetric(percentageOfCoverage);
       this.commitDate = new Date(commitYear, commitMonth - 1, commitDay);
     }
   

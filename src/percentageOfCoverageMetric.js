@@ -1,4 +1,4 @@
-export class PercentageOfCoverageMetric {
+export class TestCoverageCommitMetric {
     value = 0;
     points = 0;
     feedbackMessage = "";
