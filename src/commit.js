@@ -8,14 +8,16 @@ export class Commit {
     addedTests = 0;
     percentageOfCoverage = null;
     commitDate = null;
+    codeComplexity = "";
   
-    constructor(commitDescription, modifiedLines, addedTests, percentageOfCoverage, date) {
+    constructor(commitDescription, modifiedLines, addedTests, percentageOfCoverage, date, codeComplexity) {
       this.commitDescription = commitDescription;
       let linesValue = new ModifiedLinesMetric(modifiedLines);
       this.modifiedLines = linesValue;
       this.addedTests = new AddedTestMetric(addedTests, commitDescription)
       this.percentageOfCoverage = new TestCoverageCommitMetric(percentageOfCoverage);
       this.commitDate = date;
+      this.codeComplexity = codeComplexity;
     }
   
     getCommitDescription() {
@@ -44,6 +46,10 @@ export class Commit {
 
     getCommitTimeString() {
       return this.commitDate.getHours() + ":" + this.commitDate.getMinutes();
+    }
+
+    getCodeComplexity() {
+      return this.codeComplexity;
     }
   
     getTotalPoints() {

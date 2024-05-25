@@ -13,6 +13,7 @@ const percentageOfCoverageInput = document.querySelector("#percentage-coverage")
 const overallScore = document.querySelector("#overAll-score");
 const dateInput = document.querySelector("#date");
 const timeInput = document.querySelector("#time");
+const codeComplexityInput = document.querySelector("#select-complexity");
 
 const tableFeedbackProject = document.querySelector("#feedback-project-tb");
 const projectFeedback = document.querySelector("#project-feedback");
@@ -38,6 +39,7 @@ function getFormData(){
     commitPercentageOfCoverage: percentageOfCoverageInput.value,
     dateValue: dateInput.value,
     timeValue: timeInput.value,
+    codeComplexityValue: codeComplexityInput.value,
   };
 }
 
@@ -60,11 +62,11 @@ function extractTime(timeValue) {
 
 addCommitForm.addEventListener("submit", (event) => {
   event.preventDefault();
-  const { projectIndex, commitMessage, commitModifiedLines, commitAddedTests, commitPercentageOfCoverage, dateValue, timeValue } = getFormData();
+  const { projectIndex, commitMessage, commitModifiedLines, commitAddedTests, commitPercentageOfCoverage, dateValue, timeValue, codeComplexityValue } = getFormData();
   const { year, month, day } = extractDate(dateValue);
   const { hours, minutes } = extractTime(timeValue);
   
-  projectsList.projects[projectIndex].addCommit(commitMessage, commitModifiedLines, commitAddedTests, commitPercentageOfCoverage, day, month, year, hours, minutes);
+  projectsList.projects[projectIndex].addCommit(commitMessage, commitModifiedLines, commitAddedTests, commitPercentageOfCoverage, day, month, year, hours, minutes, codeComplexityValue);
   renderCommitsTable(projectIndex);
   renderFeedbackTable(projectIndex);
   renderProjectsTable();
@@ -137,6 +139,7 @@ function renderCommitsTable(projectIndex) {
       <td>${commit.getAddedTests().getValue()}</td>
       <td>${commit.getPercentageOfCoverage().getValue()}</td>
       <td>${commit.getTotalPoints()}</td>
+      <td>${commit.getCodeComplexity()}</td>
       <td>${commit.getCommitStringDate()}</td>
       <td>${commit.getCommitTimeString()}</td>
     `;
