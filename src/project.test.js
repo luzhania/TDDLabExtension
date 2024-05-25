@@ -133,7 +133,7 @@ describe("Add code complexity per commit", () => {
     expect(commit.getCodeComplexity()).toEqual("low");
   });
 
-  it("should save 1 commit with description 'Added the greet method', 10 modified lines, 2 added tests, 100 percentage of coverage, date '2021-09-01', time '10:30', and code complexity 'Low'", () => {
+  it("should save 1 commit with description 'Added the greet method', 10 modified lines, 2 added tests, 100 percentage of coverage, date '2021-09-01', time '10:30', and code complexity 'Moderate'", () => {
     let project = new Project("Saludador");
     project.addCommit("Added the greet method", 10, 2, 100, 1, 1, 2000, 10, 30, "moderate");
     const commit = project.commitList[0];
@@ -146,6 +146,21 @@ describe("Add code complexity per commit", () => {
     expect(commit.getCommitStringDate()).toEqual("1/1/2000");
     expect(commit.getCommitTimeString()).toEqual("10:30");
     expect(commit.getCodeComplexity()).toEqual("moderate");
+  });
+
+  it("should save 1 commit with description 'Added the greet method', 10 modified lines, 2 added tests, 100 percentage of coverage, date '2021-09-01', time '10:30', and code complexity 'High'", () => {
+    let project = new Project("Saludador");
+    project.addCommit("Added the greet method", 10, 2, 100, 1, 1, 2000, 10, 30, "high");
+    const commit = project.commitList[0];
+
+    expect(commit.getCommitDescription()).toEqual("Added the greet method");
+    expect(commit.getModifiedLines().getValue()).toEqual(10);
+    expect(commit.getAddedTests().value).toEqual(2);
+    expect(commit.getPercentageOfCoverage().getValue()).toEqual(100);
+    expect(commit.getCommitDate()).toEqual(new Date(2000, 0, 1, 10, 30));
+    expect(commit.getCommitStringDate()).toEqual("1/1/2000");
+    expect(commit.getCommitTimeString()).toEqual("10:30");
+    expect(commit.getCodeComplexity()).toEqual("high");
   });
 });
 
