@@ -25,14 +25,20 @@ addProjectForm.addEventListener("submit", (event) => {
   updateCommitProjectSelect();
 });
 
+function getFormData(){
+  return {
+    projectIndex: commitProjectSelect.value,
+    commitMessage: commitMessageInput.value.trim(),
+    commitModifiedLines: modifiedLinesInput.value,
+    commitAddedTests: addedTestsInput.value,
+    commitPercentageOfCoverage: percentageOfCoverageInput.value,
+    dateValue: dateInput.value,
+  };
+}
+
 addCommitForm.addEventListener("submit", (event) => {
   event.preventDefault();
-  const projectIndex = commitProjectSelect.value;
-  const commitMessage = commitMessageInput.value.trim();
-  const commitModifiedLines = modifiedLinesInput.value;
-  const commitAddedTests = addedTestsInput.value;
-  const commitPercentageOfCoverage = percentageOfCoverageInput.value;
-  const dateValue = dateInput.value;
+  const { projectIndex, commitMessage, commitModifiedLines, commitAddedTests, commitPercentageOfCoverage, dateValue } = getFormData();
   const dateParts = dateValue.split('-');
   const year = parseInt(dateParts[0]);
   const month = parseInt(dateParts[1]);
