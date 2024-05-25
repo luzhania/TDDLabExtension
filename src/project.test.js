@@ -325,4 +325,12 @@ describe("Feedback messages for percentage of coverage per project", () => {
     project.addCommit("Added the greet method 2", 10, 1, 40);
     expect(project.getTestCoverage().getFeedbackMessage()).toEqual("Deficient");
   });
+  it("should return 'Regular' feedback if the average test coverage of all commits in the project is major or equal to 70 and minor or equal to 79", () => {
+    let projectslist = new ProjectsList();
+    projectslist.addProject("Saludador");
+    const project = projectslist.projects[0];
+    project.addCommit("Added the greet method", 10, 1, 70);
+    project.addCommit("Added the greet method 2", 10, 1, 70);
+    expect(project.getTestCoverage().getFeedbackMessage()).toEqual("Regular");
+  });
 });
