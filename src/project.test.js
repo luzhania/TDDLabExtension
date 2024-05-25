@@ -493,4 +493,14 @@ describe("Points for test coverage per project", () => {
     project.addCommit("Added the greet method", 10, 1, 80);
     expect(project.getTestCoverage().getPoints()).toEqual(16);
   });
+  it("should return 20 points if the average test coverage of all commits in the project is major to 90", () => {
+    let projectslist = new ProjectsList();
+    projectslist.addProject("Saludador");
+    const project = projectslist.projects[0];
+    project.addCommit("Added the greet method", 10, 1, 90);
+    project.addCommit("Added the greet method", 10, 1, 95);
+    project.addCommit("Added the greet method", 10, 1, 95);
+    project.addCommit("Added the greet method", 10, 1, 100);
+    expect(project.getTestCoverage().getPoints()).toEqual(20);
+  });
 });

@@ -45,6 +45,9 @@ export class ProjectCoverageFeedbackAssigner {
             case percentageOfCoverage >= 80 && percentageOfCoverage <= 90:
                 this.points = 16;
                 break;
+            case percentageOfCoverage >= 91 && percentageOfCoverage <= 100:
+                this.points = 20;
+                break;
         }
     }
 
