@@ -12,6 +12,7 @@ const addedTestsInput = document.querySelector("#added-tests"); //test criteria
 const percentageOfCoverageInput = document.querySelector("#percentage-coverage");
 const overallScore = document.querySelector("#overAll-score");
 const dateInput = document.querySelector("#date");
+const timeInput = document.querySelector("#time");
 
 const tableFeedbackProject = document.querySelector("#feedback-project-tb");
 const projectFeedback = document.querySelector("#project-feedback");
@@ -52,8 +53,13 @@ addCommitForm.addEventListener("submit", (event) => {
   event.preventDefault();
   const { projectIndex, commitMessage, commitModifiedLines, commitAddedTests, commitPercentageOfCoverage, dateValue } = getFormData();
   const { year, month, day } = extractDate(dateValue);
+
+  timeValue = timeInput.value;
+  const timeParts = timeValue.split(':');
+  const hours = parseInt(timeParts[0]);
+  const minutes = parseInt(timeParts[1]);
   
-  projectsList.projects[projectIndex].addCommit(commitMessage, commitModifiedLines, commitAddedTests, commitPercentageOfCoverage, day, month, year);
+  projectsList.projects[projectIndex].addCommit(commitMessage, commitModifiedLines, commitAddedTests, commitPercentageOfCoverage, day, month, year, hours, minutes);
   renderCommitsTable(projectIndex);
   renderFeedbackTable(projectIndex);
   renderProjectsTable();
@@ -127,6 +133,7 @@ function renderCommitsTable(projectIndex) {
       <td>${commit.getPercentageOfCoverage().getValue()}</td>
       <td>${commit.getTotalPoints()}</td>
       <td>${commit.getCommitStringDate()}</td>
+      <td>${commit.getCommitTimeString()}</td>
     `;
     tableCommitsBody.appendChild(row);
   });
