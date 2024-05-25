@@ -1,8 +1,10 @@
+import { TestCoverageEvaluationCriteria } from "./TestCoverageEvaluationCriteria";
 export class ProjectCoverageFeedbackAssigner {
     feedbackMessage = "";
     points = 0;
 
     constructor(percentageOfCoverage) {
+        this.evaluationCriteria = new TestCoverageEvaluationCriteria();
         this.assignFeedbackMessage(percentageOfCoverage);
         this.assignPoints(percentageOfCoverage);
     }
@@ -12,7 +14,7 @@ export class ProjectCoverageFeedbackAssigner {
             case percentageOfCoverage === null:
                 this.feedbackMessage = "This project has no commits yet.";
                 break;
-            case percentageOfCoverage < 70:
+            case this.evaluationCriteria.isDeficient(percentageOfCoverage):
                 this.feedbackMessage = "Deficient";
                 break;
             case percentageOfCoverage >= 70 && percentageOfCoverage <= 79:
@@ -36,7 +38,7 @@ export class ProjectCoverageFeedbackAssigner {
             case percentageOfCoverage === null:
                 this.points = 0;
                 break;
-            case percentageOfCoverage < 70:
+            case this.evaluationCriteria.isDeficient(percentageOfCoverage):
                 this.points = 8;
                 break;
             case percentageOfCoverage >= 70 && percentageOfCoverage <= 79:
