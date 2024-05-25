@@ -37,6 +37,7 @@ function getFormData(){
     commitAddedTests: addedTestsInput.value,
     commitPercentageOfCoverage: percentageOfCoverageInput.value,
     dateValue: dateInput.value,
+    timeValue: timeInput.value,
   };
 }
 
@@ -49,15 +50,19 @@ function extractDate(dateValue) {
   };
 }
 
+function extractTime(timeValue) {
+  const timeParts = timeValue.split(':');
+  return {
+    hours: parseInt(timeParts[0]),
+    minutes: parseInt(timeParts[1]),
+  };
+}
+
 addCommitForm.addEventListener("submit", (event) => {
   event.preventDefault();
-  const { projectIndex, commitMessage, commitModifiedLines, commitAddedTests, commitPercentageOfCoverage, dateValue } = getFormData();
+  const { projectIndex, commitMessage, commitModifiedLines, commitAddedTests, commitPercentageOfCoverage, dateValue, timeValue } = getFormData();
   const { year, month, day } = extractDate(dateValue);
-
-  timeValue = timeInput.value;
-  const timeParts = timeValue.split(':');
-  const hours = parseInt(timeParts[0]);
-  const minutes = parseInt(timeParts[1]);
+  const { hours, minutes } = extractTime(timeValue);
   
   projectsList.projects[projectIndex].addCommit(commitMessage, commitModifiedLines, commitAddedTests, commitPercentageOfCoverage, day, month, year, hours, minutes);
   renderCommitsTable(projectIndex);
