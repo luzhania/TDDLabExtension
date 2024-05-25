@@ -13,6 +13,7 @@ const percentageOfCoverageInput = document.querySelector("#percentage-coverage")
 const overallScore = document.querySelector("#overAll-score");
 
 const tableFeedbackProject = document.querySelector("#feedback-project-tb");
+const projectFeedback = document.querySelector("#project-feedback");
 
 const projectsList = new ProjectsList();
 
@@ -22,6 +23,8 @@ addProjectForm.addEventListener("submit", (event) => {
   projectsList.addProject(projectName);
   renderProjectsTable();
   updateCommitProjectSelect();
+  const projectIndex = commitProjectSelect.value;
+  updateProjectFeedback(projectIndex);
 });
 
 addCommitForm.addEventListener("submit", (event) => {
@@ -36,12 +39,14 @@ addCommitForm.addEventListener("submit", (event) => {
   renderFeedbackTable(projectIndex);
   renderProjectsTable();
   updadateOverallScore();
+  updateProjectFeedback(projectIndex);
 });
 
 commitProjectSelect.addEventListener("change", () => {
   const projectIndex = commitProjectSelect.value;
   renderCommitsTable(projectIndex);
   renderFeedbackTable(projectIndex);
+  updateProjectFeedback(projectIndex);
 });
 
 function renderProjectsTable() {
@@ -125,4 +130,9 @@ function renderFeedbackTable(projectIndex) {
     */
     tableFeedbackProject.appendChild(row);
   });
+}
+
+function updateProjectFeedback(projectIndex) {
+  const project = projectsList.projects[projectIndex];
+  projectFeedback.innerHTML = "<p> Percentage of test coverage: "+project.getTestCoverage().getFeedbackMessage()+"</p>";
 }

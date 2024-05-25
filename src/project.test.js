@@ -296,3 +296,10 @@ describe("Calculate the overall total of points", () => {
     expect(projectslist.getTotalPoints()).toEqual(900);
   });
 });
+
+describe("Feedback messages for percentage of coverage per project", () => {
+  it("should return an a default string if there's no commits in the project", () => {
+    let project = new Project("Saludador");
+    expect(project.getTestCoverage().getFeedbackMessage()).toEqual("This project has no commits yet.");
+  });
+});
