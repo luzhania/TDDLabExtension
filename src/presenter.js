@@ -36,13 +36,20 @@ function getFormData(){
   };
 }
 
+function extractDate(dateValue) {
+  const dateParts = dateValue.split('-');
+  return {
+    year: parseInt(dateParts[0]),
+    month: parseInt(dateParts[1]),
+    day: parseInt(dateParts[2]),
+  };
+}
+
 addCommitForm.addEventListener("submit", (event) => {
   event.preventDefault();
   const { projectIndex, commitMessage, commitModifiedLines, commitAddedTests, commitPercentageOfCoverage, dateValue } = getFormData();
-  const dateParts = dateValue.split('-');
-  const year = parseInt(dateParts[0]);
-  const month = parseInt(dateParts[1]);
-  const day = parseInt(dateParts[2]);
+  const { year, month, day } = extractDate(dateValue);
+  
   projectsList.projects[projectIndex].addCommit(commitMessage, commitModifiedLines, commitAddedTests, commitPercentageOfCoverage, day, month, year);
   renderCommitsTable(projectIndex);
   renderFeedbackTable(projectIndex);
