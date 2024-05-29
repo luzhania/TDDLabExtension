@@ -50,7 +50,7 @@ export class AddedTestMetric {
         case this.areMuchTestsInNoRefactoring(): 
           return `✔ Cantidad de pruebas añadidas: ${this.amountTest} pruebas nuevas. 🤔 No hace falta añadir tantas pruebas en un solo ciclo de TDD`;
         default:
-          return "☑️Buen trabajo, no se añaden pruebas cuando el código solo es modificado para 'refactoring' 👍";
+          return "✔ Cantidad de pruebas añadidas: 0 pruebas nuevas. ☑️Buen trabajo, no se añaden pruebas cuando el código solo es modificado para 'refactoring' 👍";
       }
     }
     areTestAddedInRefactoring(){

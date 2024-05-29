@@ -330,7 +330,7 @@ describe("Return feedback messages for modified lines per commit", () => {
       let project = new Project("Saludador");
       project.addCommit("refact: adding functions for best coder reading", 0, 0, 20);
       const commit = project.commitList[0];
-      expect(commit.getAddedTests().getFeedbackMessage()).toEqual("☑️Buen trabajo, no se añaden pruebas cuando el código solo es modificado para 'refactoring' 👍");
+      expect(commit.getAddedTests().getFeedbackMessage()).toEqual("✔ Cantidad de pruebas añadidas: 0 pruebas nuevas. ☑️Buen trabajo, no se añaden pruebas cuando el código solo es modificado para 'refactoring' 👍");
     });
     it("should return encouraging feedback when is a refactoring commit and the number of addedTests is 1", () => {
       let project = new Project("Saludador");
