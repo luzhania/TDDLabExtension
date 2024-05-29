@@ -1,10 +1,10 @@
 export class AddedTestMetric {
-    value = 0
+    amountTest = 0
     message = ''
     points = 0
     feedbackMessage = ''
-    constructor(value, message) {
-      this.value = value;
+    constructor(amountTest, message) {
+      this.amountTest = amountTest;
       this.message = message;
       this.points = this.assignPoints();
       this.feedbackMessage = this.assignFeedbackMessage();
@@ -13,7 +13,7 @@ export class AddedTestMetric {
       return this.points;
     }
     getValue(){
-      return this.value;
+      return this.amountTest;
     }
     assignPoints(){
       switch(true){
@@ -34,7 +34,7 @@ export class AddedTestMetric {
       return this.areTestAddedInRefactoring() || this.noTestAddedInNoRefactoring();
     }
     areMuchTestsInNoRefactoring(){
-      return !this.isRefactCommit() && this.value > 1;
+      return !this.isRefactCommit() && this.amountTest > 1;
     }
     getFeedbackMessage(){
       return this.feedbackMessage;
@@ -54,12 +54,12 @@ export class AddedTestMetric {
       }
     }
     areTestAddedInRefactoring(){
-      return this.isRefactCommit() && this.value > 0;
+      return this.isRefactCommit() && this.amountTest > 0;
     }
     noTestAddedInNoRefactoring(){
-      return !this.isRefactCommit() && this.value == 0;
+      return !this.isRefactCommit() && this.amountTest == 0;
     }
     testAddedInNoRefactoring(){
-      return !this.isRefactCommit() && this.value == 1;
+      return !this.isRefactCommit() && this.amountTest == 1;
     }
   }

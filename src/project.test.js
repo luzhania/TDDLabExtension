@@ -81,7 +81,7 @@ describe("Add percentage of coverage per commit", () => {
     const commit = project.commitList[0];
     expect(commit.getCommitDescription()).toEqual("Added the greet method");
     expect(commit.getModifiedLines().getValue()).toEqual(10);
-    expect(commit.getAddedTests().value).toEqual(2);
+    expect(commit.getAddedTests().getValue()).toEqual(2);
     expect(commit.getPercentageOfCoverage().getValue()).toEqual(100);
   });
 });
@@ -94,7 +94,7 @@ describe("Add commit date", () => {
 
     expect(commit.getCommitDescription()).toEqual("Added the greet method");
     expect(commit.getModifiedLines().getValue()).toEqual(10);
-    expect(commit.getAddedTests().value).toEqual(2);
+    expect(commit.getAddedTests().getValue()).toEqual(2);
     expect(commit.getPercentageOfCoverage().getValue()).toEqual(100);
     expect(commit.getCommitDate()).toEqual(new Date(2000, 0, 1));
     expect(commit.getCommitStringDate()).toEqual("1/1/2000");
@@ -109,7 +109,7 @@ describe("Add commit time", () => {
 
     expect(commit.getCommitDescription()).toEqual("Added the greet method");
     expect(commit.getModifiedLines().getValue()).toEqual(10);
-    expect(commit.getAddedTests().value).toEqual(2);
+    expect(commit.getAddedTests().getValue()).toEqual(2);
     expect(commit.getPercentageOfCoverage().getValue()).toEqual(100);
     expect(commit.getCommitDate()).toEqual(new Date(2000, 0, 1, 10, 30));
     expect(commit.getCommitStringDate()).toEqual("1/1/2000");
@@ -125,7 +125,7 @@ describe("Add code complexity per commit", () => {
 
     expect(commit.getCommitDescription()).toEqual("Added the greet method");
     expect(commit.getModifiedLines().getValue()).toEqual(10);
-    expect(commit.getAddedTests().value).toEqual(2);
+    expect(commit.getAddedTests().getValue()).toEqual(2);
     expect(commit.getPercentageOfCoverage().getValue()).toEqual(100);
     expect(commit.getCommitDate()).toEqual(new Date(2000, 0, 1, 10, 30));
     expect(commit.getCommitStringDate()).toEqual("1/1/2000");
@@ -140,7 +140,7 @@ describe("Add code complexity per commit", () => {
 
     expect(commit.getCommitDescription()).toEqual("Added the greet method");
     expect(commit.getModifiedLines().getValue()).toEqual(10);
-    expect(commit.getAddedTests().value).toEqual(2);
+    expect(commit.getAddedTests().getValue()).toEqual(2);
     expect(commit.getPercentageOfCoverage().getValue()).toEqual(100);
     expect(commit.getCommitDate()).toEqual(new Date(2000, 0, 1, 10, 30));
     expect(commit.getCommitStringDate()).toEqual("1/1/2000");
@@ -155,7 +155,7 @@ describe("Add code complexity per commit", () => {
 
     expect(commit.getCommitDescription()).toEqual("Added the greet method");
     expect(commit.getModifiedLines().getValue()).toEqual(10);
-    expect(commit.getAddedTests().value).toEqual(2);
+    expect(commit.getAddedTests().getValue()).toEqual(2);
     expect(commit.getPercentageOfCoverage().getValue()).toEqual(100);
     expect(commit.getCommitDate()).toEqual(new Date(2000, 0, 1, 10, 30));
     expect(commit.getCommitStringDate()).toEqual("1/1/2000");
@@ -170,7 +170,7 @@ describe("Add code complexity per commit", () => {
 
     expect(commit.getCommitDescription()).toEqual("Added the greet method");
     expect(commit.getModifiedLines().getValue()).toEqual(10);
-    expect(commit.getAddedTests().value).toEqual(2);
+    expect(commit.getAddedTests().getValue()).toEqual(2);
     expect(commit.getPercentageOfCoverage().getValue()).toEqual(100);
     expect(commit.getCommitDate()).toEqual(new Date(2000, 0, 1, 10, 30));
     expect(commit.getCommitStringDate()).toEqual("1/1/2000");
