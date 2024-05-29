@@ -348,7 +348,7 @@ describe("Return feedback messages for modified lines per commit", () => {
       let project = new Project("Saludador");
       project.addCommit("function to destroy 'HelloWorld' added", 0, 0, 20);
       const commit = project.commitList[0];
-      expect(commit.getAddedTests().getFeedbackMessage()).toEqual("❌Para escribir código con TDD no olvides hacer primero las pruebas!!!😨");
+      expect(commit.getAddedTests().getFeedbackMessage()).toEqual("❌ Cantidad de pruebas añadidas: 0 pruebas nuevas. 😨 Para escribir código con TDD no olvides hacer primero las pruebas!!!");
     });
     it("should return encouraging feedback when is not a refactoring commit and there is 1 tests added", () => {
       let project = new Project("Saludador");

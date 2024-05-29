@@ -44,7 +44,7 @@ export class AddedTestMetric {
         case this.areTestAddedInRefactoring():
           return "❌Recuerda, no se añaden pruebas cuando el código solo es modificado para 'refactoring'⚠️";
         case this.noTestAddedInNoRefactoring():
-          return "❌Para escribir código con TDD no olvides hacer primero las pruebas!!!😨";
+          return "❌ Cantidad de pruebas añadidas: 0 pruebas nuevas. 😨 Para escribir código con TDD no olvides hacer primero las pruebas!!!";
         case this.testAddedInNoRefactoring():
           return "✔ Cantidad de pruebas añadidas: 1 prueba nueva. ☑️Excelente! No olvides que las pruebas son el alma del TDD 😎";
         case this.areMuchTestsInNoRefactoring(): 
