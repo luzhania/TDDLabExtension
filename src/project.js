@@ -1,14 +1,17 @@
 import { Commit } from "./commit.js";
 import { ProjectCoverageFeedbackAssigner } from "./ProjectCoverageFeedbackAssigner.js";
+import { ProjectTestsFeedbackAssigner } from "./ProjectTestsFeedbackAssigner.js";
 
 export class Project {
   name = "";
   commitList = [];
   testCoverage = null;
+  addedTests = null;
 
   constructor(name) {
     this.name = name;
     this.testCoverage = new ProjectCoverageFeedbackAssigner(null);
+    this.addedTests = new ProjectTestsFeedbackAssigner();
   }
 
   getProjectName() {
@@ -36,6 +39,10 @@ export class Project {
     else {
       return this.testCoverage;
     }
+  }
+
+  getAddedTestsPerCommit(){
+    return this.addedTests;
   }
 
   getPercentageOfCoverageAverage() {
