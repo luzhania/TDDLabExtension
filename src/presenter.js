@@ -88,9 +88,11 @@ function renderProjectsTable() {
     const deleteButton = document.createElement("button");
     deleteButton.textContent = "Delete";
     deleteButton.addEventListener("click", () => {
-      projectsList.deleteProject(index);
-      renderProjectsTable();
-      updateCommitProjectSelect();
+      if (confirm("¿Are you sure you want to delete this project?")) {
+        projectsList.deleteProject(index);
+        renderProjectsTable();
+        updateCommitProjectSelect();
+      }
     });
 
     const row = document.createElement("tr");
@@ -101,15 +103,15 @@ function renderProjectsTable() {
       <td><button class="delete-project-btn">Delete</button></td>
     `;
     row.querySelector(".delete-project-btn").addEventListener("click", () => {
-      projectsList.deleteProject(index);
-      renderProjectsTable();
-      updateCommitProjectSelect();
+      if (confirm("¿Are you sure you want to delete this project?")) {
+        projectsList.deleteProject(index);
+        renderProjectsTable();
+        updateCommitProjectSelect();
+      }
     });
 
     tableProjectsBody.appendChild(row);
   });
-
-  updateCommitProjectSelect();
 }
 
 function updateCommitProjectSelect() {
