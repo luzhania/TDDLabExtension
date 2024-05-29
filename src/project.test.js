@@ -360,7 +360,8 @@ describe("Return feedback messages for modified lines per commit", () => {
       let project = new Project("Saludador");
       project.addCommit("function to destroy 'HelloWorld' added", 0, 2, 20);
       const commit = project.commitList[0];
-      expect(commit.getAddedTests().getFeedbackMessage()).toEqual("🤦‍♂️No hace falta añadir tantas pruebas en un solo ciclo de TDD");
+      let amountTest = commit.getAddedTests().getValue();
+      expect(commit.getAddedTests().getFeedbackMessage()).toEqual(`✔ Cantidad de pruebas añadidas: ${amountTest} pruebas nuevas. 🤔 No hace falta añadir tantas pruebas en un solo ciclo de TDD`);
     });
   });
 });
