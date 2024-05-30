@@ -17,9 +17,9 @@ export class ProjectCodeComplexity{
                 'low': 1,
                 'moderate': 2,
                 'high': 3,
-                'very high': 4
+                'veryHigh': 4
             };
-            
+
             let totalComplexity = 0;
             for (let commit of this.commitList){
                 totalComplexity += complexityValueMap[commit.getCodeComplexity().getValue()];
@@ -39,6 +39,9 @@ export class ProjectCodeComplexity{
                 break;
             case codeComplexity < 2.5:
                 this.points = 12;
+                break;
+            case codeComplexity < 3.5:
+                this.points = 16;
                 break;
         }
     }
