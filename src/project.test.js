@@ -582,4 +582,11 @@ describe("File processor", () => {
     const fileProcessor = new FileProcessor(projectsList, file);
     expect(fileProcessor.fileExist()).toEqual(true);
   });
+  it("should process file content correctly", () => {
+    const blob = new Blob([fileContent], { type: 'text/plain' });
+    const file = new File([blob], "commitsTest.txt", { type: 'text/plain' });
+    const fileProcessor = new FileProcessor(projectsList, file);
+    const dataArray = fileProcessor.processFileContent(fileContent);
+    expect(dataArray.length).toBeGreaterThan(19);
+  });
 });

@@ -175,10 +175,29 @@ function updateProjectFeedback(projectIndex) {
 
 document.getElementById('fileInput').addEventListener('change', function(event) {
   const file = event.target.files[0];
-  const fileProcessor = new FileProcessor(projectsList, file);
   if (file) {
-    console.log("File selected: ", file);
+    const fileProcessor = new FileProcessor(projectsList, file);
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      const content = e.target.result;
+      const data = fileProcessor.processFileContent(content);
+      const projectIndex = commitProjectSelect.value;
+
+      if (projectIndex !== null && projectIndex >= 0 && projectsList.projects[projectIndex]) {
+        const project = projectsList.projects[projectIndex];
+        project.commitList = project.commitList.concat(data);
+      
+        renderProjectsTable();
+        updateCommitProjectSelect();
+        renderCommitsTable(projectIndex);
+        renderFeedbackTable(projectIndex);
+        updateProjectFeedback(projectIndex);
+      } else {
+        alert("No project selected.");
+      }
+    };
+    reader.readAsText(file);
   } else {
-      console.log("No se seleccionó ningún archivo.");
+    console.log("No se seleccionó ningún archivo.");
   }
 });
