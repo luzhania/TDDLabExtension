@@ -37,6 +37,9 @@ export class ProjectCodeComplexity{
             case codeComplexity < 1.5:
                 this.points = 8;
                 break;
+            case codeComplexity < 2.5:
+                this.points = 12;
+                break;
         }
     }
 
