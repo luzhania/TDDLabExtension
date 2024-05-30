@@ -8,4 +8,7 @@ export class CodeComplexityEvaluationCriteria{
     isGood(codeComplexity){
         return codeComplexity >= 1.5 && codeComplexity < 2.5;
     }
+    isExcellent(codeComplexity){
+        return codeComplexity >= 1 && codeComplexity < 1.5;
+    }
 }

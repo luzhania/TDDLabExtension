@@ -46,7 +46,7 @@ export class ProjectCodeComplexity{
             case this.evaluationCriteria.isGood(codeComplexity):
                 this.feedbackMessage = "Good";
                 break;
-            case codeComplexity >= 1:
+            case this.evaluationCriteria.isExcellent(codeComplexity):
                 this.feedbackMessage = "Excellent";
                 break;
         }
@@ -70,7 +70,7 @@ export class ProjectCodeComplexity{
             case this.evaluationCriteria.isGood(codeComplexity):
                 this.points = 16;
                 break;
-            case codeComplexity >= 1:
+            case this.evaluationCriteria.isExcellent(codeComplexity):
                 this.points = 20;
                 break;
         }
