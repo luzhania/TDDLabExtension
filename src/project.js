@@ -11,7 +11,7 @@ export class Project {
   constructor(name) {
     this.name = name;
     this.testCoverage = new ProjectCoverageFeedbackAssigner(null);
-    this.addedTests = new ProjectTestsFeedbackAssigner();
+    this.addedTests = new ProjectTestsFeedbackAssigner(null);
   }
 
   getProjectName() {
@@ -42,7 +42,7 @@ export class Project {
   }
 
   getAddedTestsPerCommit(){
-    return this.addedTests;
+    return new ProjectTestsFeedbackAssigner(!this.isEmptyProject());
   }
 
   getPercentageOfCoverageAverage() {

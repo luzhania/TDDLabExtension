@@ -1,9 +1,15 @@
 export class ProjectTestsFeedbackAssigner {
-    points = 0;
-    constructor(){
-        this.points = this.points;
+    constructor(isThereACommit){
+        this.isThereACommit = isThereACommit;
+        this.assignPoints();
     };
-    getPoints() {
+    assignPoints(){
+        if (this.isThereACommit)
+            this.points = 20;
+        else
+            this.points = 0;
+    };
+    getPoints() {    
         return this.points;
-    }
+    };
 }
