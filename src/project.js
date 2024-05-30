@@ -1,4 +1,4 @@
-import { ProjectCodeComplexity } from "./codeComplexityMetric/projectCodeComplexity.js";
+import { ProjectCodeComplexity } from "./projectCodeComplexity.js";
 import { Commit } from "./commit.js";
 import { ProjectCoverageFeedbackAssigner } from "./ProjectCoverageFeedbackAssigner.js";
 
