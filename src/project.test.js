@@ -531,7 +531,7 @@ describe("Feedback messages for code complexity per project", () => {
     project.addCommit("Added the greet method", 10, 2, 100, 1, 1, 2000, 10, 30, "veryHigh");
     expect(project.getCodeComplexity().getFeedbackMessage()).toEqual("Deficient");
   });
-  it("should return 'Deficient' feedback if the average code complexity of all commits in the project is low", () => {
+  it("should return 'Deficient' feedback if the average code complexity of all commits in the project is veryHigh", () => {
     let projectslist = new ProjectsList();
     projectslist.addProject("Saludador");
     const project = projectslist.projects[0];
@@ -539,5 +539,13 @@ describe("Feedback messages for code complexity per project", () => {
     project.addCommit("Added the greet method", 10, 2, 100, 1, 1, 2000, 10, 30, "veryHigh");
     project.addCommit("Added the greet method", 10, 2, 100, 1, 1, 2000, 10, 30, "veryHigh");
     expect(project.getCodeComplexity().getFeedbackMessage()).toEqual("Deficient");
+  });
+  it("should return 'Regular' feedback if the average code complexity of all commits in the project is high", () => {
+    const project = new Project("Saludador");
+    project.addCommit("Added the greet method", 10, 2, 100, 1, 1, 2000, 10, 30, "moderate");
+    project.addCommit("Added the greet method", 10, 2, 100, 1, 1, 2000, 10, 30, "high");
+    project.addCommit("Added the greet method", 10, 2, 100, 1, 1, 2000, 10, 30, "high");
+    project.addCommit("Added the greet method", 10, 2, 100, 1, 1, 2000, 10, 30, "veryHigh");
+    expect(project.getCodeComplexity().getFeedbackMessage()).toEqual("Regular");
   });
 });

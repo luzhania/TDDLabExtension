@@ -38,6 +38,9 @@ export class ProjectCodeComplexity{
             case codeComplexity >= 3.5:
                 this.feedbackMessage = "Deficient";
                 break;
+            case codeComplexity >= 2.5:
+                this.feedbackMessage = "Regular";
+                break;
         }
     }
 
