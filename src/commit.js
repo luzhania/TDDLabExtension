@@ -1,7 +1,7 @@
 import { AddedTestMetric } from "./addedTestMetric.js";
 import { TestCoverageCommitMetric } from "./percentageOfCoverageMetric.js";
 import { ModifiedLinesMetric } from "./modifiedLinesMetric.js";
-import { CommitCodeComplexity } from "./codeComplexityMetric/commitCodeComplexity.js";
+import { CommitCodeComplexity } from "./commitCodeComplexity.js";
 
 export class Commit {
     commitDescription = "";

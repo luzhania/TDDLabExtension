@@ -1,4 +1,4 @@
-import {CodeComplexityEvaluationCriteria} from "./CodeComplexityEvaluationCriteria"
+import { CodeComplexityEvaluationCriteria } from "./CodeComplexityEvaluationCriteria.js";
 export class ProjectCodeComplexity{
     points = 0;
     feedbackMessage = "";
@@ -40,13 +40,13 @@ export class ProjectCodeComplexity{
             case this.evaluationCriteria.isDeficient(codeComplexity):
                 this.feedbackMessage = "Deficient";
                 break;
-            case codeComplexity >= 2.5:
+            case this.evaluationCriteria.isRegular(codeComplexity):
                 this.feedbackMessage = "Regular";
                 break;
-            case codeComplexity >= 1.5:
+            case this.evaluationCriteria.isGood(codeComplexity):
                 this.feedbackMessage = "Good";
                 break;
-            case codeComplexity >= 1:
+            case this.evaluationCriteria.isExcellent(codeComplexity):
                 this.feedbackMessage = "Excellent";
                 break;
         }
@@ -64,13 +64,13 @@ export class ProjectCodeComplexity{
             case this.evaluationCriteria.isDeficient(codeComplexity):
                 this.points = 8;
                 break;
-            case codeComplexity >= 2.5:
+            case this.evaluationCriteria.isRegular(codeComplexity):
                 this.points = 12;
                 break;
-            case codeComplexity >= 1.5:
+            case this.evaluationCriteria.isGood(codeComplexity):
                 this.points = 16;
                 break;
-            case codeComplexity >= 1:
+            case this.evaluationCriteria.isExcellent(codeComplexity):
                 this.points = 20;
                 break;
         }
