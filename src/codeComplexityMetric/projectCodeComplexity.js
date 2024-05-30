@@ -10,20 +10,33 @@ export class ProjectCodeComplexity{
     isEmptyProject() {
         return this.commitList.length === 0;
     }
-    
+
     getProjectCodeComplexity(){
         if (!this.isEmptyProject()) {
-            return this.commitList[0].getCodeComplexity().getValue();
+            const complexityValueMap = {
+                'low': 1,
+                'moderate': 2,
+                'high': 3,
+                'very high': 4
+            };
+            
+            let totalComplexity = 0;
+            for (let commit of this.commitList){
+                totalComplexity += complexityValueMap[commit.getCodeComplexity().getValue()];
+            }
+            return totalComplexity / this.commitList.length;
         }
         return null;
     }
 
     assignPoints(codeComplexity){
-        if(codeComplexity === null){
-            this.points = 0;
-        }
-        else{
-            this.points = 8;
+        switch (true){
+            case codeComplexity === null:
+                this.points = 0;
+                break;
+            case codeComplexity < 1.5:
+                this.points = 8;
+                break;
         }
     }
 
