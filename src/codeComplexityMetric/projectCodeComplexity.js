@@ -35,7 +35,7 @@ export class ProjectCodeComplexity{
             case codeComplexity === null:
                 this.feedbackMessage = "This project has no commits yet.";
                 break;
-            case codeComplexity < 1.5:
+            case codeComplexity >= 3.5:
                 this.feedbackMessage = "Deficient";
                 break;
         }
@@ -50,16 +50,16 @@ export class ProjectCodeComplexity{
             case codeComplexity === null:
                 this.points = 0;
                 break;
-            case codeComplexity < 1.5:
+            case codeComplexity >= 3.5:
                 this.points = 8;
                 break;
-            case codeComplexity < 2.5:
+            case codeComplexity >= 2.5:
                 this.points = 12;
                 break;
-            case codeComplexity < 3.5:
+            case codeComplexity >= 1.5:
                 this.points = 16;
                 break;
-            case codeComplexity <= 4:
+            case codeComplexity >= 1:
                 this.points = 20;
                 break;
         }
