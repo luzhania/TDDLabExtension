@@ -1,13 +1,11 @@
 import { TestCoverageEvaluationCriteria } from "./TestCoverageEvaluationCriteria";
 export class TestCoverageCommitMetric {
     value = 0;
-    points = 0;
     feedbackMessage = "";
   
     constructor(value) {
       this.value = value;
       this.evaluationCriteria = new TestCoverageEvaluationCriteria();
-      this.assignPoints();
       this.assignFeedbackMessage();
     }
   
@@ -18,32 +16,7 @@ export class TestCoverageCommitMetric {
     getFeedbackMessage() {
       return this.feedbackMessage;
     }
-  
-    getPoints() {
-      return this.points;
-    }
-  
-    isRelativelyGood() {
-      return this.value >= 60 && this.value < 90;
-    }
-  
-    isCorrect() {
-      return this.value >= 90;
-    }
-  
-    assignPoints() {
-      switch (true) {
-        case this.isCorrect():
-          this.points = 100;
-          break;
-        case this.isRelativelyGood():
-          this.points = 70;
-          break;
-        default:
-          this.points = 10;
-          break;
-      }
-    }
+
     assignFeedbackMessage() {
       switch (true) {
         case this.evaluationCriteria.isExcellent(this.value):

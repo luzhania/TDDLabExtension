@@ -140,7 +140,6 @@ function renderCommitsTable(projectIndex) {
       <td>${commit.getModifiedLines().getValue()}</td>
       <td>${commit.getAddedTests().getValue()}</td>
       <td>${commit.getPercentageOfCoverage().getValue()}</td>
-      <td>${commit.getTotalPoints()}</td>
       <td>${commit.getCodeComplexity()}</td>
       <td>${commit.getCommitStringDate()}</td>
       <td>${commit.getCommitTimeString()}</td>
@@ -157,7 +156,6 @@ function renderFeedbackTable(projectIndex) {
     row.innerHTML = `
       <td>${index + 1}</td>
       <td>${commit.getCommitDescription()}</td>
-      <td>${commit.getPercentageOfCoverage().getPoints()}</td>
       <td>${commit.getModifiedLines().getPoints()}</td>
       <td>${commit.getAddedTests().getPoints()}</td>
       <td>${commit.getPercentageOfCoverage().getFeedbackMessage()}<br><br>${commit.getModifiedLines().getFeedbackMessage()}<br><br>${commit.getAddedTests().getFeedbackMessage()}</td>

@@ -179,27 +179,6 @@ describe("Add code complexity per commit", () => {
   });
 });
 
-describe("Assign points for percentage of coverage per commit", () => {
-  it("should assign 10 points for the attempt", () => {
-    let project = new Project("Saludador");
-    project.addCommit("Added the greet method", 10, 2, 20);
-    const commit = project.commitList[0];
-    expect(commit.getPercentageOfCoverage().getPoints()).toEqual(10);
-  });
-  it("should assign 70 points if the percentage of coverage is major or equal to 60 and minor to 90", () => {
-    let project = new Project("Saludador");
-    project.addCommit("Added the greet method", 10, 2, 75);
-    const commit = project.commitList[0];
-    expect(commit.getPercentageOfCoverage().getPoints()).toEqual(70);
-  });
-  it("should assign 100 points if the percentage of coverage is major or equal to 90", () => {
-    let project = new Project("Saludador");
-    project.addCommit("Added the greet method", 10, 2, 95);
-    const commit = project.commitList[0];
-    expect(commit.getPercentageOfCoverage().getPoints()).toEqual(100);
-  });
-});
-
 describe("Return feedback messages for percentage of coverage per commit", () => {
   it("should return encouraging feedback for the attempt", () => {
     let project = new Project("Saludador");
@@ -365,15 +344,6 @@ describe("Return feedback messages for modified lines per commit", () => {
       let amountTest = commit.getAddedTests().getValue();
       expect(commit.getAddedTests().getFeedbackMessage()).toEqual(`✔ Cantidad de pruebas añadidas: ${amountTest} pruebas nuevas. 🤔 No hace falta añadir tantas pruebas en un solo ciclo de TDD`);
     });
-  });
-});
-
-describe("Calculate total points earned per commit", () => {
-  it("should return 300 points for the attempt", () => {
-    let project = new Project("Saludador");
-    project.addCommit("Added the greet method", 10, 1, 100);
-    const commit = project.commitList[0];
-    expect(commit.getTotalPoints()).toEqual(300);
   });
 });
 

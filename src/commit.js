@@ -51,8 +51,4 @@ export class Commit {
     getCodeComplexity() {
       return this.codeComplexity;
     }
-  
-    getTotalPoints() {
-      return this.modifiedLines.getPoints() + this.addedTests.getPoints() + this.percentageOfCoverage.getPoints();
-    }
   }
