@@ -41,16 +41,24 @@ export class Project {
     }
   }
 
+  getPercentageOfCoverageAverage() {
+    return parseInt(this.commitList.reduce((acc, commit) => acc + parseInt(commit.getPercentageOfCoverage().getValue()), 0) / this.commitList.length);
+  }
+
   getAddedTestsPerCommit(){
     if (!this.isEmptyProject()){
-      return new ProjectTestsFeedbackAssigner(this.commitList[0].getAddedTests().getValue());
+      return new ProjectTestsFeedbackAssigner(this.getPercentageOfCommitsWithTests());
     }
     else{
       return this.addedTests;
     }
   }
 
-  getPercentageOfCoverageAverage() {
-    return parseInt(this.commitList.reduce((acc, commit) => acc + parseInt(commit.getPercentageOfCoverage().getValue()), 0) / this.commitList.length);
+  getPercentageOfCommitsWithTests() {
+    let count = 0;
+    for (const commit of this.commitList){
+      if(commit.getAddedTests().getValue() >= 1) count ++;
+    };
+    return count/this.commitList.length;
   }
 }

@@ -1,12 +1,12 @@
 export class ProjectTestsFeedbackAssigner {
-    constructor(amountTestInFirstCommit){
-        this.assignPoints(amountTestInFirstCommit);
+    constructor(percentOfTestInProject){
+        this.assignPoints(percentOfTestInProject);
     };
-    assignPoints(amountTestInFirstCommit) {
-        if (amountTestInFirstCommit === null) {
+    assignPoints(percentOfTestInProject) {
+        if (percentOfTestInProject === null) {
             this.points = 0;
         } else {
-            if(Number(amountTestInFirstCommit) <= 0)
+            if(Number(percentOfTestInProject) < 0.6)
                 this.points = 8;
             else
                 this.points = 20;
