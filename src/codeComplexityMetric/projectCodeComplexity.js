@@ -31,11 +31,13 @@ export class ProjectCodeComplexity{
         return null;
     }
     assignFeedbackMessage(codeComplexity){
-        if (codeComplexity === null){
-            this.feedbackMessage = "This project has no commits yet."
-        }
-        else{
-            this.feedbackMessage = "Deficient";
+        switch (true){
+            case codeComplexity === null:
+                this.feedbackMessage = "This project has no commits yet.";
+                break;
+            case codeComplexity < 1.5:
+                this.feedbackMessage = "Deficient";
+                break;
         }
     }
 

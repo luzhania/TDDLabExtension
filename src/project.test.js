@@ -531,4 +531,13 @@ describe("Feedback messages for code complexity per project", () => {
     project.addCommit("Added the greet method", 10, 2, 100, 1, 1, 2000, 10, 30, "low");
     expect(project.getCodeComplexity().getFeedbackMessage()).toEqual("Deficient");
   });
+  it("should return 'Deficient' feedback if the average code complexity of all commits in the project is low", () => {
+    let projectslist = new ProjectsList();
+    projectslist.addProject("Saludador");
+    const project = projectslist.projects[0];
+    project.addCommit("Added the greet method", 10, 2, 100, 1, 1, 2000, 10, 30, "low");
+    project.addCommit("Added the greet method", 10, 2, 100, 1, 1, 2000, 10, 30, "low");
+    project.addCommit("Added the greet method", 10, 2, 100, 1, 1, 2000, 10, 30, "low");
+    expect(project.getCodeComplexity().getFeedbackMessage()).toEqual("Deficient");
+  });
 });
