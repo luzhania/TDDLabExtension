@@ -44,6 +44,9 @@ export class ProjectCodeComplexity{
             case codeComplexity >= 1.5:
                 this.feedbackMessage = "Good";
                 break;
+            case codeComplexity >= 1:
+                this.feedbackMessage = "Excellent";
+                break;
         }
     }
 
