@@ -5,4 +5,7 @@ export class CodeComplexityEvaluationCriteria{
     isRegular(codeComplexity){
         return codeComplexity >= 2.5 && codeComplexity < 3.5;
     }
+    isGood(codeComplexity){
+        return codeComplexity >= 1.5 && codeComplexity < 2.5;
+    }
 }

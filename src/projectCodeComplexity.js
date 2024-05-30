@@ -43,7 +43,7 @@ export class ProjectCodeComplexity{
             case this.evaluationCriteria.isRegular(codeComplexity):
                 this.feedbackMessage = "Regular";
                 break;
-            case codeComplexity >= 1.5:
+            case this.evaluationCriteria.isGood(codeComplexity):
                 this.feedbackMessage = "Good";
                 break;
             case codeComplexity >= 1:
@@ -67,7 +67,7 @@ export class ProjectCodeComplexity{
             case this.evaluationCriteria.isRegular(codeComplexity):
                 this.points = 12;
                 break;
-            case codeComplexity >= 1.5:
+            case this.evaluationCriteria.isGood(codeComplexity):
                 this.points = 16;
                 break;
             case codeComplexity >= 1:
