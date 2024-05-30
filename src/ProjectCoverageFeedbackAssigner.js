@@ -2,11 +2,23 @@ import { TestCoverageEvaluationCriteria } from "./TestCoverageEvaluationCriteria
 export class ProjectCoverageFeedbackAssigner {
     feedbackMessage = "";
     points = 0;
-
-    constructor(percentageOfCoverage) {
+    commitList = [];
+    constructor(commitList) {
+        this.commitList = commitList;
         this.evaluationCriteria = new TestCoverageEvaluationCriteria();
-        this.assignFeedbackMessage(percentageOfCoverage);
-        this.assignPoints(percentageOfCoverage);
+        this.testCoverage = this.getProjectTestCoverage();
+        this.assignFeedbackMessage(this.testCoverage);
+        this.assignPoints(this.testCoverage);
+    }
+    isEmptyProject() {
+        return this.commitList.length === 0;
+    }
+
+    getProjectTestCoverage() {
+        if (!this.isEmptyProject()) {
+            return parseInt(this.commitList.reduce((acc, commit) => acc + parseInt(commit.getPercentageOfCoverage().getValue()), 0) / this.commitList.length);
+        }
+        return null;
     }
 
     assignFeedbackMessage(percentageOfCoverage) {
