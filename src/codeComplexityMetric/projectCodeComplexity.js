@@ -1,9 +1,11 @@
+import {CodeComplexityEvaluationCriteria} from "./CodeComplexityEvaluationCriteria"
 export class ProjectCodeComplexity{
     points = 0;
     feedbackMessage = "";
     commitList = [];
     constructor(commitList){
         this.commitList = commitList;
+        this.evaluationCriteria = new CodeComplexityEvaluationCriteria();
         this.codeComplexity = this.getProjectCodeComplexity();
         this.assignPoints(this.codeComplexity);
         this.assignFeedbackMessage(this.codeComplexity);
@@ -35,7 +37,7 @@ export class ProjectCodeComplexity{
             case codeComplexity === null:
                 this.feedbackMessage = "This project has no commits yet.";
                 break;
-            case codeComplexity >= 3.5:
+            case this.evaluationCriteria.isDeficient(codeComplexity):
                 this.feedbackMessage = "Deficient";
                 break;
             case codeComplexity >= 2.5:
@@ -59,7 +61,7 @@ export class ProjectCodeComplexity{
             case codeComplexity === null:
                 this.points = 0;
                 break;
-            case codeComplexity >= 3.5:
+            case this.evaluationCriteria.isDeficient(codeComplexity):
                 this.points = 8;
                 break;
             case codeComplexity >= 2.5:
