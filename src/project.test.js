@@ -1,5 +1,6 @@
 import { Project } from "./project.js";
 import { ProjectsList } from "./projectList.js";
+import { FileProcessor } from "./fileProcessor.js";
 import { Commit } from "./commit.js";
 
 describe("Add project", () => {
@@ -561,5 +562,24 @@ describe("Feedback messages for code complexity per project", () => {
     project.addCommit("Added the greet method", 10, 2, 100, 1, 1, 2000, 10, 30, "low");
     project.addCommit("Added the greet method", 10, 2, 100, 1, 1, 2000, 10, 30, "low");
     expect(project.getCodeComplexity().getFeedbackMessage()).toEqual("Excellent");
+  });
+});
+
+describe("File processor", () => {
+  const path = require('path');
+  const fs = require('fs');
+  let projectsList;
+  let fileContent;
+
+  beforeAll(() => {
+    const filePath = path.join(__dirname, '../src/commitsTest.txt'); 
+    fileContent = fs.readFileSync(filePath, 'utf8');
+  });
+
+  it("should receive a file", () => {
+    const blob = new Blob([fileContent], { type: 'text/plain' });
+    const file = new File([blob], "commitsTest.txt", { type: 'text/plain' });
+    const fileProcessor = new FileProcessor(projectsList, file);
+    expect(fileProcessor.fileExist()).toEqual(true);
   });
 });

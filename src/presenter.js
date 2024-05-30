@@ -1,4 +1,5 @@
 import { ProjectsList } from "./projectList";
+import { FileProcessor } from "./fileProcessor";
 
 const projectNameInput = document.querySelector("#project-name");
 const addProjectForm = document.querySelector("#add-project-form");
@@ -171,3 +172,13 @@ function updateProjectFeedback(projectIndex) {
   const project = projectsList.projects[projectIndex];
   projectFeedback.innerHTML = "<p> Percentage of test coverage: " + project.getTestCoverage().getPoints() + " points (" + project.getTestCoverage().getFeedbackMessage() + ")</p><p> Code complexity: " + project.getCodeComplexity().getPoints() + " points (" + project.getCodeComplexity().getFeedbackMessage() + ")</p>";
 }
+
+document.getElementById('fileInput').addEventListener('change', function(event) {
+  const file = event.target.files[0];
+  const fileProcessor = new FileProcessor(projectsList, file);
+  if (file) {
+    console.log("File selected: ", file);
+  } else {
+      console.log("No se seleccionó ningún archivo.");
+  }
+});
