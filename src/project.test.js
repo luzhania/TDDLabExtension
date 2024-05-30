@@ -526,4 +526,9 @@ describe("Feedback messages for code complexity per project", () => {
     let project = new Project("Saludador");
     expect(project.getCodeComplexity().getFeedbackMessage()).toEqual("This project has no commits yet.");
   });
+  it("should return any feedback if there's one commit in the project", () => {
+    const project = new Project("Saludador");
+    project.addCommit("Added the greet method", 10, 2, 100, 1, 1, 2000, 10, 30, "low");
+    expect(project.getCodeComplexity().getFeedbackMessage()).toEqual("Deficient");
+  });
 });
