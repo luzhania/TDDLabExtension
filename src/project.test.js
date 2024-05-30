@@ -484,4 +484,11 @@ describe("Points for code complexity per project", () => {
     const project = projectslist.projects[0];
     expect(project.getCodeComplexity().getPoints()).toEqual(0);
   });
+  it("should return points if there is one commit in the project", () => {
+    let projectslist = new ProjectsList();
+    projectslist.addProject("Saludador");
+    const project = projectslist.projects[0];
+    project.addCommit("Added the greet method", 10, 2, 100, 1, 1, 2000, 10, 30, "low");
+    expect(project.getCodeComplexity().getPoints()).toEqual(8);
+  });
 });

@@ -9,8 +9,7 @@ export class Project {
 
   constructor(name) {
     this.name = name;
-    this.testCoverage = new ProjectCoverageFeedbackAssigner(null);
-    this.codeComplexity = new ProjectCodeComplexity(this.commitList);
+    this.testCoverage = new ProjectCoverageFeedbackAssigner(null);;
   }
 
   getProjectName() {
@@ -45,6 +44,6 @@ export class Project {
   }
   
   getCodeComplexity() {
-      return this.codeComplexity;
+      return new ProjectCodeComplexity(this.commitList);
   }
 }
