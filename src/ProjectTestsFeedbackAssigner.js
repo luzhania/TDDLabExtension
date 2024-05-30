@@ -6,10 +6,14 @@ export class ProjectTestsFeedbackAssigner {
         if (percentOfTestInProject === null) {
             this.points = 0;
         } else {
-            if(Number(percentOfTestInProject) < 0.6)
-                this.points = 8;
+            if(Number(percentOfTestInProject) > 0.6){
+                this.points = 12;
+                if(Number(percentOfTestInProject) >= 0.8){
+                    this.points = 20;
+                }
+            }
             else
-                this.points = 20;
+                this.points = 8;
         }
     };
     getPoints() {    
