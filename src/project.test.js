@@ -513,4 +513,11 @@ describe("Points for code complexity per project", () => {
     project.addCommit("Added the greet method", 10, 2, 100, 1, 1, 2000, 10, 30, "veryHigh");
     expect(project.getCodeComplexity().getPoints()).toEqual(16);
   });
+  it("should return 20 points if the average code complexity of all commits in the project is veryHigh ", () => {
+    const project = new Project("Saludador");
+    project.addCommit("Added the greet method", 10, 2, 100, 1, 1, 2000, 10, 30, "high");
+    project.addCommit("Added the greet method", 10, 2, 100, 1, 1, 2000, 10, 30, "veryHigh");
+    project.addCommit("Added the greet method", 10, 2, 100, 1, 1, 2000, 10, 30, "veryHigh");
+    expect(project.getCodeComplexity().getPoints()).toEqual(20);
+  });
 });
