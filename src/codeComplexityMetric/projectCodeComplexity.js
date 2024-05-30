@@ -1,10 +1,12 @@
 export class ProjectCodeComplexity{
     points = 0;
+    feedbackMessage = "";
     commitList = [];
     constructor(commitList){
         this.commitList = commitList;
         this.codeComplexity = this.getProjectCodeComplexity();
         this.assignPoints(this.codeComplexity);
+        this.assignFeedbackMessage(this.codeComplexity);
     }
 
     isEmptyProject() {
@@ -27,6 +29,13 @@ export class ProjectCodeComplexity{
             return totalComplexity / this.commitList.length;
         }
         return null;
+    }
+    assignFeedbackMessage(codeComplexity){
+        this.feedbackMessage = "This project has no commits yet."
+    }
+
+    getFeedbackMessage(){
+        return this.feedbackMessage;
     }
 
     assignPoints(codeComplexity){

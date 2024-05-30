@@ -169,5 +169,5 @@ function renderFeedbackTable(projectIndex) {
 
 function updateProjectFeedback(projectIndex) {
   const project = projectsList.projects[projectIndex];
-  projectFeedback.innerHTML = "<p> Percentage of test coverage: " + project.getTestCoverage().getPoints() + " points (" + project.getTestCoverage().getFeedbackMessage() + ")</p><p> Code complexity: " + project.getCodeComplexity().getPoints() + " points </p>";
+  projectFeedback.innerHTML = "<p> Percentage of test coverage: " + project.getTestCoverage().getPoints() + " points (" + project.getTestCoverage().getFeedbackMessage() + ")</p><p> Code complexity: " + project.getCodeComplexity().getPoints() + " points (" + project.getCodeComplexity().getFeedbackMessage() + ")</p>";
 }
