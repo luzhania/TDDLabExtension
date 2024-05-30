@@ -517,8 +517,15 @@ describe("Points for test added per commit in project", () => {
   it("should return 20 points in test added per commit if there's a commit in the project", () => {
     let projectslist = new ProjectsList();
     projectslist.addProject("Saludador");
-    projectslist.projects[0].addCommit("new functionality added")
+    projectslist.projects[0].addCommit("new functionality added", 0, 1)
     const project = projectslist.projects[0];
     expect(project.getAddedTestsPerCommit().getPoints()).toEqual(20);
+  });
+  it("should return 8 points in test added per commit if there isn't a commit in the project without at least one test", () => {
+    let projectslist = new ProjectsList();
+    projectslist.addProject("Saludador");
+    projectslist.projects[0].addCommit("new functionality added", 0, 0, 0)
+    const project = projectslist.projects[0];
+    expect(project.getAddedTestsPerCommit().getPoints()).toEqual(8);
   });
 });

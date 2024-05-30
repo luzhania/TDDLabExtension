@@ -42,7 +42,12 @@ export class Project {
   }
 
   getAddedTestsPerCommit(){
-    return new ProjectTestsFeedbackAssigner(!this.isEmptyProject());
+    if (!this.isEmptyProject()){
+      return new ProjectTestsFeedbackAssigner(this.commitList[0].getAddedTests().getValue());
+    }
+    else{
+      return this.addedTests;
+    }
   }
 
   getPercentageOfCoverageAverage() {
