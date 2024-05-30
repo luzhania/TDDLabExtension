@@ -378,17 +378,17 @@ describe("Calculate total points earned per commit", () => {
 });
 
 describe("Calculate total points earned per project", () => {
-  it("should return 900 points for the attempt", () => {
+  it("should return points only considering the test coverage metric", () => {
     let project = new Project("Saludador");
     project.addCommit("Added the greet method", 10, 1, 100);
     project.addCommit("Added the greet method", 200, 2, 30);
     project.addCommit("Added the greet method", 20, 1, 100);
-    expect(project.getTotalPointsPerProject()).toEqual(630);
+    expect(project.getTotalPointsPerProject()).toEqual(12);
   });
 });
 
 describe("Calculate the overall total of points", () => {
-  it("should return 900 points for the attempt", () => {
+  it("should return points of all projects considering only test coverage metric", () => {
     let projectslist = new ProjectsList();
     projectslist.addProject("Saludador");
     projectslist.addProject("Totalizador");
@@ -396,7 +396,7 @@ describe("Calculate the overall total of points", () => {
     projectslist.projects[0].addCommit("Added the greet method", 10, 1, 100);
     projectslist.projects[1].addCommit("Added totalizer method", 10, 1, 100);
     projectslist.projects[2].addCommit("Added substracting method", 10, 1, 100);
-    expect(projectslist.getTotalPoints()).toEqual(900);
+    expect(projectslist.getTotalPoints()).toEqual(60);
   });
 });
 

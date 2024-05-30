@@ -26,7 +26,7 @@ export class Project {
   }
 
   getTotalPointsPerProject() {
-    return this.commitList.reduce((acc, commit) => acc + commit.getTotalPoints(), 0);
+    return this.getTestCoverage().getPoints(); //Incomplete
   }
 
   getTestCoverage() {
