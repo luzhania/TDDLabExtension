@@ -140,7 +140,7 @@ function renderCommitsTable(projectIndex) {
       <td>${commit.getModifiedLines().getValue()}</td>
       <td>${commit.getAddedTests().getValue()}</td>
       <td>${commit.getPercentageOfCoverage().getValue()}</td>
-      <td>${commit.getCodeComplexity()}</td>
+      <td>${commit.getCodeComplexity().getValue()}</td>
       <td>${commit.getCommitStringDate()}</td>
       <td>${commit.getCommitTimeString()}</td>
     `;
@@ -169,5 +169,5 @@ function renderFeedbackTable(projectIndex) {
 
 function updateProjectFeedback(projectIndex) {
   const project = projectsList.projects[projectIndex];
-  projectFeedback.innerHTML = "<p> Percentage of test coverage: " + project.getTestCoverage().getPoints() + " points (" + project.getTestCoverage().getFeedbackMessage() + ")</p>";
+  projectFeedback.innerHTML = "<p> Percentage of test coverage: " + project.getTestCoverage().getPoints() + " points (" + project.getTestCoverage().getFeedbackMessage() + ")</p><p> Code complexity: " + project.getCodeComplexity().getPoints() + " points </p>";
 }

@@ -1,3 +1,4 @@
+import { ProjectCodeComplexity } from "./codeComplexityMetric/projectCodeComplexity.js";
 import { Commit } from "./commit.js";
 import { ProjectCoverageFeedbackAssigner } from "./ProjectCoverageFeedbackAssigner.js";
 
@@ -9,6 +10,7 @@ export class Project {
   constructor(name) {
     this.name = name;
     this.testCoverage = new ProjectCoverageFeedbackAssigner(null);
+    this.codeComplexity = new ProjectCodeComplexity(null);
   }
 
   getProjectName() {
@@ -40,5 +42,9 @@ export class Project {
 
   getPercentageOfCoverageAverage() {
     return parseInt(this.commitList.reduce((acc, commit) => acc + parseInt(commit.getPercentageOfCoverage().getValue()), 0) / this.commitList.length);
+  }
+  
+  getCodeComplexity() {
+      return this.codeComplexity;
   }
 }
