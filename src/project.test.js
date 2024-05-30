@@ -130,7 +130,7 @@ describe("Add code complexity per commit", () => {
     expect(commit.getCommitDate()).toEqual(new Date(2000, 0, 1, 10, 30));
     expect(commit.getCommitStringDate()).toEqual("1/1/2000");
     expect(commit.getCommitTimeString()).toEqual("10:30");
-    expect(commit.getCodeComplexity()).toEqual("low");
+    expect(commit.getCodeComplexity().getValue()).toEqual("low");
   });
 
   it("should save 1 commit with description 'Added the greet method', 10 modified lines, 2 added tests, 100 percentage of coverage, date '2021-09-01', time '10:30', and code complexity 'Moderate'", () => {
@@ -145,7 +145,7 @@ describe("Add code complexity per commit", () => {
     expect(commit.getCommitDate()).toEqual(new Date(2000, 0, 1, 10, 30));
     expect(commit.getCommitStringDate()).toEqual("1/1/2000");
     expect(commit.getCommitTimeString()).toEqual("10:30");
-    expect(commit.getCodeComplexity()).toEqual("moderate");
+    expect(commit.getCodeComplexity().getValue()).toEqual("moderate");
   });
 
   it("should save 1 commit with description 'Added the greet method', 10 modified lines, 2 added tests, 100 percentage of coverage, date '2021-09-01', time '10:30', and code complexity 'High'", () => {
@@ -160,7 +160,7 @@ describe("Add code complexity per commit", () => {
     expect(commit.getCommitDate()).toEqual(new Date(2000, 0, 1, 10, 30));
     expect(commit.getCommitStringDate()).toEqual("1/1/2000");
     expect(commit.getCommitTimeString()).toEqual("10:30");
-    expect(commit.getCodeComplexity()).toEqual("high");
+    expect(commit.getCodeComplexity().getValue()).toEqual("high");
   });
 
   it("should save 1 commit with description 'Added the greet method', 10 modified lines, 2 added tests, 100 percentage of coverage, date '2021-09-01', time '10:30', and code complexity 'Very high'", () => {
@@ -175,7 +175,7 @@ describe("Add code complexity per commit", () => {
     expect(commit.getCommitDate()).toEqual(new Date(2000, 0, 1, 10, 30));
     expect(commit.getCommitStringDate()).toEqual("1/1/2000");
     expect(commit.getCommitTimeString()).toEqual("10:30");
-    expect(commit.getCodeComplexity()).toEqual("veryHigh");
+    expect(commit.getCodeComplexity().getValue()).toEqual("veryHigh");
   });
 });
 

@@ -1,6 +1,7 @@
 import { AddedTestMetric } from "./addedTestMetric.js";
 import { TestCoverageCommitMetric } from "./percentageOfCoverageMetric.js";
 import { ModifiedLinesMetric } from "./modifiedLinesMetric.js";
+import { CommitCodeComplexity } from "./codeComplexityMetric/commitCodeComplexity.js";
 
 export class Commit {
     commitDescription = "";
@@ -8,7 +9,7 @@ export class Commit {
     addedTests = 0;
     percentageOfCoverage = null;
     commitDate = null;
-    codeComplexity = "";
+    codeComplexity = null;
   
     constructor(commitDescription, modifiedLines, addedTests, percentageOfCoverage, date, codeComplexity) {
       this.commitDescription = commitDescription;
@@ -17,7 +18,7 @@ export class Commit {
       this.addedTests = new AddedTestMetric(addedTests, commitDescription)
       this.percentageOfCoverage = new TestCoverageCommitMetric(percentageOfCoverage);
       this.commitDate = date;
-      this.codeComplexity = codeComplexity;
+      this.codeComplexity = new CommitCodeComplexity(codeComplexity);
     }
   
     getCommitDescription() {
