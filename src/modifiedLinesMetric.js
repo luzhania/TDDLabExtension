@@ -36,14 +36,14 @@ export class ModifiedLinesMetric {
         case this.ModifiedLinesEvaluationCriteria.isThereNone(this.value):
           this.points = 0;
           break;
+        case this.ModifiedLinesEvaluationCriteria.isDeficient(this.value):
+          this.points = 8;
+          break;
         case this.isCorrect():
           this.points = 100;
           break;
         case this.isRelativelyGood():
           this.points = 70;
-          break;
-        default:
-          this.points = 10;
           break;
       }
     }
@@ -51,6 +51,9 @@ export class ModifiedLinesMetric {
       switch (true) {
         case this.ModifiedLinesEvaluationCriteria.isThereNone(this.value):
           this.feedbackMessage = `❌ Líneas de código modificadas: ${this.value}. Debes hacer los cambios necesarios para el ciclo TDD en tu código antes de hacer un commit. No te desanimes. ¡Aplica lo aprendido en la siguiente!`
+          break;
+        case this.ModifiedLinesEvaluationCriteria.isDeficient(this.value):
+          this.feedbackMessage = `❌ Líneas de código modificadas: ${this.value}. DEFICIENTE. Demasiadas líneas de código añadidas. Debes hacer solo los cambios necesarios en cada ciclo de TDD. ¡Vamos, puedes hacerlo mejor y tendrás más puntos!`
           break;
         case this.isCorrect():
           this.feedbackMessage = `✔ Líneas de código modificadas: ${this.value}. El código sufrió pocos cambios. ¡Buen trabajo! ¡Sigue así!`
