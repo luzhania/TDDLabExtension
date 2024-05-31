@@ -241,6 +241,12 @@ describe("Return feedback messages for modified lines per commit", () => {
     const commit = project.commitList[0];
     expect(commit.getModifiedLines().getFeedbackMessage()).toEqual("❌ Líneas de código modificadas: 0. Debes hacer los cambios necesarios para el ciclo TDD en tu código antes de hacer un commit. No te desanimes. ¡Aplica lo aprendido en la siguiente!");
   });
+  it("should return encouraging feedback if the modified lines were grater than 60", () => {
+    let project = new Project("Saludador");
+    project.addCommit("Added the greet method", 65, 2, 20);
+    const commit = project.commitList[0];
+    expect(commit.getModifiedLines().getFeedbackMessage()).toEqual("❌ Líneas de código modificadas: 65. DEFICIENTE. Demasiadas líneas de código añadidas. Debes hacer solo los cambios necesarios en cada ciclo de TDD. ¡Vamos, puedes hacerlo mejor y tendrás más puntos!");
+  });
   it("should return encouraging feedback if the modified lines were grater than 0 and lower or equal to 35", () => {
     let project = new Project("Saludador");
     project.addCommit("Added the greet method", 15, 2, 20);
@@ -252,12 +258,6 @@ describe("Return feedback messages for modified lines per commit", () => {
     project.addCommit("Added the greet method", 45, 2, 20);
     const commit = project.commitList[0];
     expect(commit.getModifiedLines().getFeedbackMessage()).toEqual("🤔 Líneas de código modificadas: 45. Muchas líneas de código modificadas para ser un ciclo TDD, debes reducir los cambios que realizas al código en cada ciclo ¡Lo harás mejor en el siguiente commit!");
-  });
-  it("should return encouraging feedback if the modified lines were grater than 50", () => {
-    let project = new Project("Saludador");
-    project.addCommit("Added the greet method", 55, 2, 20);
-    const commit = project.commitList[0];
-    expect(commit.getModifiedLines().getFeedbackMessage()).toEqual("❌ Líneas de código modificadas: 55. Demasiadas líneas de código añadidas. Debes hacer solo los cambios necesarios en cada ciclo de TDD. ¡Vamos, puedes hacerlo mejor y tendrás más puntos!");
   });
 
   describe("Assign points for added tests", () => {
