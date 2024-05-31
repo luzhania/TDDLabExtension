@@ -465,6 +465,13 @@ describe("Assign points for modified lines per project", () => {
     const project = projectslist.projects[0];
     expect(project.getModifiedLines().getPoints()).toEqual(0);
   });
+  it("should assign points if there's one commit in the project", () => {
+    let projectslist = new ProjectsList();
+    projectslist.addProject("Saludador");
+    const project = projectslist.projects[0];
+    project.addCommit("Added the greet method", 10, 1, 60);
+    expect(project.getModifiedLines().getPoints()).toEqual(20);
+  });
 });
 
 describe("Points for code complexity per project", () => {
