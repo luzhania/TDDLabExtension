@@ -226,10 +226,16 @@ describe("Assign points for modified lines per commit", () => {
     const commit = project.commitList[0];
     expect(commit.getModifiedLines().getPoints()).toEqual(12);
   });
+  it("should assign 16 points for the attempt if the modified lines are grater than 20 and lower or equal to 40", () => {
+    let project = new Project("Saludador");
+    project.addCommit("Added the greet method", 38, 2, 20);
+    const commit = project.commitList[0];
+    expect(commit.getModifiedLines().getPoints()).toEqual(16);
+  });
 
   it("should assign 100 points for the attempt if the modified lines are grater than 0 and lower or equal to 35", () => {
     let project = new Project("Saludador");
-    project.addCommit("Added the greet method", 25, 2, 20);
+    project.addCommit("Added the greet method", 15, 2, 20);
     const commit = project.commitList[0];
     expect(commit.getModifiedLines().getPoints()).toEqual(100);
   });

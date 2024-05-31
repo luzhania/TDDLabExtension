@@ -8,4 +8,7 @@ export class ModifiedLinesEvaluationCriteria{
     isRegular(modifiedLines){
         return modifiedLines > 40 && modifiedLines <= 60;
     }
+    isGood(modifiedLines){
+        return modifiedLines > 20 && modifiedLines <= 40;
+    }
 }

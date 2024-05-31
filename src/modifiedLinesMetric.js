@@ -27,10 +27,6 @@ export class ModifiedLinesMetric {
       return this.value > 0 && this.value <= 35;
     }
   
-    isRelativelyGood() {
-      return this.value > 35 && this.value <= 50;
-    }
-  
     assignPoints() {
       switch (true) {
         case this.ModifiedLinesEvaluationCriteria.isThereNone(this.value):
@@ -41,6 +37,9 @@ export class ModifiedLinesMetric {
           break;
         case this.ModifiedLinesEvaluationCriteria.isRegular(this.value):
            this.points = 12;
+           break;
+        case this.ModifiedLinesEvaluationCriteria.isGood(this.value):
+           this.points = 16;
            break;
         case this.isCorrect():
           this.points = 100;
