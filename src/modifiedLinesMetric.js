@@ -1,3 +1,4 @@
+import { ModifiedLinesEvaluationCriteria } from "./ModifiedLinesEvaluationCriteria";
 export class ModifiedLinesMetric {
     value = 0;
     points = 0;
@@ -5,6 +6,7 @@ export class ModifiedLinesMetric {
   
     constructor(value) {
       this.value = value;
+      this.ModifiedLinesEvaluationCriteria = new ModifiedLinesEvaluationCriteria();
       this.assignPoints();
       this.assignFeedbackMessage();
     }
@@ -21,10 +23,6 @@ export class ModifiedLinesMetric {
       return this.feedbackMessage;
     }
   
-    isIncorrect() {
-      return this.value == 0;
-    }
-  
     isCorrect() {
       return this.value > 0 && this.value <= 35;
     }
@@ -35,7 +33,7 @@ export class ModifiedLinesMetric {
   
     assignPoints() {
       switch (true) {
-        case this.isIncorrect():
+        case this.ModifiedLinesEvaluationCriteria.isThereNone(this.value):
           this.points = 0;
           break;
         case this.isCorrect():
@@ -51,7 +49,7 @@ export class ModifiedLinesMetric {
     }
     assignFeedbackMessage() {
       switch (true) {
-        case this.isIncorrect():
+        case this.ModifiedLinesEvaluationCriteria.isThereNone(this.value):
           this.feedbackMessage = `❌ Líneas de código modificadas: ${this.value}. Debes hacer los cambios necesarios para el ciclo TDD en tu código antes de hacer un commit. No te desanimes. ¡Aplica lo aprendido en la siguiente!`
           break;
         case this.isCorrect():
