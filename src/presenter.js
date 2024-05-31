@@ -195,6 +195,7 @@ document.getElementById('fileInput').addEventListener('change', function(event) 
       } else {
         alert("No project selected.");
       }
+      event.target.value = null;
     };
     reader.readAsText(file);
   } else {
