@@ -11,4 +11,7 @@ export class ModifiedLinesEvaluationCriteria{
     isGood(modifiedLines){
         return modifiedLines > 20 && modifiedLines <= 40;
     }
+    isExcelent(modifiedLines){
+        return modifiedLines > 0 && modifiedLines <= 20;
+    }
 }

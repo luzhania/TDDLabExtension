@@ -41,8 +41,8 @@ export class ModifiedLinesMetric {
         case this.ModifiedLinesEvaluationCriteria.isGood(this.value):
            this.points = 16;
            break;
-        case this.isCorrect():
-          this.points = 100;
+        case this.ModifiedLinesEvaluationCriteria.isExcelent(this.value):
+          this.points = 20;
           break;
       }
     }
