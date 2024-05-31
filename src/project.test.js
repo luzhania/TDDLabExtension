@@ -232,7 +232,6 @@ describe("Assign points for modified lines per commit", () => {
     const commit = project.commitList[0];
     expect(commit.getModifiedLines().getPoints()).toEqual(16);
   });
-
   it("should assign 20 points for the attempt if the modified lines are grater than 0 and lower or equal to 20", () => {
     let project = new Project("Saludador");
     project.addCommit("Added the greet method", 15, 2, 20);
@@ -266,12 +265,11 @@ describe("Return feedback messages for modified lines per commit", () => {
     const commit = project.commitList[0];
     expect(commit.getModifiedLines().getFeedbackMessage()).toEqual("✔ Líneas de código modificadas: 39. BUENO. El código sufrió pocos cambios. ¡Buen trabajo! ¡Sigue así!");
   });
-
-  it("should return encouraging feedback if the modified lines were grater than 0 and lower or equal to 35", () => {
+  it("should return encouraging feedback if the modified lines were grater than 0 and lower or equal to 20", () => {
     let project = new Project("Saludador");
     project.addCommit("Added the greet method", 15, 2, 20);
     const commit = project.commitList[0];
-    expect(commit.getModifiedLines().getFeedbackMessage()).toEqual("✔ Líneas de código modificadas: 15. El código sufrió pocos cambios. ¡Buen trabajo! ¡Sigue así!");
+    expect(commit.getModifiedLines().getFeedbackMessage()).toEqual("✔  Líneas de código modificadas: 15. EXCELENTE. El código sufrió cambios mínimos. ¡Sigue con el buen trabajo!");
   });
 });
 

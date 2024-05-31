@@ -22,11 +22,7 @@ export class ModifiedLinesMetric {
     getFeedbackMessage() {
       return this.feedbackMessage;
     }
-  
-    isCorrect() {
-      return this.value > 0 && this.value <= 35;
-    }
-  
+
     assignPoints() {
       switch (true) {
         case this.ModifiedLinesEvaluationCriteria.isThereNone(this.value):
@@ -60,8 +56,8 @@ export class ModifiedLinesMetric {
         case this.ModifiedLinesEvaluationCriteria.isGood(this.value):
           this.feedbackMessage = `✔ Líneas de código modificadas: ${this.value}. BUENO. El código sufrió pocos cambios. ¡Buen trabajo! ¡Sigue así!`
           break;
-          case this.isCorrect():
-          this.feedbackMessage = `✔ Líneas de código modificadas: ${this.value}. El código sufrió pocos cambios. ¡Buen trabajo! ¡Sigue así!`
+          case this.ModifiedLinesEvaluationCriteria.isExcelent(this.value):
+          this.feedbackMessage = `✔  Líneas de código modificadas: ${this.value}. EXCELENTE. El código sufrió cambios mínimos. ¡Sigue con el buen trabajo!`
           break;
       }
     }
