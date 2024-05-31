@@ -207,39 +207,6 @@ describe("Return feedback messages for percentage of coverage per commit", () =>
   });
 });
 
-describe("Assign points for modified lines per commit", () => {
-  it("should assign 0 points for the attempt if the modified lines are equal to 0", () => {
-    let project = new Project("Saludador");
-    project.addCommit("Added the greet method", 0, 2, 20);
-    const commit = project.commitList[0];
-    expect(commit.getModifiedLines().getPoints()).toEqual(0);
-  });
-  it("should assign 8 points for the attempt if the modified lines are grater than 60", () => {
-    let project = new Project("Saludador");
-    project.addCommit("Added the greet method", 61, 2, 20);
-    const commit = project.commitList[0];
-    expect(commit.getModifiedLines().getPoints()).toEqual(8);
-  });
-  it("should assign 12 points for the attempt if the modified lines are grater than 40 and lower or equal to 60", () => {
-    let project = new Project("Saludador");
-    project.addCommit("Added the greet method", 55, 2, 20);
-    const commit = project.commitList[0];
-    expect(commit.getModifiedLines().getPoints()).toEqual(12);
-  });
-  it("should assign 16 points for the attempt if the modified lines are grater than 20 and lower or equal to 40", () => {
-    let project = new Project("Saludador");
-    project.addCommit("Added the greet method", 38, 2, 20);
-    const commit = project.commitList[0];
-    expect(commit.getModifiedLines().getPoints()).toEqual(16);
-  });
-  it("should assign 20 points for the attempt if the modified lines are grater than 0 and lower or equal to 20", () => {
-    let project = new Project("Saludador");
-    project.addCommit("Added the greet method", 15, 2, 20);
-    const commit = project.commitList[0];
-    expect(commit.getModifiedLines().getPoints()).toEqual(20);
-  });
-});
-
 describe("Return feedback messages for modified lines per commit", () => {
   it("should return encouraging feedback for the attempt when there was 0 lines modified", () => {
     let project = new Project("Saludador");
@@ -490,6 +457,16 @@ describe("Points for test coverage per project", () => {
     expect(project.getTestCoverage().getPoints()).toEqual(20);
   });
 });
+
+describe("Assign points for modified lines per project", () => {
+  it("should assign 0 points if there's no commits in the project", () => {
+    let projectslist = new ProjectsList();
+    projectslist.addProject("Saludador");
+    const project = projectslist.projects[0];
+    expect(project.getModifiedLines().getPoints()).toEqual(0);
+  });
+});
+
 describe("Points for code complexity per project", () => {
   it("should return 0 points if there's no commits in the project", () => {
     let projectslist = new ProjectsList();

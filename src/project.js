@@ -1,6 +1,7 @@
 import { ProjectCodeComplexity } from "./projectCodeComplexity.js";
 import { Commit } from "./commit.js";
 import { ProjectCoverageFeedbackAssigner } from "./ProjectCoverageFeedbackAssigner.js";
+import { ProjectModifiedLines } from "./ProjectModifiedLines.js";
 
 export class Project {
   name = "";
@@ -26,11 +27,15 @@ export class Project {
   }
 
   getTestCoverage() {
-      return new ProjectCoverageFeedbackAssigner(this.commitList);
+    return new ProjectCoverageFeedbackAssigner(this.commitList);
   }
   
   getCodeComplexity() {
-      return new ProjectCodeComplexity(this.commitList);
+    return new ProjectCodeComplexity(this.commitList);
+  }
+
+  getModifiedLines(){
+    return new ProjectModifiedLines(this.commitList);
   }
 
   changeName(newName) {
