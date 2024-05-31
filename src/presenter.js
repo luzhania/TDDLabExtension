@@ -31,7 +31,7 @@ addProjectForm.addEventListener("submit", (event) => {
   updateProjectFeedback(projectIndex);
 });
 
-function getFormData(){
+function getFormData() {
   return {
     projectIndex: commitProjectSelect.value,
     commitMessage: commitMessageInput.value.trim(),
@@ -66,7 +66,7 @@ addCommitForm.addEventListener("submit", (event) => {
   const { projectIndex, commitMessage, commitModifiedLines, commitAddedTests, commitPercentageOfCoverage, dateValue, timeValue, codeComplexityValue } = getFormData();
   const { year, month, day } = extractDate(dateValue);
   const { hours, minutes } = extractTime(timeValue);
-  
+
   projectsList.projects[projectIndex].addCommit(commitMessage, commitModifiedLines, commitAddedTests, commitPercentageOfCoverage, day, month, year, hours, minutes, codeComplexityValue);
   renderCommitsTable(projectIndex);
   renderFeedbackTable(projectIndex);
@@ -99,7 +99,7 @@ function renderProjectsTable() {
     const row = document.createElement("tr");
     row.innerHTML = `
       <td>${index + 1}</td>
-      <td>${project.name}</td>
+      <td><input type="text" value="${project.name}" data-index="${index}" class="project-name-input"></td>
       <td>${project.getTotalPointsPerProject()}</td>
       <td><button class="delete-project-btn">Delete</button></td>
     `;
@@ -112,6 +112,19 @@ function renderProjectsTable() {
     });
 
     tableProjectsBody.appendChild(row);
+  });
+
+  const projectNameInputs = document.querySelectorAll('.project-name-input');
+  projectNameInputs.forEach(input => {
+    input.addEventListener('change', (event) => {
+      const index = event.target.dataset.index;
+      const newName = event.target.value.trim();
+      if (newName) {
+        projectsList.projects[index].changeName(newName);
+        updateCommitProjectSelect();
+        updateProjectFeedback(index);
+      }
+    });
   });
 }
 
@@ -186,7 +199,7 @@ document.getElementById('fileInput').addEventListener('change', function(event) 
       if (projectIndex !== null && projectIndex >= 0 && projectsList.projects[projectIndex]) {
         const project = projectsList.projects[projectIndex];
         project.commitList = project.commitList.concat(data);
-      
+
         renderProjectsTable();
         updateCommitProjectSelect();
         renderCommitsTable(projectIndex);

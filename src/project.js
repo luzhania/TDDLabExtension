@@ -32,4 +32,8 @@ export class Project {
   getCodeComplexity() {
       return new ProjectCodeComplexity(this.commitList);
   }
+
+  changeName(newName) {
+    this.name = newName;
+  }
 }

@@ -590,3 +590,11 @@ describe("File processor", () => {
     expect(dataArray.length).toBeGreaterThan(19);
   });
 });
+
+describe("Change name of a project", () => {
+  it("should change the name of a project", () => {
+    let project = new Project("Saludador");
+    project.changeName("Saludador 2");
+    expect(project.getProjectName()).toEqual("Saludador 2");
+  });
+});
