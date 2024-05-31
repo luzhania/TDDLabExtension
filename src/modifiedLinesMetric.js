@@ -39,11 +39,11 @@ export class ModifiedLinesMetric {
         case this.ModifiedLinesEvaluationCriteria.isDeficient(this.value):
           this.points = 8;
           break;
+        case this.ModifiedLinesEvaluationCriteria.isRegular(this.value):
+           this.points = 12;
+           break;
         case this.isCorrect():
           this.points = 100;
-          break;
-        case this.isRelativelyGood():
-          this.points = 70;
           break;
       }
     }

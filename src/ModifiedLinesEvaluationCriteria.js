@@ -5,4 +5,7 @@ export class ModifiedLinesEvaluationCriteria{
     isDeficient(modifiedLines){
         return modifiedLines > 60;
     }
+    isRegular(modifiedLines){
+        return modifiedLines > 40 && modifiedLines <= 60;
+    }
 }
