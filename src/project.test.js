@@ -587,6 +587,18 @@ describe("Feedback message for test coverage per project", () => {
     projectslist.projects[0].addCommit("new functionality added", 0, 3, 0)
     expect(project.getAddedTestsPerCommit().getFeedbackMessage()).toEqual("Regular");
   });
+  it("should return 'Good' in feedback if more than 79% and less than 100% of the test added per commit have at least one test", () => {
+    let projectslist = new ProjectsList();
+    projectslist.addProject("Saludador");
+    const project = projectslist.projects[0];
+    projectslist.projects[0].addCommit("new functionality added", 0, 0, 0)
+    projectslist.projects[0].addCommit("new functionality added", 0, 1, 0)
+    projectslist.projects[0].addCommit("refact: new functionality added", 0, 1, 0)
+    projectslist.projects[0].addCommit("new functionality added", 0, 1, 0)
+    projectslist.projects[0].addCommit("new functionality added", 0, 1, 0)
+    projectslist.projects[0].addCommit("new functionality added", 0, 3, 0)
+    expect(project.getAddedTestsPerCommit().getFeedbackMessage()).toEqual("Good");
+  });
 });
 describe("Points for code complexity per project", () => {
   it("should return 0 points if there's no commits in the project", () => {
