@@ -7,14 +7,18 @@ export class ProjectFrecuencyFeedbackAssigner {
         if(averageFrecuency === undefined)
             this.points = 0;
         else{
-            this.points = 20;
+            if(averageFrecuency <= 172800000 || averageFrecuency === "NoEmpty")
+                this.points = 20;
         }
     };
     getPoints() {    
         return this.points;
     };
     getFrecuencyOfCommits(commitList) {
-        if(!commitList.length ==0)
-            return "NoEmpty";
+        if(!commitList.length ==0){
+            if(commitList.length >1)
+                return commitList[1].getCommitDate()-commitList[0].getCommitDate();
+            return "NoEmpty"
+        }
     }
 }
