@@ -709,10 +709,18 @@ describe("Points for code complexity per project", () => {
     project.addCommit("Added the greet method", 10, 2, 100, 1, 1, 2000, 10, 30);
     expect(project.getFrecuencyCommit().getPoints()).toEqual(20);
   });
-  it("should assign 20 points when there are two commits and the differece of days is less than two days", () => {
+  it("should assign 20 points when there are two commits and the differece of days is less or equal to  two days", () => {
     const project = new Project("Saludador");
     project.addCommit("Added the greet method", 10, 2, 100, 1, 1, 2000, 10, 30);
     project.addCommit("Added the greet method", 10, 2, 100, 2, 1, 2000, 10, 30);
+    expect(project.getFrecuencyCommit().getPoints()).toEqual(20);
+  });
+  it("should assign 20 points when the average in differece of days in commits is less or equal to two days", () => {
+    const project = new Project("Saludador");
+    project.addCommit("Added the greet method", 10, 2, 100, 1, 1, 2000, 10, 30);
+    project.addCommit("Added the greet method", 10, 2, 100, 2, 1, 2000, 10, 30);
+    project.addCommit("Added the greet method", 10, 2, 100, 3, 1, 2000, 10, 30);
+    project.addCommit("Added the greet method", 10, 2, 100, 4, 1, 2000, 10, 30);
     expect(project.getFrecuencyCommit().getPoints()).toEqual(20);
   });
 });
