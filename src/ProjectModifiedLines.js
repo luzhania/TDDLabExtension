@@ -23,9 +23,6 @@ export class ProjectModifiedLines{
 
     assignPoints(ModifiedLines){
         switch (true) {
-            case this.ModifiedLinesEvaluationCriteria.isExcelent(ModifiedLines):
-                this.projectPoints = 20;
-                break;
             case this.ModifiedLinesEvaluationCriteria.isThereNone(ModifiedLines):
                 this.projectPoints = 0;
                 break;
@@ -38,6 +35,9 @@ export class ProjectModifiedLines{
             case this.ModifiedLinesEvaluationCriteria.isGood(ModifiedLines):
                 this.projectPoints = 16;
                 break;
+            case this.ModifiedLinesEvaluationCriteria.isExcelent(ModifiedLines):
+            this.projectPoints = 20;
+            break;
         }
     }
 

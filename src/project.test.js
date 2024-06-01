@@ -469,8 +469,8 @@ describe("Assign points for modified lines per project", () => {
     let projectslist = new ProjectsList();
     projectslist.addProject("Saludador");
     const project = projectslist.projects[0];
-    project.addCommit("Added the greet method", 10, 1, 60);
-    expect(project.getModifiedLines().getPoints()).toEqual(20);
+    project.addCommit("Added the greet method", 0, 1, 60);
+    expect(project.getModifiedLines().getPoints()).toEqual(0);
   });
   it("should assign 0 points if the average amount of modified lines of all commits in the project is 0", () => {
     let projectslist = new ProjectsList();
@@ -507,6 +507,15 @@ describe("Assign points for modified lines per project", () => {
     project.addCommit("Added the greet method", 50, 1, 50);
     project.addCommit("Added the greet method", 40, 1, 70);
     expect(project.getModifiedLines().getPoints()).toEqual(16);
+  });
+  it("should assign 20 points if the average amount of modified lines of all commits in the project is grater than 0 and less or equal to 20", () => {
+    let projectslist = new ProjectsList();
+    projectslist.addProject("Saludador");
+    const project = projectslist.projects[0];
+    project.addCommit("Added the greet method", 10, 1, 60);
+    project.addCommit("Added the greet method", 15, 1, 50);
+    project.addCommit("Added the greet method", 15, 1, 70);
+    expect(project.getModifiedLines().getPoints()).toEqual(20);
   });
 });
 
