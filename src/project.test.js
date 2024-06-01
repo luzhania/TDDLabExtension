@@ -236,7 +236,7 @@ describe("Return feedback messages for modified lines per commit", () => {
     let project = new Project("Saludador");
     project.addCommit("Added the greet method", 15, 2, 20);
     const commit = project.commitList[0];
-    expect(commit.getModifiedLines().getFeedbackMessage()).toEqual("✔  Líneas de código modificadas: 15. EXCELENTE. El código sufrió cambios mínimos. ¡Sigue con el buen trabajo!");
+    expect(commit.getModifiedLines().getFeedbackMessage()).toEqual("👏  Líneas de código modificadas: 15. EXCELENTE. El código sufrió cambios mínimos. ¡Sigue con el buen trabajo!");
   });
 });
 

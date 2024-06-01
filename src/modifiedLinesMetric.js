@@ -32,7 +32,7 @@ export class ModifiedLinesMetric {
           this.feedbackMessage = `✔ Líneas de código modificadas: ${this.value}. BUENO. El código sufrió pocos cambios. ¡Buen trabajo! ¡Sigue así!`
           break;
           case this.ModifiedLinesEvaluationCriteria.isExcelent(this.value):
-          this.feedbackMessage = `✔  Líneas de código modificadas: ${this.value}. EXCELENTE. El código sufrió cambios mínimos. ¡Sigue con el buen trabajo!`
+          this.feedbackMessage = `👏  Líneas de código modificadas: ${this.value}. EXCELENTE. El código sufrió cambios mínimos. ¡Sigue con el buen trabajo!`
           break;
       }
     }
