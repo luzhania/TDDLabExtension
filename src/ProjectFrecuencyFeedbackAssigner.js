@@ -3,12 +3,18 @@ export class ProjectFrecuencyFeedbackAssigner {
         this.assignPoints(commitList);
     };
     assignPoints(commitList) {
-        this.points = this.getFrecuencyOfCommits();
+        let averageFrecuency = this.getFrecuencyOfCommits(commitList);
+        if(averageFrecuency === undefined)
+            this.points = 0;
+        else{
+            this.points = 20;
+        }
     };
     getPoints() {    
         return this.points;
     };
-    getFrecuencyOfCommits() {
-        return 0;
+    getFrecuencyOfCommits(commitList) {
+        if(!commitList.length ==0)
+            return "NoEmpty";
     }
 }

@@ -704,6 +704,11 @@ describe("Points for code complexity per project", () => {
     const project = new Project("Saludador");
     expect(project.getFrecuencyCommit().getPoints()).toEqual(0);
   });
+  it("should assign 20 points when there is a commit", () => {
+    const project = new Project("Saludador");
+    project.addCommit("Added the greet method", 10, 2, 100, 1, 1, 2000, 10, 30);
+    expect(project.getFrecuencyCommit().getPoints()).toEqual(20);
+  });
 });
 describe("File processor", () => {
   const path = require('path');
