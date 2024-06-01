@@ -539,6 +539,14 @@ describe("Feedback messages for modified lines per project", () => {
     project.addCommit("Added the greet method 2", 70, 1, 40);
     expect(project.getModifiedLines().getFeedbackMessage()).toEqual("Deficient");
   });
+  it("should return a Regular feedback if the average amount of modified lines of all commits in the project is grater than to 40 and less or equal to 60", () => {
+    let projectslist = new ProjectsList();
+    projectslist.addProject("Saludador");
+    const project = projectslist.projects[0];
+    project.addCommit("Added the greet method", 40, 1, 20);
+    project.addCommit("Added the greet method 2", 60, 1, 40);
+    expect(project.getModifiedLines().getFeedbackMessage()).toEqual("Regular");
+  });
 });
 
 describe("Points for code complexity per project", () => {

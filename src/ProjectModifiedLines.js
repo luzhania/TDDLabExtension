@@ -54,8 +54,11 @@ export class ProjectModifiedLines{
             case ModifiedLines === 0:
                 this.projectFeedback = "Bad";
                 break;
-            case ModifiedLines >60:
+            case ModifiedLines > 60:
                 this.projectFeedback = "Deficient";
+                break;
+            case ModifiedLines > 40 && ModifiedLines <= 60:
+                this.projectFeedback = "Regular";
                 break;
         }
     }
