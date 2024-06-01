@@ -3,6 +3,7 @@ import { Commit } from "./commit.js";
 import { ProjectCoverageFeedbackAssigner } from "./ProjectCoverageFeedbackAssigner.js";
 import { ProjectTestsFeedbackAssigner } from "./ProjectTestsFeedbackAssigner.js";
 import { ProjectFrecuencyFeedbackAssigner } from "./ProjectFrecuencyFeedbackAssigner.js";
+import { ProjectModifiedLines } from "./ProjectModifiedLines.js";
 
 export class Project {
   name = "";
@@ -25,15 +26,15 @@ export class Project {
   }
 
   getTotalPointsPerProject() {
-    return this.getTestCoverage().getPoints(); //Incomplete
+    return (this.getTestCoverage().getPoints() + this.getModifiedLines().getPoints())/2; //Incomplete
   }
 
   getTestCoverage() {
-      return new ProjectCoverageFeedbackAssigner(this.commitList);
+    return new ProjectCoverageFeedbackAssigner(this.commitList);
   }
   
   getCodeComplexity() {
-      return new ProjectCodeComplexity(this.commitList);
+    return new ProjectCodeComplexity(this.commitList);
   }
   getAddedTestsPerCommit(){
     return new ProjectTestsFeedbackAssigner(this.commitList);
@@ -41,6 +42,10 @@ export class Project {
   getFrecuencyCommit(){
     return new ProjectFrecuencyFeedbackAssigner(this.commitList);
   }
+  getModifiedLines(){
+    return new ProjectModifiedLines(this.commitList);
+  }
+
   changeName(newName) {
     this.name = newName;
   }

@@ -207,33 +207,6 @@ describe("Return feedback messages for percentage of coverage per commit", () =>
   });
 });
 
-describe("Assign points for modified lines per commit", () => {
-  it("should assign 0 points for the attempt if the modified lines are equal to 0", () => {
-    let project = new Project("Saludador");
-    project.addCommit("Added the greet method", 0, 2, 20);
-    const commit = project.commitList[0];
-    expect(commit.getModifiedLines().getPoints()).toEqual(0);
-  });
-  it("should assign 100 points for the attempt if the modified lines are grater than 0 and lower or equal to 35", () => {
-    let project = new Project("Saludador");
-    project.addCommit("Added the greet method", 25, 2, 20);
-    const commit = project.commitList[0];
-    expect(commit.getModifiedLines().getPoints()).toEqual(100);
-  });
-  it("should assign 70 points for the attempt if the modified lines are grater than 35 and lower or equal to 50", () => {
-    let project = new Project("Saludador");
-    project.addCommit("Added the greet method", 40, 2, 20);
-    const commit = project.commitList[0];
-    expect(commit.getModifiedLines().getPoints()).toEqual(70);
-  });
-  it("should assign 10 points for the attempt if the modified lines are grater than 50", () => {
-    let project = new Project("Saludador");
-    project.addCommit("Added the greet method", 60, 2, 20);
-    const commit = project.commitList[0];
-    expect(commit.getModifiedLines().getPoints()).toEqual(10);
-  });
-});
-
 describe("Return feedback messages for modified lines per commit", () => {
   it("should return encouraging feedback for the attempt when there was 0 lines modified", () => {
     let project = new Project("Saludador");
@@ -241,133 +214,139 @@ describe("Return feedback messages for modified lines per commit", () => {
     const commit = project.commitList[0];
     expect(commit.getModifiedLines().getFeedbackMessage()).toEqual("❌ Líneas de código modificadas: 0. Debes hacer los cambios necesarios para el ciclo TDD en tu código antes de hacer un commit. No te desanimes. ¡Aplica lo aprendido en la siguiente!");
   });
-  it("should return encouraging feedback if the modified lines were grater than 0 and lower or equal to 35", () => {
+  it("should return encouraging feedback if the modified lines were grater than 60", () => {
     let project = new Project("Saludador");
-    project.addCommit("Added the greet method", 15, 2, 20);
+    project.addCommit("Added the greet method", 65, 2, 20);
     const commit = project.commitList[0];
-    expect(commit.getModifiedLines().getFeedbackMessage()).toEqual("✔ Líneas de código modificadas: 15. El código sufrió pocos cambios. ¡Buen trabajo! ¡Sigue así!");
+    expect(commit.getModifiedLines().getFeedbackMessage()).toEqual("❌ Líneas de código modificadas: 65. DEFICIENTE. Demasiadas líneas de código añadidas. Debes hacer solo los cambios necesarios en cada ciclo de TDD. ¡Vamos, puedes hacerlo mejor y tendrás más puntos!");
   });
-  it("should return encouraging feedback if the modified lines were grater than 35 and lower or equal to 50", () => {
+  it("should return encouraging feedback if the modified lines were grater than 40 and lower or equal to 60", () => {
     let project = new Project("Saludador");
     project.addCommit("Added the greet method", 45, 2, 20);
     const commit = project.commitList[0];
-    expect(commit.getModifiedLines().getFeedbackMessage()).toEqual("🤔 Líneas de código modificadas: 45. Muchas líneas de código modificadas para ser un ciclo TDD, debes reducir los cambios que realizas al código en cada ciclo ¡Lo harás mejor en el siguiente commit!");
+    expect(commit.getModifiedLines().getFeedbackMessage()).toEqual("🤔 Líneas de código modificadas: 45. REGULAR. Muchas líneas de código modificadas para ser un ciclo TDD, debes reducir los cambios que realizas al código en cada ciclo ¡Lo harás mejor en el siguiente commit!");
   });
-  it("should return encouraging feedback if the modified lines were grater than 50", () => {
+  it("should return encouraging feedback if the modified lines were grater than 20 and lower or equal to 40", () => {
     let project = new Project("Saludador");
-    project.addCommit("Added the greet method", 55, 2, 20);
+    project.addCommit("Added the greet method", 39, 2, 20);
     const commit = project.commitList[0];
-    expect(commit.getModifiedLines().getFeedbackMessage()).toEqual("❌ Líneas de código modificadas: 55. Demasiadas líneas de código añadidas. Debes hacer solo los cambios necesarios en cada ciclo de TDD. ¡Vamos, puedes hacerlo mejor y tendrás más puntos!");
+    expect(commit.getModifiedLines().getFeedbackMessage()).toEqual("✔ Líneas de código modificadas: 39. BUENO. El código sufrió pocos cambios. ¡Buen trabajo! ¡Sigue así!");
   });
-
-  describe("Assign points for added tests", () => {
-    it("should assign 100 points for the attempt", () => {
-      let project = new Project("Saludador");
-      project.addCommit("refact: changing names of variables", 0, 0, 20);
-      const commit = project.commitList[0];
-      expect(commit.getAddedTests().getPoints()).toEqual(100);
-    });
-    it("should assign 100 points for the attempt if the added tests are equal to 0 when message of commit is 'refact: [rest of message]'", () => {
-      let project = new Project("Saludador");
-      project.addCommit("refact: changing names of variables", 0, 0, 20);
-      const commit = project.commitList[0];
-      expect(commit.getAddedTests().getPoints()).toEqual(100);
-    });
-    it("should assign 0 points for the attempt if the added tests are equal to 1 when message of commit is 'refact: [rest of message]'", () => {
-      let project = new Project("Saludador");
-      project.addCommit("refact: changing names of variables", 0, 1, 20);
-      const commit = project.commitList[0];
-      expect(commit.getAddedTests().getPoints()).toEqual(0);
-    });
-    it("should assign 0 points for the attempt if the added tests are more than 0 when message of commit is 'refact: [rest of message]'", () => {
-      let project = new Project("Saludador");
-      project.addCommit("refact: changing names of variables", 0, 2, 20);
-      const commit = project.commitList[0];
-      expect(commit.getAddedTests().getPoints()).toEqual(0);
-    });
-    it("should assign 0 points for the attempt if the added tests are equal to 0 when commit isn't for refactoring", () => {
-      let project = new Project("Saludador");
-      project.addCommit("new function destroyHelloWorld implemented", 0, 0, 20);
-      const commit = project.commitList[0];
-      expect(commit.getAddedTests().getPoints()).toEqual(0);
-    });
-    it("should assign 100 points for the attempt if the added tests are equal to 1 when commit isn't for refactoring", () => {
-      let project = new Project("Saludador");
-      project.addCommit("new function destroyHelloWorld implemented", 0, 1, 20);
-      const commit = project.commitList[0];
-      expect(commit.getAddedTests().getPoints()).toEqual(100);
-    });
-    it("should assign 10 points for the attempt if the added tests are more than 1 when commit isn't for refactoring", () => {
-      let project = new Project("Saludador");
-      project.addCommit("new function destroyHelloWorld implemented", 0, 2, 20);
-      const commit = project.commitList[0];
-      expect(commit.getAddedTests().getPoints()).toEqual(10);
-    });
+  it("should return encouraging feedback if the modified lines were grater than 0 and lower or equal to 20", () => {
+    let project = new Project("Saludador");
+    project.addCommit("Added the greet method", 15, 2, 20);
+    const commit = project.commitList[0];
+    expect(commit.getModifiedLines().getFeedbackMessage()).toEqual("👏  Líneas de código modificadas: 15. EXCELENTE. El código sufrió cambios mínimos. ¡Sigue con el buen trabajo!");
   });
+});
 
-  describe("Return feedback messages for modified lines per commit", () => {
-    it("should return encouraging feedback when is a refactoring commit and the number of addedTests is equal to 0", () => {
-      let project = new Project("Saludador");
-      project.addCommit("refact: adding functions for best coder reading", 0, 0, 20);
-      const commit = project.commitList[0];
-      expect(commit.getAddedTests().getFeedbackMessage()).toEqual("✔ Cantidad de pruebas añadidas: 0 pruebas nuevas. ☑️Buen trabajo, no se añaden pruebas cuando el código solo es modificado para 'refactoring' 👍");
-    });
-    it("should return encouraging feedback when is a refactoring commit and the number of addedTests is 1", () => {
-      let project = new Project("Saludador");
-      project.addCommit("refact: adding functions for best coder reading", 0, 1, 20);
-      const commit = project.commitList[0];
-      let amountTest = commit.getAddedTests().getValue();
-      expect(commit.getAddedTests().getFeedbackMessage()).toEqual(`❌ Cantidad de pruebas añadidas: ${amountTest} prueba/s nueva/s. ⚠️ Recuerda, no se añaden pruebas cuando el código solo es modificado para 'refactoring'`);
-    });
-    it("should return encouraging feedback when is a refactoring commit and there are tests added", () => {
-      let project = new Project("Saludador");
-      project.addCommit("refact: adding functions for best coder reading", 0, 2, 20);
-      const commit = project.commitList[0];
-      let amountTest = commit.getAddedTests().getValue();
-      expect(commit.getAddedTests().getFeedbackMessage()).toEqual(`❌ Cantidad de pruebas añadidas: ${amountTest} prueba/s nueva/s. ⚠️ Recuerda, no se añaden pruebas cuando el código solo es modificado para 'refactoring'`);
-    });
-    it("should return encouraging feedback when is not a refactoring commit and there are not tests added", () => {
-      let project = new Project("Saludador");
-      project.addCommit("function to destroy 'HelloWorld' added", 0, 0, 20);
-      const commit = project.commitList[0];
-      expect(commit.getAddedTests().getFeedbackMessage()).toEqual("❌ Cantidad de pruebas añadidas: 0 pruebas nuevas. 😨 Para escribir código con TDD no olvides hacer primero las pruebas!!!");
-    });
-    it("should return encouraging feedback when is not a refactoring commit and there is 1 tests added", () => {
-      let project = new Project("Saludador");
-      project.addCommit("function to destroy 'HelloWorld' added", 0, 1, 20);
-      const commit = project.commitList[0];
-      expect(commit.getAddedTests().getFeedbackMessage()).toEqual("✔ Cantidad de pruebas añadidas: 1 prueba nueva. ☑️Excelente! No olvides que las pruebas son el alma del TDD 😎");
-    });
-    it("should return encouraging feedback when is not a refactoring commit and there are more than 1 tests added", () => {
-      let project = new Project("Saludador");
-      project.addCommit("function to destroy 'HelloWorld' added", 0, 2, 20);
-      const commit = project.commitList[0];
-      let amountTest = commit.getAddedTests().getValue();
-      expect(commit.getAddedTests().getFeedbackMessage()).toEqual(`✔ Cantidad de pruebas añadidas: ${amountTest} pruebas nuevas. 🤔 No hace falta añadir tantas pruebas en un solo ciclo de TDD`);
-    });
+describe("Assign points for added tests", () => {
+  it("should assign 100 points for the attempt", () => {
+    let project = new Project("Saludador");
+    project.addCommit("refact: changing names of variables", 0, 0, 20);
+    const commit = project.commitList[0];
+    expect(commit.getAddedTests().getPoints()).toEqual(100);
+  });
+  it("should assign 100 points for the attempt if the added tests are equal to 0 when message of commit is 'refact: [rest of message]'", () => {
+    let project = new Project("Saludador");
+    project.addCommit("refact: changing names of variables", 0, 0, 20);
+    const commit = project.commitList[0];
+    expect(commit.getAddedTests().getPoints()).toEqual(100);
+  });
+  it("should assign 0 points for the attempt if the added tests are equal to 1 when message of commit is 'refact: [rest of message]'", () => {
+    let project = new Project("Saludador");
+    project.addCommit("refact: changing names of variables", 0, 1, 20);
+    const commit = project.commitList[0];
+    expect(commit.getAddedTests().getPoints()).toEqual(0);
+  });
+  it("should assign 0 points for the attempt if the added tests are more than 0 when message of commit is 'refact: [rest of message]'", () => {
+    let project = new Project("Saludador");
+    project.addCommit("refact: changing names of variables", 0, 2, 20);
+    const commit = project.commitList[0];
+    expect(commit.getAddedTests().getPoints()).toEqual(0);
+  });
+  it("should assign 0 points for the attempt if the added tests are equal to 0 when commit isn't for refactoring", () => {
+    let project = new Project("Saludador");
+    project.addCommit("new function destroyHelloWorld implemented", 0, 0, 20);
+    const commit = project.commitList[0];
+    expect(commit.getAddedTests().getPoints()).toEqual(0);
+  });
+  it("should assign 100 points for the attempt if the added tests are equal to 1 when commit isn't for refactoring", () => {
+    let project = new Project("Saludador");
+    project.addCommit("new function destroyHelloWorld implemented", 0, 1, 20);
+    const commit = project.commitList[0];
+    expect(commit.getAddedTests().getPoints()).toEqual(100);
+  });
+  it("should assign 10 points for the attempt if the added tests are more than 1 when commit isn't for refactoring", () => {
+    let project = new Project("Saludador");
+    project.addCommit("new function destroyHelloWorld implemented", 0, 2, 20);
+    const commit = project.commitList[0];
+    expect(commit.getAddedTests().getPoints()).toEqual(10);
+  });
+});
+
+describe("Return feedback messages for modified lines per commit", () => {
+  it("should return encouraging feedback when is a refactoring commit and the number of addedTests is equal to 0", () => {
+    let project = new Project("Saludador");
+    project.addCommit("refact: adding functions for best coder reading", 0, 0, 20);
+    const commit = project.commitList[0];
+    expect(commit.getAddedTests().getFeedbackMessage()).toEqual("✔ Cantidad de pruebas añadidas: 0 pruebas nuevas. ☑️Buen trabajo, no se añaden pruebas cuando el código solo es modificado para 'refactoring' 👍");
+  });
+  it("should return encouraging feedback when is a refactoring commit and the number of addedTests is 1", () => {
+    let project = new Project("Saludador");
+    project.addCommit("refact: adding functions for best coder reading", 0, 1, 20);
+    const commit = project.commitList[0];
+    let amountTest = commit.getAddedTests().getValue();
+    expect(commit.getAddedTests().getFeedbackMessage()).toEqual(`❌ Cantidad de pruebas añadidas: ${amountTest} prueba/s nueva/s. ⚠️ Recuerda, no se añaden pruebas cuando el código solo es modificado para 'refactoring'`);
+  });
+  it("should return encouraging feedback when is a refactoring commit and there are tests added", () => {
+    let project = new Project("Saludador");
+    project.addCommit("refact: adding functions for best coder reading", 0, 2, 20);
+    const commit = project.commitList[0];
+    let amountTest = commit.getAddedTests().getValue();
+    expect(commit.getAddedTests().getFeedbackMessage()).toEqual(`❌ Cantidad de pruebas añadidas: ${amountTest} prueba/s nueva/s. ⚠️ Recuerda, no se añaden pruebas cuando el código solo es modificado para 'refactoring'`);
+  });
+  it("should return encouraging feedback when is not a refactoring commit and there are not tests added", () => {
+    let project = new Project("Saludador");
+    project.addCommit("function to destroy 'HelloWorld' added", 0, 0, 20);
+    const commit = project.commitList[0];
+    expect(commit.getAddedTests().getFeedbackMessage()).toEqual("❌ Cantidad de pruebas añadidas: 0 pruebas nuevas. 😨 Para escribir código con TDD no olvides hacer primero las pruebas!!!");
+  });
+  it("should return encouraging feedback when is not a refactoring commit and there is 1 tests added", () => {
+    let project = new Project("Saludador");
+    project.addCommit("function to destroy 'HelloWorld' added", 0, 1, 20);
+    const commit = project.commitList[0];
+    expect(commit.getAddedTests().getFeedbackMessage()).toEqual("✔ Cantidad de pruebas añadidas: 1 prueba nueva. ☑️Excelente! No olvides que las pruebas son el alma del TDD 😎");
+  });
+  it("should return encouraging feedback when is not a refactoring commit and there are more than 1 tests added", () => {
+    let project = new Project("Saludador");
+    project.addCommit("function to destroy 'HelloWorld' added", 0, 2, 20);
+    const commit = project.commitList[0];
+    let amountTest = commit.getAddedTests().getValue();
+    expect(commit.getAddedTests().getFeedbackMessage()).toEqual(`✔ Cantidad de pruebas añadidas: ${amountTest} pruebas nuevas. 🤔 No hace falta añadir tantas pruebas en un solo ciclo de TDD`);
   });
 });
 
 describe("Calculate total points earned per project", () => {
-  it("should return points only considering the test coverage metric", () => {
+  it("should return points, considering the test coverage metric and the modified lines", () => {
     let project = new Project("Saludador");
     project.addCommit("Added the greet method", 10, 1, 100);
     project.addCommit("Added the greet method", 200, 2, 30);
     project.addCommit("Added the greet method", 20, 1, 100);
-    expect(project.getTotalPointsPerProject()).toEqual(12);
+    expect(project.getTotalPointsPerProject()).toEqual(10);
   });
 });
 
 describe("Calculate the overall total of points", () => {
-  it("should return points of all projects considering only test coverage metric", () => {
+  it("should return points of all projects considering test coverage metric and the modified lines", () => {
     let projectslist = new ProjectsList();
     projectslist.addProject("Saludador");
     projectslist.addProject("Totalizador");
     projectslist.addProject("Calculador");
     projectslist.projects[0].addCommit("Added the greet method", 10, 1, 100);
-    projectslist.projects[1].addCommit("Added totalizer method", 10, 1, 100);
+    projectslist.projects[1].addCommit("Added totalizer method", 100, 1, 100);
     projectslist.projects[2].addCommit("Added substracting method", 10, 1, 100);
-    expect(projectslist.getTotalPoints()).toEqual(60);
+    expect(projectslist.getTotalPoints()).toEqual(54);
   });
 });
 
@@ -612,6 +591,114 @@ describe("Feedback message for test coverage per project", () => {
     expect(project.getAddedTestsPerCommit().getFeedbackMessage()).toEqual("Excellent");
   });
 });
+
+describe("Assign points for modified lines per project", () => {
+  it("should assign 0 points if there's no commits in the project", () => {
+    let projectslist = new ProjectsList();
+    projectslist.addProject("Saludador");
+    const project = projectslist.projects[0];
+    expect(project.getModifiedLines().getPoints()).toEqual(0);
+  });
+  it("should assign points if there's one commit in the project", () => {
+    let projectslist = new ProjectsList();
+    projectslist.addProject("Saludador");
+    const project = projectslist.projects[0];
+    project.addCommit("Added the greet method", 0, 1, 60);
+    expect(project.getModifiedLines().getPoints()).toEqual(0);
+  });
+  it("should assign 0 points if the average amount of modified lines of all commits in the project is 0", () => {
+    let projectslist = new ProjectsList();
+    projectslist.addProject("Saludador");
+    const project = projectslist.projects[0];
+    project.addCommit("Added the greet method", 0, 1, 60);
+    project.addCommit("Added the greet method", 0, 1, 50);
+    project.addCommit("Added the greet method", 0, 1, 70);
+    expect(project.getModifiedLines().getPoints()).toEqual(0);
+  });
+  it("should assign 8 points if the average amount of modified lines of all commits in the project is grater than 60", () => {
+    let projectslist = new ProjectsList();
+    projectslist.addProject("Saludador");
+    const project = projectslist.projects[0];
+    project.addCommit("Added the greet method", 30, 1, 60);
+    project.addCommit("Added the greet method", 50, 1, 50);
+    project.addCommit("Added the greet method", 130, 1, 70);
+    expect(project.getModifiedLines().getPoints()).toEqual(8);
+  });
+  it("should assign 12 points if the average amount of modified lines of all commits in the project is grater than 40 and less or equal to 60", () => {
+    let projectslist = new ProjectsList();
+    projectslist.addProject("Saludador");
+    const project = projectslist.projects[0];
+    project.addCommit("Added the greet method", 10, 1, 60);
+    project.addCommit("Added the greet method", 50, 1, 50);
+    project.addCommit("Added the greet method", 100, 1, 70);
+    expect(project.getModifiedLines().getPoints()).toEqual(12);
+  });
+  it("should assign 16 points if the average amount of modified lines of all commits in the project is grater than 20 and less or equal to 40", () => {
+    let projectslist = new ProjectsList();
+    projectslist.addProject("Saludador");
+    const project = projectslist.projects[0];
+    project.addCommit("Added the greet method", 10, 1, 60);
+    project.addCommit("Added the greet method", 50, 1, 50);
+    project.addCommit("Added the greet method", 40, 1, 70);
+    expect(project.getModifiedLines().getPoints()).toEqual(16);
+  });
+  it("should assign 20 points if the average amount of modified lines of all commits in the project is grater than 0 and less or equal to 20", () => {
+    let projectslist = new ProjectsList();
+    projectslist.addProject("Saludador");
+    const project = projectslist.projects[0];
+    project.addCommit("Added the greet method", 10, 1, 60);
+    project.addCommit("Added the greet method", 15, 1, 50);
+    project.addCommit("Added the greet method", 15, 1, 70);
+    expect(project.getModifiedLines().getPoints()).toEqual(20);
+  });
+});
+
+describe("Feedback messages for modified lines per project", () => {
+  it("should return a default string if there's no commits in the project", () => {
+    let project = new Project("Saludador");
+    expect(project.getModifiedLines().getFeedbackMessage()).toEqual("This project has no commits yet.");
+  });
+  it("should return a Bad feedback if there's one commit in the project that has 0 modified lines", () => {
+    let projectslist = new ProjectsList();
+    projectslist.addProject("Saludador");
+    projectslist.projects[0].addCommit("Added the greet method", 0, 1, 50);
+    const project = projectslist.projects[0];
+    expect(project.getModifiedLines().getFeedbackMessage()).toEqual("Bad");
+  });
+  it("should return a Deficient feedback if the average amount of modified lines of all commits in the project is grater than to 60", () => {
+    let projectslist = new ProjectsList();
+    projectslist.addProject("Saludador");
+    const project = projectslist.projects[0];
+    project.addCommit("Added the greet method", 60, 1, 20);
+    project.addCommit("Added the greet method 2", 70, 1, 40);
+    expect(project.getModifiedLines().getFeedbackMessage()).toEqual("Deficient");
+  });
+  it("should return a Regular feedback if the average amount of modified lines of all commits in the project is grater than to 40 and less or equal to 60", () => {
+    let projectslist = new ProjectsList();
+    projectslist.addProject("Saludador");
+    const project = projectslist.projects[0];
+    project.addCommit("Added the greet method", 40, 1, 20);
+    project.addCommit("Added the greet method 2", 60, 1, 40);
+    expect(project.getModifiedLines().getFeedbackMessage()).toEqual("Regular");
+  });
+  it("should return a Good feedback if the average amount of modified lines of all commits in the project is grater than to 20 and less or equal to 40", () => {
+    let projectslist = new ProjectsList();
+    projectslist.addProject("Saludador");
+    const project = projectslist.projects[0];
+    project.addCommit("Added the greet method", 20, 1, 20);
+    project.addCommit("Added the greet method 2", 40, 1, 40);
+    expect(project.getModifiedLines().getFeedbackMessage()).toEqual("Good");
+  });
+  it("should return an Excelent feedback if the average amount of modified lines of all commits in the project is grater than to 0 and less or equal to 20", () => {
+    let projectslist = new ProjectsList();
+    projectslist.addProject("Saludador");
+    const project = projectslist.projects[0];
+    project.addCommit("Added the greet method", 0, 1, 20);
+    project.addCommit("Added the greet method 2", 20, 1, 40);
+    expect(project.getModifiedLines().getFeedbackMessage()).toEqual("Excelent");
+  });
+});
+
 describe("Points for code complexity per project", () => {
   it("should return 0 points if there's no commits in the project", () => {
     let projectslist = new ProjectsList();
