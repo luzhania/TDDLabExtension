@@ -17,6 +17,7 @@ export class ProjectTestsFeedbackAssigner {
                     this.feedbackMessage = "Good";
                     if(Number(percentOfTestInProject) >= 1){
                         this.points = 20;
+                        this.feedbackMessage = "Excellent";
                     }
                 }
             }
