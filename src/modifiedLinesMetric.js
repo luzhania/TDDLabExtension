@@ -1,7 +1,6 @@
 import { ModifiedLinesEvaluationCriteria } from "./ModifiedLinesEvaluationCriteria";
 export class ModifiedLinesMetric {
     value = 0;
-    points = 0;
     feedbackMessage = "";
   
     constructor(value) {
