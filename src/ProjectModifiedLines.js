@@ -35,6 +35,9 @@ export class ProjectModifiedLines{
             case this.ModifiedLinesEvaluationCriteria.isRegular(ModifiedLines):
                 this.projectPoints = 12;
                 break;
+            case this.ModifiedLinesEvaluationCriteria.isGood(ModifiedLines):
+                this.projectPoints = 16;
+                break;
         }
     }
 

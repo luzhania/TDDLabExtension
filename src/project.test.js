@@ -499,6 +499,15 @@ describe("Assign points for modified lines per project", () => {
     project.addCommit("Added the greet method", 100, 1, 70);
     expect(project.getModifiedLines().getPoints()).toEqual(12);
   });
+  it("should assign 16 points if the average amount of modified lines of all commits in the project is grater than 20 and less or equal to 40", () => {
+    let projectslist = new ProjectsList();
+    projectslist.addProject("Saludador");
+    const project = projectslist.projects[0];
+    project.addCommit("Added the greet method", 10, 1, 60);
+    project.addCommit("Added the greet method", 50, 1, 50);
+    project.addCommit("Added the greet method", 40, 1, 70);
+    expect(project.getModifiedLines().getPoints()).toEqual(16);
+  });
 });
 
 describe("Points for code complexity per project", () => {
