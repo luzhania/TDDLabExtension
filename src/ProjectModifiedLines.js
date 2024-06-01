@@ -63,6 +63,9 @@ export class ProjectModifiedLines{
             case ModifiedLines > 20 && ModifiedLines <= 40:
                 this.projectFeedback = "Good";
                 break;
+            case ModifiedLines > 0 && ModifiedLines <= 20:
+                this.projectFeedback = "Excelent";
+                break;
         }
     }
 
