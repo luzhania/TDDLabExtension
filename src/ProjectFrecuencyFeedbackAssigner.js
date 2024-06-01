@@ -10,7 +10,10 @@ export class ProjectFrecuencyFeedbackAssigner {
             if(averageFrecuency <= 172800000 || averageFrecuency === "NoEmpty")
                 this.points = 20;
             else{
-                this.points = 16;
+                if (averageFrecuency <= 259200000) 
+                    this.points = 16;
+                else
+                    this.points = 12;
             }
         }
     };

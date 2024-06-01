@@ -731,6 +731,14 @@ describe("Points for code complexity per project", () => {
     project.addCommit("Added the greet method", 10, 2, 100, 10, 1, 2000, 10, 30);
     expect(project.getFrecuencyCommit().getPoints()).toEqual(16);
   });
+  it("should assign 12 points when the average in differece of days in commits is more than 3 days and less or equal to 5 days", () => {
+    const project = new Project("Saludador");
+    project.addCommit("Added the greet method", 10, 2, 100, 1, 1, 2000, 10, 30);
+    project.addCommit("Added the greet method", 10, 2, 100, 6, 1, 2000, 10, 30);
+    project.addCommit("Added the greet method", 10, 2, 100, 11, 1, 2000, 10, 30);
+    project.addCommit("Added the greet method", 10, 2, 100, 16, 1, 2000, 10, 30);
+    expect(project.getFrecuencyCommit().getPoints()).toEqual(12);
+  });
 });
 describe("File processor", () => {
   const path = require('path');
