@@ -9,8 +9,9 @@ export class ProjectTestsFeedbackAssigner {
         if(isFinite(percentOfTestInProject)){
             this.points = 8;
             this.feedbackMessage = "Deficient";
-            if(Number(percentOfTestInProject) > 0.6){
+            if(Number(percentOfTestInProject) >= 0.6){
                 this.points = 12;
+                this.feedbackMessage = "Regular";
                 if(Number(percentOfTestInProject) >= 0.8){
                     this.points = 16;
                     if(Number(percentOfTestInProject) >= 1){
