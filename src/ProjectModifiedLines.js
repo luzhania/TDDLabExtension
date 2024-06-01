@@ -51,6 +51,9 @@ export class ProjectModifiedLines{
             case ModifiedLines === null:
                 this.projectFeedback = "This project has no commits yet.";
                 break;
+            case ModifiedLines === 0:
+                this.projectFeedback = "Bad";
+                break;
         }
     }
 

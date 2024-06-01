@@ -524,6 +524,13 @@ describe("Feedback messages for modified lines per project", () => {
     let project = new Project("Saludador");
     expect(project.getModifiedLines().getFeedbackMessage()).toEqual("This project has no commits yet.");
   });
+  it("should return a Bad feedback if there's one commit in the project that has 0 modified lines", () => {
+    let projectslist = new ProjectsList();
+    projectslist.addProject("Saludador");
+    projectslist.projects[0].addCommit("Added the greet method", 0, 1, 50);
+    const project = projectslist.projects[0];
+    expect(project.getModifiedLines().getFeedbackMessage()).toEqual("Bad");
+  });
 });
 
 describe("Points for code complexity per project", () => {
