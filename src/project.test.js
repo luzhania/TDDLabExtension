@@ -573,4 +573,16 @@ describe("Points for test added per commit in project", () => {
     const project = projectslist.projects[0]
     expect(project.getAddedTestsPerCommit().getPoints()).toEqual(20);
   });
+  it("should ignore all the commits for refactoing to set the points", () => {
+    let projectslist = new ProjectsList();
+    projectslist.addProject("Saludador");
+    projectslist.projects[0].addCommit("refact: new functionality added", 0, 1, 0)
+    projectslist.projects[0].addCommit("new functionality added", 0, 5, 0)
+    projectslist.projects[0].addCommit("refact: new functionality added", 0, 1, 0)
+    projectslist.projects[0].addCommit("new functionality added", 0, 2, 0)
+    projectslist.projects[0].addCommit("new functionality added", 0, 1, 0)
+    projectslist.projects[0].addCommit("refact: new functionality added", 0, 3, 0)
+    const project = projectslist.projects[0]
+    expect(project.getAddedTestsPerCommit().getPoints()).toEqual(20);
+  });
 });

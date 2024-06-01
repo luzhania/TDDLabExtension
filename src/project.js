@@ -56,9 +56,23 @@ export class Project {
 
   getPercentageOfCommitsWithTests() {
     let count = 0;
+    let nonRefactCommits = 0;
     for (const commit of this.commitList){
-      if(commit.getAddedTests().getValue() >= 1) count ++;
+      if(!this.isRefactoringCommit(commit)) {
+        nonRefactCommits++;
+        if(commit.getAddedTests().getValue() >= 1) 
+          count ++;
+      }
     };
-    return count/this.commitList.length;
+    return count/nonRefactCommits;
+  }
+
+  isRefactoringCommit(commit){
+    const refactor = 'refact:';
+    return this.getFirstWordCommit(commit) == refactor ? true : false;
+  }
+  getFirstWordCommit(commit){
+    const index = 0;
+    return commit.getCommitDescription().trim().split(' ')[index];
   }
 }
