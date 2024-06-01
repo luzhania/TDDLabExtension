@@ -557,12 +557,23 @@ describe("Points for test added per commit in project", () => {
     expect(project.getAddedTestsPerCommit().getPoints()).toEqual(20);
   });
 });
-describe("Points for test coverage per project", () => {
+describe("Feedback message for test coverage per project", () => {
   it("should return '(This project has no commits yet.)' in feedback if there aren't commits in project", () => {
     let projectslist = new ProjectsList();
     projectslist.addProject("Saludador");
     const project = projectslist.projects[0];
     expect(project.getAddedTestsPerCommit().getFeedbackMessage()).toEqual("This project has no commits yet.");
+  });
+  it("should return 'Deficient' in feedback if less of the 60% of the test added per commit doesn't have at least one test", () => {
+    let projectslist = new ProjectsList();
+    projectslist.addProject("Saludador");
+    const project = projectslist.projects[0];
+    projectslist.projects[0].addCommit("new functionality added", 0, 0, 0)
+    projectslist.projects[0].addCommit("new functionality added", 0, 0, 0)
+    projectslist.projects[0].addCommit("new functionality added", 0, 0, 0)
+    projectslist.projects[0].addCommit("new functionality added", 0, 1, 0)
+    projectslist.projects[0].addCommit("new functionality added", 0, 3, 0)
+    expect(project.getAddedTestsPerCommit().getFeedbackMessage()).toEqual("Deficient");
   });
 });
 describe("Points for code complexity per project", () => {

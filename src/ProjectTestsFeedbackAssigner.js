@@ -8,6 +8,7 @@ export class ProjectTestsFeedbackAssigner {
         let percentOfTestInProject = this.getPercentageOfCommitsWithTests(commitList);
         if(isFinite(percentOfTestInProject)){
             this.points = 8;
+            this.feedbackMessage = "Deficient";
             if(Number(percentOfTestInProject) > 0.6){
                 this.points = 12;
                 if(Number(percentOfTestInProject) >= 0.8){
