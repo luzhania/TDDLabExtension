@@ -478,6 +478,85 @@ describe("Points for test coverage per project", () => {
     expect(project.getTestCoverage().getPoints()).toEqual(20);
   });
 });
+describe("Points for test added per commit in project", () => {
+  it("should return 0 points in test added per commit if there's no commits in the project", () => {
+    let projectslist = new ProjectsList();
+    projectslist.addProject("Saludador");
+    const project = projectslist.projects[0];
+    expect(project.getAddedTestsPerCommit().getPoints()).toEqual(0);
+  });
+  it("should return 20 points in test added per commit if there's a commit in the project", () => {
+    let projectslist = new ProjectsList();
+    projectslist.addProject("Saludador");
+    projectslist.projects[0].addCommit("new functionality added", 0, 1)
+    const project = projectslist.projects[0];
+    expect(project.getAddedTestsPerCommit().getPoints()).toEqual(20);
+  });
+  it("should return 8 points in test added per commit if there isn't a commit in the project without at least one test", () => {
+    let projectslist = new ProjectsList();
+    projectslist.addProject("Saludador");
+    projectslist.projects[0].addCommit("new functionality added", 0, 0, 0)
+    const project = projectslist.projects[0];
+    expect(project.getAddedTestsPerCommit().getPoints()).toEqual(8);
+  });
+  it("should return 8 points if less of the 60% of the test added per commit doesn't have at least one test", () => {
+    let projectslist = new ProjectsList();
+    projectslist.addProject("Saludador");
+    projectslist.projects[0].addCommit("new functionality added", 0, 0, 0)
+    projectslist.projects[0].addCommit("new functionality added", 0, 0, 0)
+    projectslist.projects[0].addCommit("new functionality added", 0, 0, 0)
+    projectslist.projects[0].addCommit("new functionality added", 0, 1, 0)
+    projectslist.projects[0].addCommit("new functionality added", 0, 3, 0)
+    const project = projectslist.projects[0]
+    expect(project.getAddedTestsPerCommit().getPoints()).toEqual(8);
+  });
+  it("should return 12 points if less of the 80% and more of the 59% of the test added per commit have at least one test", () => {
+    let projectslist = new ProjectsList();
+    projectslist.addProject("Saludador");
+    projectslist.projects[0].addCommit("new functionality added", 0, 0, 0)
+    projectslist.projects[0].addCommit("new functionality added", 0, 2, 0)
+    projectslist.projects[0].addCommit("new functionality added", 0, 1, 0)
+    projectslist.projects[0].addCommit("new functionality added", 0, 3, 0)
+    const project = projectslist.projects[0]
+    expect(project.getAddedTestsPerCommit().getPoints()).toEqual(12);
+  });
+  it("should return 16 points if more of the 79% and less of the 100% of the test added per commit have at least one test", () => {
+    let projectslist = new ProjectsList();
+    projectslist.addProject("Saludador");
+    projectslist.projects[0].addCommit("new functionality added", 0, 0, 0)
+    projectslist.projects[0].addCommit("new functionality added", 0, 5, 0)
+    projectslist.projects[0].addCommit("new functionality added", 0, 1, 0)
+    projectslist.projects[0].addCommit("new functionality added", 0, 2, 0)
+    projectslist.projects[0].addCommit("new functionality added", 0, 1, 0)
+    projectslist.projects[0].addCommit("new functionality added", 0, 3, 0)
+    const project = projectslist.projects[0]
+    expect(project.getAddedTestsPerCommit().getPoints()).toEqual(16);
+  });
+  it("should return 20 points if 100% of the test added per commit have at least one test", () => {
+    let projectslist = new ProjectsList();
+    projectslist.addProject("Saludador");
+    projectslist.projects[0].addCommit("new functionality added", 0, 1, 0)
+    projectslist.projects[0].addCommit("new functionality added", 0, 5, 0)
+    projectslist.projects[0].addCommit("new functionality added", 0, 1, 0)
+    projectslist.projects[0].addCommit("new functionality added", 0, 2, 0)
+    projectslist.projects[0].addCommit("new functionality added", 0, 1, 0)
+    projectslist.projects[0].addCommit("new functionality added", 0, 3, 0)
+    const project = projectslist.projects[0]
+    expect(project.getAddedTestsPerCommit().getPoints()).toEqual(20);
+  });
+  it("should ignore all the commits for refactoing to set the points", () => {
+    let projectslist = new ProjectsList();
+    projectslist.addProject("Saludador");
+    projectslist.projects[0].addCommit("refact: new functionality added", 0, 1, 0)
+    projectslist.projects[0].addCommit("new functionality added", 0, 5, 0)
+    projectslist.projects[0].addCommit("refact: new functionality added", 0, 1, 0)
+    projectslist.projects[0].addCommit("new functionality added", 0, 2, 0)
+    projectslist.projects[0].addCommit("new functionality added", 0, 1, 0)
+    projectslist.projects[0].addCommit("refact: new functionality added", 0, 3, 0)
+    const project = projectslist.projects[0]
+    expect(project.getAddedTestsPerCommit().getPoints()).toEqual(20);
+  });
+});
 describe("Points for code complexity per project", () => {
   it("should return 0 points if there's no commits in the project", () => {
     let projectslist = new ProjectsList();
