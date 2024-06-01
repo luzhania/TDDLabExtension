@@ -699,6 +699,12 @@ describe("Feedback messages for code complexity per project", () => {
   });
 });
 
+describe("Points for code complexity per project", () => {
+  it("should assign 0 points when project has no commits yet", () => {
+    const project = new Project("Saludador");
+    expect(project.getFrecuencyCommit().getPoints()).toEqual(0);
+  });
+});
 describe("File processor", () => {
   const path = require('path');
   const fs = require('fs');

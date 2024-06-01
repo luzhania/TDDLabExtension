@@ -2,6 +2,7 @@ import { ProjectCodeComplexity } from "./projectCodeComplexity.js";
 import { Commit } from "./commit.js";
 import { ProjectCoverageFeedbackAssigner } from "./ProjectCoverageFeedbackAssigner.js";
 import { ProjectTestsFeedbackAssigner } from "./ProjectTestsFeedbackAssigner.js";
+import { ProjectFrecuencyFeedbackAssigner } from "./ProjectFrecuencyFeedbackAssigner.js";
 
 export class Project {
   name = "";
@@ -36,6 +37,9 @@ export class Project {
   }
   getAddedTestsPerCommit(){
     return new ProjectTestsFeedbackAssigner(this.commitList);
+  }
+  getFrecuencyCommit(){
+    return new ProjectFrecuencyFeedbackAssigner(this.commitList);
   }
   changeName(newName) {
     this.name = newName;
