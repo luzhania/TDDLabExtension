@@ -29,6 +29,9 @@ export class ProjectModifiedLines{
             case this.ModifiedLinesEvaluationCriteria.isThereNone(ModifiedLines):
                 this.projectPoints = 0;
                 break;
+            case this.ModifiedLinesEvaluationCriteria.isDeficient(ModifiedLines):
+                this.projectPoints = 8;
+                break;
         }
     }
 
