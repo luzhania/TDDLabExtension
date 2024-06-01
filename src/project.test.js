@@ -519,6 +519,13 @@ describe("Assign points for modified lines per project", () => {
   });
 });
 
+describe("Feedback messages for modified lines per project", () => {
+  it("should return a default string if there's no commits in the project", () => {
+    let project = new Project("Saludador");
+    expect(project.getModifiedLines().getFeedbackMessage()).toEqual("This project has no commits yet.");
+  });
+});
+
 describe("Points for code complexity per project", () => {
   it("should return 0 points if there's no commits in the project", () => {
     let projectslist = new ProjectsList();

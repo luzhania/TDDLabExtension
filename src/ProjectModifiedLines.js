@@ -8,6 +8,7 @@ export class ProjectModifiedLines{
         this.ModifiedLinesEvaluationCriteria = new ModifiedLinesEvaluationCriteria();
         this.ModifiedLines = this.getProjectAverageLines();
         this.assignPoints(this.ModifiedLines);
+        this.assignFeedbackMessage(this.ModifiedLines);
     }
 
     isEmptyProject() {
@@ -43,5 +44,17 @@ export class ProjectModifiedLines{
 
     getPoints(){
         return this.projectPoints;
+    }
+
+    assignFeedbackMessage(ModifiedLines){
+        switch(true){
+            case ModifiedLines === null:
+                this.projectFeedback = "This project has no commits yet.";
+                break;
+        }
+    }
+
+    getFeedbackMessage(){
+        return this.projectFeedback;
     }
 }
