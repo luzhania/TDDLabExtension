@@ -23,7 +23,7 @@ export class Project {
   }
 
   getTotalPointsPerProject() {
-    return this.getTestCoverage().getPoints(); //Incomplete
+    return (this.getTestCoverage().getPoints() + this.getModifiedLines().getPoints())/2; //Incomplete
   }
 
   getTestCoverage() {
