@@ -557,6 +557,14 @@ describe("Points for test added per commit in project", () => {
     expect(project.getAddedTestsPerCommit().getPoints()).toEqual(20);
   });
 });
+describe("Points for test coverage per project", () => {
+  it("should return '(This project has no commits yet.)' in feedback if there aren't commits in project", () => {
+    let projectslist = new ProjectsList();
+    projectslist.addProject("Saludador");
+    const project = projectslist.projects[0];
+    expect(project.getAddedTestsPerCommit().getFeedbackMessage()).toEqual("This project has no commits yet.");
+  });
+});
 describe("Points for code complexity per project", () => {
   it("should return 0 points if there's no commits in the project", () => {
     let projectslist = new ProjectsList();

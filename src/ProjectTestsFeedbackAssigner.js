@@ -1,9 +1,10 @@
 export class ProjectTestsFeedbackAssigner {
     constructor(commitList){
-        this.assignPoints(commitList);
+        this.assignPointsAndFeedback(commitList);
     };
-    assignPoints(commitList) {
+    assignPointsAndFeedback(commitList) {
         this.points = 0;
+        this.feedbackMessage = "This project has no commits yet.";
         let percentOfTestInProject = this.getPercentageOfCommitsWithTests(commitList);
         if(isFinite(percentOfTestInProject)){
             this.points = 8;
@@ -21,6 +22,9 @@ export class ProjectTestsFeedbackAssigner {
     };
     getPoints() {    
         return this.points;
+    };
+    getFeedbackMessage(){
+        return this.feedbackMessage;
     };
     isRefactoringCommit(commit){
         const refactor = 'refact:';
