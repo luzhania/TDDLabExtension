@@ -12,8 +12,13 @@ export class ProjectFrecuencyFeedbackAssigner {
             else{
                 if (averageFrecuency <= 259200000) 
                     this.points = 16;
-                else
-                    this.points = 12;
+                else{
+                    if (averageFrecuency <= 432000000)
+                        this.points = 12;
+                    else
+                        this.points = 8;
+                }
+                    
             }
         }
     };
@@ -32,7 +37,7 @@ export class ProjectFrecuencyFeedbackAssigner {
                     summonDifferenceDates += firstDate - secondDate;
                     secondDate = firstDate;
                 }
-                averageFrecuencyDifference = (summonDifferenceDates - commitList[0].getCommitDate())/commitList.length;
+                averageFrecuencyDifference = (summonDifferenceDates - commitList[0].getCommitDate())/(commitList.length-1);
                 return averageFrecuencyDifference;
             }
             return "NoEmpty"
