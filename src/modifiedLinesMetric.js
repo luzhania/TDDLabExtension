@@ -7,7 +7,6 @@ export class ModifiedLinesMetric {
     constructor(value) {
       this.value = value;
       this.ModifiedLinesEvaluationCriteria = new ModifiedLinesEvaluationCriteria();
-      this.assignPoints();
       this.assignFeedbackMessage();
     }
   
@@ -15,33 +14,10 @@ export class ModifiedLinesMetric {
       return this.value;
     }
   
-    getPoints() {
-      return this.points;
-    }
-  
     getFeedbackMessage() {
       return this.feedbackMessage;
     }
 
-    assignPoints() {
-      switch (true) {
-        case this.ModifiedLinesEvaluationCriteria.isThereNone(this.value):
-          this.points = 0;
-          break;
-        case this.ModifiedLinesEvaluationCriteria.isDeficient(this.value):
-          this.points = 8;
-          break;
-        case this.ModifiedLinesEvaluationCriteria.isRegular(this.value):
-           this.points = 12;
-           break;
-        case this.ModifiedLinesEvaluationCriteria.isGood(this.value):
-           this.points = 16;
-           break;
-        case this.ModifiedLinesEvaluationCriteria.isExcelent(this.value):
-          this.points = 20;
-          break;
-      }
-    }
     assignFeedbackMessage() {
       switch (true) {
         case this.ModifiedLinesEvaluationCriteria.isThereNone(this.value):

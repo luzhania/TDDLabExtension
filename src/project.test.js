@@ -472,6 +472,7 @@ describe("Assign points for modified lines per project", () => {
     project.addCommit("Added the greet method", 10, 1, 60);
     expect(project.getModifiedLines().getPoints()).toEqual(20);
   });
+  
 });
 
 describe("Points for code complexity per project", () => {
