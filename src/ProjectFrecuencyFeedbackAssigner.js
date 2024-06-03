@@ -4,8 +4,10 @@ export class ProjectFrecuencyFeedbackAssigner {
     };
     assignPoints(commitList) {
         let averageFrecuency = this.getFrecuencyOfCommits(commitList);
-        if(averageFrecuency === undefined)
+        if(averageFrecuency === undefined){
             this.points = 0;
+            this.feedback = "This project has no commits yet.";
+        }
         else{
             if(averageFrecuency <= 172800000 || averageFrecuency === "NoEmpty")
                 this.points = 20;
@@ -24,6 +26,9 @@ export class ProjectFrecuencyFeedbackAssigner {
     };
     getPoints() {    
         return this.points;
+    };
+    getFeedbackMessage() {    
+        return this.feedback;
     };
     getFrecuencyOfCommits(commitList) {
         let averageFrecuencyDifference = 0;

@@ -786,7 +786,7 @@ describe("Feedback messages for code complexity per project", () => {
   });
 });
 
-describe("Points for code complexity per project", () => {
+describe("Points for frecuency of commits per project", () => {
   it("should assign 0 points when project has no commits yet", () => {
     const project = new Project("Saludador");
     expect(project.getFrecuencyCommit().getPoints()).toEqual(0);
@@ -833,6 +833,12 @@ describe("Points for code complexity per project", () => {
     project.addCommit("Added the greet method", 10, 2, 100, 13, 1, 2000, 10, 30);
     project.addCommit("Added the greet method", 10, 2, 100, 19, 1, 2000, 10, 30);
     expect(project.getFrecuencyCommit().getPoints()).toEqual(8);
+  });
+});
+describe("Feedback messages for frecuency of commits per project", () => {
+  it("should return an a default string if there's no commits in the project", () => {
+    const project = new Project("Saludador");
+    expect(project.getFrecuencyCommit().getFeedbackMessage()).toEqual("This project has no commits yet.");
   });
 });
 describe("File processor", () => {
