@@ -182,7 +182,7 @@ function renderFeedbackTable(projectIndex) {
 
 function updateProjectFeedback(projectIndex) {
   const project = projectsList.projects[projectIndex];
-  projectFeedback.innerHTML = "<p> Modified Lines: " + project.getModifiedLines().getPoints() + " points (" + project.getModifiedLines().getFeedbackMessage() + ")</p><p> Percentage of test coverage: " + project.getTestCoverage().getPoints() + " points (" + project.getTestCoverage().getFeedbackMessage() + ")</p><p> Code complexity: " + project.getCodeComplexity().getPoints() + " points (" + project.getCodeComplexity().getFeedbackMessage() + ")</p><p>  Amount of test added: " + project.getAddedTestsPerCommit().getPoints() + " points("+ project.getAddedTestsPerCommit().getFeedbackMessage() + ")</p><p>  Frecuency of commits: " + project.getFrecuencyCommit().getPoints() + " points</p>";
+  projectFeedback.innerHTML = "<p> Modified Lines: " + project.getModifiedLines().getPoints() + " points (" + project.getModifiedLines().getFeedbackMessage() + ")</p><p> Percentage of test coverage: " + project.getTestCoverage().getPoints() + " points (" + project.getTestCoverage().getFeedbackMessage() + ")</p><p> Code complexity: " + project.getCodeComplexity().getPoints() + " points (" + project.getCodeComplexity().getFeedbackMessage() + ")</p><p>  Amount of test added: " + project.getAddedTestsPerCommit().getPoints() + " points("+ project.getAddedTestsPerCommit().getFeedbackMessage() + ")</p><p>  Frecuency of commits: " + project.getFrecuencyCommit().getPoints() + " points("+ project.getFrecuencyCommit().getFeedbackMessage() +")</p>";
 }
 
 document.getElementById('fileInput').addEventListener('change', function(event) {

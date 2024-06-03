@@ -19,8 +19,10 @@ export class ProjectFrecuencyFeedbackAssigner {
                     this.feedback = "Good";
                 }
                 else{
-                    if (averageFrecuency <= 432000000)
+                    if (averageFrecuency <= 432000000){
                         this.points = 12;
+                        this.feedback = "Regular";
+                    }
                     else
                         this.points = 8;
                 }
