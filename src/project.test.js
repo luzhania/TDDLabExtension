@@ -840,6 +840,14 @@ describe("Feedback messages for frecuency of commits per project", () => {
     const project = new Project("Saludador");
     expect(project.getFrecuencyCommit().getFeedbackMessage()).toEqual("This project has no commits yet.");
   });
+  it("should return 'Excellent' in feedback when the average in differece of days in commits is less or equal to two days", () => {
+    const project = new Project("Saludador");
+    project.addCommit("Added the greet method", 10, 2, 100, 1, 1, 2000, 10, 30);
+    project.addCommit("Added the greet method", 10, 2, 100, 2, 1, 2000, 10, 30);
+    project.addCommit("Added the greet method", 10, 2, 100, 3, 1, 2000, 10, 30);
+    project.addCommit("Added the greet method", 10, 2, 100, 4, 1, 2000, 10, 30);
+    expect(project.getFrecuencyCommit().getFeedbackMessage()).toEqual("Excellent");
+  });
 });
 describe("File processor", () => {
   const path = require('path');

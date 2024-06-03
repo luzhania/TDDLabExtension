@@ -9,8 +9,10 @@ export class ProjectFrecuencyFeedbackAssigner {
             this.feedback = "This project has no commits yet.";
         }
         else{
-            if(averageFrecuency <= 172800000 || averageFrecuency === "NoEmpty")
+            if(averageFrecuency <= 172800000 || averageFrecuency === "NoEmpty"){
                 this.points = 20;
+                this.feedback = "Excellent";
+            }
             else{
                 if (averageFrecuency <= 259200000) 
                     this.points = 16;
