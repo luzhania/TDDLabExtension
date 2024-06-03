@@ -23,8 +23,10 @@ export class ProjectFrecuencyFeedbackAssigner {
                         this.points = 12;
                         this.feedback = "Regular";
                     }
-                    else
+                    else{
                         this.points = 8;
+                        this.feedback = "Deficient";
+                    }
                 }
                     
             }
