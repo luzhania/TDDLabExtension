@@ -26,7 +26,7 @@ export class Project {
   }
 
   getTotalPointsPerProject() {
-    return (this.getTestCoverage().getPoints() + this.getModifiedLines().getPoints())/2; //Incomplete
+    return (this.getTestCoverage().getPoints() + this.getModifiedLines().getPoints() + this.getAddedTestsPerCommit().getPoints() + this.getFrecuencyCommit().getPoints() + this.getCodeComplexity().getPoints());
   }
 
   getTestCoverage() {

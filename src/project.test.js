@@ -328,25 +328,29 @@ describe("Return feedback messages for modified lines per commit", () => {
 });
 
 describe("Calculate total points earned per project", () => {
-  it("should return points, considering the test coverage metric and the modified lines", () => {
+  it("should return points, considering all metrics", () => {
     let project = new Project("Saludador");
-    project.addCommit("Added the greet method", 10, 1, 100);
-    project.addCommit("Added the greet method", 200, 2, 30);
-    project.addCommit("Added the greet method", 20, 1, 100);
-    expect(project.getTotalPointsPerProject()).toEqual(10);
+    project.addCommit("Added the greet method", 25, 2, 90, 1, 1, 2000, 10, 30, "low");
+    project.addCommit("Added the greet method", 40, 1, 85, 4, 1, 2000, 10, 30, "moderate");
+    project.addCommit("Added the greet method", 15, 0, 75, 7, 1, 2000, 10, 30, "low");
+    project.addCommit("Added the greet method", 50, 2, 95, 10, 1, 2000, 10, 30, "high");
+    project.addCommit("Added the greet method", 20, 3, 80, 13, 1, 2000, 10, 30, "moderate");
+    expect(project.getTotalPointsPerProject()).toEqual(80);
   });
 });
 
 describe("Calculate the overall total of points", () => {
-  it("should return points of all projects considering test coverage metric and the modified lines", () => {
+  it("should return points of all projects considering all metrics", () => {
     let projectslist = new ProjectsList();
     projectslist.addProject("Saludador");
     projectslist.addProject("Totalizador");
     projectslist.addProject("Calculador");
-    projectslist.projects[0].addCommit("Added the greet method", 10, 1, 100);
-    projectslist.projects[1].addCommit("Added totalizer method", 100, 1, 100);
-    projectslist.projects[2].addCommit("Added substracting method", 10, 1, 100);
-    expect(projectslist.getTotalPoints()).toEqual(54);
+    projectslist.projects[0].addCommit("Added the greet method", 10, 1, 100, 1, 1, 2000, 10, 30, "low");
+    projectslist.projects[1].addCommit("Added the greet method", 25, 2, 90, 1, 1, 2000, 10, 30, "low");
+    projectslist.projects[2].addCommit("Added the greet method", 40, 1, 85, 4, 1, 2000, 10, 30, "moderate");
+    projectslist.projects[1].addCommit("Added the greet method", 15, 0, 75, 7, 1, 2000, 10, 30, "veryHigh");
+    projectslist.projects[2].addCommit("Added the greet method", 50, 2, 95, 10, 1, 2000, 10, 30, "high");
+    expect(projectslist.getTotalPoints()).toEqual(232);
   });
 });
 
