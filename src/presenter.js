@@ -182,7 +182,6 @@ function renderFeedbackTable(projectIndex) {
     row.innerHTML = `
       <td>${index + 1}</td>
       <td>${commit.getCommitDescription()}</td>
-      <td>${commit.getAddedTests().getPoints()}</td>
       <td>${commit.getPercentageOfCoverage().getFeedbackMessage()}<br><br>${commit.getModifiedLines().getFeedbackMessage()}<br><br>${commit.getAddedTests().getFeedbackMessage()}</td>
     `;
     /*
