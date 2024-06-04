@@ -61,6 +61,17 @@ function extractTime(timeValue) {
   };
 }
 
+function resetInputValues(){
+  commitMessageInput.value = "";
+  modifiedLinesInput.value = "";
+  addedTestsInput.value = "";
+  percentageOfCoverageInput.value = "";
+  dateInput.value = "";
+  timeInput.value = "";
+  codeComplexityInput.value = "";
+
+}
+
 addCommitForm.addEventListener("submit", (event) => {
   event.preventDefault();
   const { projectIndex, commitMessage, commitModifiedLines, commitAddedTests, commitPercentageOfCoverage, dateValue, timeValue, codeComplexityValue } = getFormData();
@@ -73,6 +84,7 @@ addCommitForm.addEventListener("submit", (event) => {
   renderProjectsTable();
   updadateOverallScore();
   updateProjectFeedback(projectIndex);
+  resetInputValues();
 });
 
 commitProjectSelect.addEventListener("change", () => {
